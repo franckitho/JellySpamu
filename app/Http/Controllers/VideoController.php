@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class VideoController extends Controller
 {
@@ -55,7 +56,9 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        //
+        return Inertia::render('app/views/show', [
+            'video' => $video
+        ]);
     }
 
     /**
