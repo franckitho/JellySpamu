@@ -4232,10 +4232,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4249,6 +4249,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
 //
 //
 //
@@ -4263,16 +4277,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    FormConverter: _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -48926,6 +48935,45 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("form", [
+        _c("input", {
+          staticClass:
+            "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
+          attrs: { type: "text", name: "" }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/views/index.vue?vue&type=template&id=6ace79ec&":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/views/index.vue?vue&type=template&id=6ace79ec& ***!
@@ -48948,47 +48996,12 @@ var render = function() {
         "min-h-screen flex justify-center bg-gray-800 py-12 px-4 sm:px-6 lg:px-8"
     },
     [
-      _c("div", { staticClass: "max-w-md w-full space-y-8" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "mt-8 space-y-6",
-            attrs: { action: "#", method: "POST" }
-          },
-          [
-            _c("input", {
-              attrs: { type: "hidden", name: "remember", value: "true" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "rounded-md shadow-sm -space-y-px" }, [
-              _c(
-                "form",
-                {
-                  attrs: {
-                    action: "/video/store",
-                    method: "POST",
-                    enctype: "multipart/form-data"
-                  }
-                },
-                [
-                  _c("input", {
-                    attrs: { type: "hidden" },
-                    domProps: { value: _vm.csrf }
-                  }),
-                  _vm._v(" "),
-                  _c("input", { attrs: { type: "file", name: "video" } }),
-                  _vm._v(" "),
-                  _c("input", { attrs: { type: "submit", value: "Ok" } })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(1)
-          ]
-        )
-      ])
+      _c(
+        "div",
+        { staticClass: "max-w-md w-full space-y-8" },
+        [_vm._m(0), _vm._v(" "), _c("form-converter")],
+        1
+      )
     ]
   )
 }
@@ -49008,23 +49021,7 @@ var staticRenderFns = [
         {
           staticClass: "mt-6 text-center text-3xl font-extrabold text-white-900"
         },
-        [_vm._v("\r\n        Jellyspamu Video Converter\r\n      ")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c(
-        "button",
-        {
-          staticClass:
-            "group relative  flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("\r\n      \r\n          Sign in\r\n        ")]
+        [_vm._v("\n                Jellyspamu Video Converter\n            ")]
       )
     ])
   }
@@ -62757,6 +62754,8 @@ var map = {
 	"./Profile/UpdatePasswordForm.vue": "./resources/js/Pages/Profile/UpdatePasswordForm.vue",
 	"./Profile/UpdateProfileInformationForm": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
 	"./Profile/UpdateProfileInformationForm.vue": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
+	"./app/components/form-converter": "./resources/js/Pages/app/components/form-converter",
+	"./app/components/form-converter.vue": "./resources/js/Pages/app/components/form-converter.vue",
 	"./app/views": "./resources/js/Pages/app/views/index.vue",
 	"./app/views/": "./resources/js/Pages/app/views/index.vue",
 	"./app/views/index": "./resources/js/Pages/app/views/index.vue",
@@ -63406,6 +63405,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/app/components/form-converter":
+/*!**********************************************************!*\
+  !*** ./resources/js/Pages/app/components/form-converter ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projet\\web\\jellyspamu\\resources\\js\\Pages\\app\\components\\form-converter'");
+
+/***/ }),
+
+/***/ "./resources/js/Pages/app/components/form-converter.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/Pages/app/components/form-converter.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _form_converter_vue_vue_type_template_id_2cdddbc9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form-converter.vue?vue&type=template&id=2cdddbc9& */ "./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9&");
+/* harmony import */ var _form_converter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form-converter.vue?vue&type=script&lang=js& */ "./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _form_converter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _form_converter_vue_vue_type_template_id_2cdddbc9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _form_converter_vue_vue_type_template_id_2cdddbc9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/app/components/form-converter.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_form_converter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-converter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_form_converter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_converter_vue_vue_type_template_id_2cdddbc9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./form-converter.vue?vue&type=template&id=2cdddbc9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_converter_vue_vue_type_template_id_2cdddbc9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_form_converter_vue_vue_type_template_id_2cdddbc9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/app/views/index.vue":
 /*!************************************************!*\
   !*** ./resources/js/Pages/app/views/index.vue ***!
@@ -63563,8 +63642,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
