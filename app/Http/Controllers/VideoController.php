@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Services\VideoServices;
 
 class VideoController extends Controller
 {
@@ -15,7 +16,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $video = new VideoServices();
+        $video->getMetaVideo();
     }
 
     /**
