@@ -17,7 +17,7 @@
         "laravel/jetstream": "^1.6",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
-        "php-ffmpeg/php-ffmpeg": "^0.16.0",
+        "pbmedia/laravel-ffmpeg": "^7.4",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {
