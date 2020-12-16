@@ -16,6 +16,10 @@ class CreateVideoLogTable extends Migration
         Schema::create('video_log', function (Blueprint $table) {
             $table->id();
             $table->json('data');
+            $table->string('title');
+            $table->string('plateform');
+            $table->integer('vid_time');
+            $table->string('categories');
             $table->timestamps();
         });
     }
