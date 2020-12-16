@@ -18,7 +18,7 @@ class CreateVideoLogTable extends Migration
             $table->json('data');
             $table->string('title');
             $table->string('plateform');
-            $table->int('vid_time');
+            $table->integer('vid_time');
             $table->string('categories');
             $table->timestamps();
         });
