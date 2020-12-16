@@ -1,69 +1,43 @@
-    <template>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    Welcome to Vue.js on Laravel
-                </div>
-                <div class="links">
-                    <a href="https://laravel.com/docs">View Laravel Docs</a>
-                    <a href="https://vuejs.org/v2/guide/">View Vue Docs</a>
-                    <a href="https://laracasts.com">Watch Videos</a>
-                </div>
-            </div>
-        </div>
-    </template>
-    <script>
-        export default {}
-    </script>
-    <style scoped>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
+<template>
+<div class="min-h-screen flex justify-center bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <img class="mx-auto h-40 w-auto" src="/img/logo_bis.png">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-white-900">
+        Jellyspamu Video Converter
+      </h2>
+    </div>
+    <form class="mt-8 space-y-6" action="#" method="POST">
+      <input type="hidden" name="remember" value="true">
+      <div class="rounded-md shadow-sm -space-y-px">
+         <form action="/video/store" method="POST" enctype="multipart/form-data">
+                <input type="hidden" :value="csrf">
+                <input type="file" name="video">
+                <input type="submit" value="Ok">
+    </form>
+     
+      </div>
+      <div>
+        <button type="submit" class="group relative  flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+  
+</div>
+</template>
 
-        .full-height {
-            height: 100vh;
+<script>
+    export default {
+        data(){
+            return {
+                csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            }
         }
+    }
 
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
+   
+</script>
+   
