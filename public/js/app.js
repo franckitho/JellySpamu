@@ -4249,6 +4249,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -48959,11 +48978,64 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", [
       _c("form", [
-        _c("input", {
-          staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
-          attrs: { type: "text", name: "" }
-        })
+        _c("div", { staticClass: "flex flex-col items-center w-full" }, [
+          _c("div", { staticClass: "flex w-full" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "shadow bg-red-600 h-full hover:bg-red-700 focus:shadow-outline focus:outline-none text-white font-bold py-4 rounded-r-none rounded-bl-none px-6 text-xl rounded-md",
+                attrs: { type: "button" }
+              },
+              [_c("i", { staticClass: "fas fa-upload" })]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass:
+                "appearance-none block w-full bg-gray-200 text-gray-700 text-3xl py-3 px-4 leading-tight focus:outline-none rounded-tr-md focus:bg-white",
+              attrs: {
+                type: "text",
+                name: "",
+                placeholder: "Lien de la vidéo a convertir..."
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-full h-px bg-black" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex w-full" }, [
+            _c(
+              "select",
+              {
+                staticClass:
+                  "appearance-none block w-full bg-gray-200 text-gray-700 rounded-bl-md text-3xl py-3 px-4 leading-tight focus:outline-none focus:bg-white",
+                attrs: { name: "" }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [_vm._v("TikTok")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "" } }, [_vm._v("Youtube")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "" } }, [_vm._v("Instagram")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "" } }, [_vm._v("Snapchat")])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "flex items-center shadow bg-red-600 h-full hover:bg-red-700 focus:shadow-outline focus:outline-none text-white font-bold py-4 rounded-tr-none rounded-l-none px-6 text-xl rounded-md",
+                attrs: { type: "button" }
+              },
+              [
+                _vm._v("\n                    Convertir "),
+                _c("i", { staticClass: "fas fa-sync ml-3" })
+              ]
+            )
+          ])
+        ])
       ])
     ])
   }
@@ -48998,7 +49070,7 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "max-w-md w-full space-y-8" },
+        { staticClass: "max-w-4xl w-full space-y-8" },
         [_vm._m(0), _vm._v(" "), _c("form-converter")],
         1
       )
@@ -49013,13 +49085,13 @@ var staticRenderFns = [
     return _c("div", [
       _c("img", {
         staticClass: "mx-auto h-40 w-auto",
-        attrs: { src: "/img/logo_bis.png" }
+        attrs: { src: "/img/logo_blanc.png" }
       }),
       _vm._v(" "),
       _c(
         "h2",
         {
-          staticClass: "mt-6 text-center text-3xl font-extrabold text-white-900"
+          staticClass: "mt-6 text-center text-5xl font-extrabold text-white-900"
         },
         [_vm._v("\n                Jellyspamu Video Converter\n            ")]
       )
