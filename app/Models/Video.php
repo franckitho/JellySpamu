@@ -9,6 +9,7 @@ use FFMpeg\{
     Coordinate\Dimension,
     Format\Video\X264,
 };
+use Illuminate\Support\Facades\Storage;
 
 class Video extends Model
 {
@@ -42,7 +43,7 @@ class Video extends Model
     public function convert(string $filename)
     {
         $ffmpeg = FFMpeg::create();
-        $video = $ffmpeg->open($filename);
+        $video = $ffmpeg->open(Storage::url($filename));
 
         $video->filters()->resize(new Dimension(1080, 1920))->synchronize();
         $video->save(new X264(), 'test.mp4');

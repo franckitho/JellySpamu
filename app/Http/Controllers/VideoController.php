@@ -35,10 +35,16 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        $validateVideo = $request->validate([
-            'video' => ['required', 'mimes:mp4']
+        $request->validate([
+            'video' => ['required']
         ]);
-        $validateVideo->file('video')->store('video');
+
+        $path = $request->file('video')->store('video');
+
+        $video = new Video();
+        $video->convert($path);
+
+        return back();
     }
 
     /**

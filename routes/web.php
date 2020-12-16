@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/', HomeController::class, ['only' => ['index', 'create']]);
+Route::resource('video', VideoController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return \Inertia\Inertia::render('Dashboard');
