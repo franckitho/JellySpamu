@@ -129,4 +129,9 @@ class VideoController extends Controller
     {
         $video->convert($video->data['file_path'], 1080, 1920, []);
     }
+
+    public function download(Video $video)
+    {
+        return Storage::disk('local')->download($video->data['file_path']);
+    }
 }
