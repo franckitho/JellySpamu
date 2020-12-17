@@ -4295,12 +4295,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      form: {
+        url: null,
+        image: null,
+        "export": null
+      }
     };
+  },
+  methods: {
+    onImageChange: function onImageChange(e) {
+      console.log(e.target.files[0]);
+      this.form.image = e.target.files[0];
+    },
+    formSubmit: function formSubmit(e) {
+      e.preventDefault();
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('video', this.form.image);
+      formData.append('url', this.form.url);
+      formData.append('export', this.form["export"]);
+      this.$inertia.post('/video', formData, config);
+    }
   }
 });
 
@@ -49061,11 +49085,8 @@ var render = function() {
       "form",
       {
         staticClass: "flex flex-col w-full",
-        attrs: {
-          action: "/video",
-          method: "post",
-          enctype: "multipart/form-data"
-        }
+        attrs: { enctype: "multipart/form-data" },
+        on: { submit: _vm.formSubmit }
       },
       [
         _c("input", {
@@ -49073,14 +49094,114 @@ var render = function() {
           domProps: { value: _vm.csrf }
         }),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "flex flex-row w-full" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
+            },
+            [
+              _c("p", { staticClass: "pr-2" }, [_vm._v("Upload")]),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-upload" }),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "hidden",
+                attrs: { type: "file" },
+                on: { change: _vm.onImageChange }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
+            _vm._v("OR")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.url,
+                expression: "form.url"
+              }
+            ],
+            staticClass:
+              "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
+            attrs: { type: "text", placeholder: "Paste a video URL..." },
+            domProps: { value: _vm.form.url },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "url", $event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "flex flex-row w-full" }, [
           _c("div", { staticClass: "flex flex-col" }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col" }, [
             _c("div", { staticClass: "inline-block relative w-64" }, [
-              _vm._m(1),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.export,
+                      expression: "form.export"
+                    }
+                  ],
+                  staticClass:
+                    "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "export",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "tiktok" } }, [
+                    _vm._v("Export for TikTok")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "youtube" } }, [
+                    _vm._v("Export for Youtube")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "instagram" } }, [
+                    _vm._v("Export fo Instagram")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "snapchat" } }, [
+                    _vm._v("Export for Snapchat")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "facebook" } }, [
+                    _vm._v("Export for Facebook")
+                  ])
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -49124,80 +49245,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-row w-full" }, [
-      _c(
-        "label",
-        {
-          staticClass:
-            " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
-        },
-        [
-          _c("p", { staticClass: "pr-2" }, [_vm._v("Upload")]),
-          _vm._v(" "),
-          _c("i", { staticClass: "fas fa-upload" }),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "hidden",
-            attrs: { type: "file", name: "video" }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
-        _vm._v("OR")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass:
-          "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
-        attrs: {
-          type: "text",
-          name: "url",
-          placeholder: "Paste a video URL..."
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass:
-          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
-        attrs: { name: "export" }
-      },
-      [
-        _c("option", { attrs: { value: "tiktok" } }, [
-          _vm._v("Export for TikTok")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "youtube" } }, [
-          _vm._v("Export for Youtube")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "instagram" } }, [
-          _vm._v("Export fo Instagram")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "snapchat" } }, [
-          _vm._v("Export for Snapchat")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "facebook" } }, [
-          _vm._v("Export for Facebook")
-        ])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

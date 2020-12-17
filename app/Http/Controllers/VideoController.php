@@ -38,7 +38,6 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->video);
         $request->validate([
             'video' => ['required']
         ]);

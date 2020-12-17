@@ -1,19 +1,19 @@
 <template>
     <div>
 
-        <form action="/video" method="post" enctype="multipart/form-data" class="flex flex-col w-full">
+        <form @submit="formSubmit" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
             <div class="flex flex-row w-full">
                 <label
                     class=" flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white">
                     <p class="pr-2">Upload</p>
                     <i class="fas fa-upload"></i>
-                    <input type="file" name="video" class="hidden"/>
+                    <input type="file" v-on:change="onImageChange" class="hidden"/>
                 </label>
                 <h3 class="text-white px-4 py-2 font-bold">OR</h3>
                 <input
                     class="appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white"
-                    type="text" name="url"  placeholder="Paste a video URL..." />
+                    type="text" v-model="form.url"  placeholder="Paste a video URL..." />
             </div>
             <div class="flex flex-row w-full">
                 <div class="flex flex-col">
@@ -22,7 +22,7 @@
                     <div class="inline-block relative w-64">
                         <select
                             class="block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
-                            name="export"
+                            v-model="form.export"
                             >
                             <option value="tiktok">Export for TikTok</option>
                             <option value="youtube">Export for Youtube</option>
@@ -52,15 +52,39 @@
         </form>
     </div>
 </template>
-
 <script>
     export default {
         data() {
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                form: {
+                    url: null,
+                    image: null,
+                    export: null,
+                },
             }
         },
-        
+        methods: {
+            onImageChange(e){
+                console.log(e.target.files[0]);
+                this.form.image = e.target.files[0];
+            },
+            formSubmit(e) {
+                e.preventDefault();
+                let currentObj = this;
+ 
+                const config = {
+                    headers: { 'content-type': 'multipart/form-data' }
+                }
+ 
+                let formData = new FormData();
+                formData.append('video', this.form.image);
+                formData.append('url', this.form.url);
+                formData.append('export', this.form.export);
+ 
+                this.$inertia.post('/video', formData, config)
+            }
+        }
     };
 
 </script>
