@@ -24,11 +24,11 @@
                             class="block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
                             v-model="form.export"
                             >
-                            <option value="tiktok">Export for TikTok</option>
-                            <option value="youtube">Export for Youtube</option>
-                            <option value="instagram">Export fo Instagram</option>
-                            <option value="snapchat">Export for Snapchat</option>
-                            <option value="facebook">Export for Facebook</option>
+                            <option value="1080x1920">Export for TikTok</option>
+                            <option value="1920x1080">Export for Youtube</option>
+                            <option value="600x600">Export fo Instagram</option>
+                            <option value="1080x1920">Export for Snapchat</option>
+                            <option value="1280x720">Export for Facebook</option>
                         </select>
                         <div
                             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">

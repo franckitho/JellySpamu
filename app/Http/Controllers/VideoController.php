@@ -37,17 +37,17 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $request->validate([
             'video' => 'file|required',
-            'width' => 'required',
-            'height' => 'required',
         ]);
+
+        $format = explode("x", $request->export);
 
         $path = $request->file('video')->store('video');
 
         $video = new Video();
-        $video->convert($path, intval($request->get('width')), intval($request->get('height')), []);
+        $video->convert($path, intval($format[0]), intval($format[1]), []);
 
         return back();
     }

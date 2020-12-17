@@ -49181,23 +49181,23 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "tiktok" } }, [
+                  _c("option", { attrs: { value: "1080x1920" } }, [
                     _vm._v("Export for TikTok")
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "youtube" } }, [
+                  _c("option", { attrs: { value: "1920x1080" } }, [
                     _vm._v("Export for Youtube")
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "instagram" } }, [
+                  _c("option", { attrs: { value: "600x600" } }, [
                     _vm._v("Export fo Instagram")
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "snapchat" } }, [
+                  _c("option", { attrs: { value: "1080x1920" } }, [
                     _vm._v("Export for Snapchat")
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "facebook" } }, [
+                  _c("option", { attrs: { value: "1280x720" } }, [
                     _vm._v("Export for Facebook")
                   ])
                 ]
