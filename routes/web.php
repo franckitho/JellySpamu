@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/', HomeController::class, ['only' => ['index', 'create']]);
-Route::resource('video', VideoController::class);
+Route::resource('video', VideoController::class, ['except' => ['edit', 'update', 'destroy']]);
 Route::get('video/{video}/convert', [VideoController::class, 'convert']);
+Route::get('video/{video}/download', [VideoController::class, 'download']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return \Inertia\Inertia::render('Dashboard');
