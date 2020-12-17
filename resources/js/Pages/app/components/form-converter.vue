@@ -139,18 +139,17 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
             submitFile() {
                 let sendToBack = true;
                 let formData = new FormData();
-                this.step2 = true
                 formData.append('video', this.form.image);
                 formData.append('url', this.form.url);
                 formData.append('export', this.form.export);
 
-                /*if (this.form.url != null && this.validURL(this.form.url)) {
-                    this.form.video = null
-                    sendToBack = true
-                } else if (this.form.video != null) {
-                    this.form.url = null
-                    sendToBack = true
-                }*/
+                if (this.form.url == null || this.form.video == null ) {
+                    sendToBack = false
+                }
+                else if(!this.validURL(this.form.url)){
+                    sendToBack = false
+                }
+                
 
                 if (sendToBack) {
                     axios.post('/video',
@@ -161,7 +160,7 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                             }
                         ).then(response => {
                             this.filedata = response.data
-                            console.log(this.filedata)
+                            this.step2 = true
                         })
                         .catch(e => {
                             this.errors.push(e)
