@@ -13,7 +13,6 @@
                 <form-converter />
             </div>
         </div>
-        </span>
     </div>
     
 </template>
@@ -32,7 +31,6 @@
             return {
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             }
-        },
-
-   
+        }}
 </script>
+   
