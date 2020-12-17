@@ -8,7 +8,7 @@ class VideoServices
 {
     public function getMetaVideo(){
         $essence = new Essence();
-        $media = $essence->extract('http://www.youtube.com/watch?v=JZcTHl0Mdpk');
+        $media = $essence->extract('https://www.youtube.com/watch?v=fYdQpWocBZs&ab_channel=Galax');
         dd($media);
     }
 }
