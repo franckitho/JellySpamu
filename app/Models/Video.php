@@ -46,22 +46,24 @@ class Video extends Model
      * @param  string $filename
      * @return void
      */
-    public function convert(string $filename)
+    public function convert(string $filename, int $width, int $height)
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
 
-        $dim = $ffmpeg->getVideoStream()->getDimensions();
-        $width = $dim->getWidth();
-        $height = $dim->getHeight();
+        $output = 'converted/' . uniqid() . '.mp4';
 
-        $ffmpeg
-            //->addFilter(new \FFMpeg\Filters\Video\CropFilter(new \FFMpeg\Coordinate\Point(((int) ($width / 3)), 0), new \FFMpeg\Coordinate\Dimension(((int) ($width / 3)), $height)))
-            ->addFilter(function (VideoFilters $filters) use (&$width, &$height) {
-                $filters->crop(new \FFMpeg\Coordinate\Point(((int) ($width / 3)), 0), new \FFMpeg\Coordinate\Dimension(((int) ($width / 3)), $height));
-                //$filters->resize(new \FFMpeg\Coordinate\Dimension(1080, 1920));
-            })
-            ->export()
-            ->inFormat(new X264('libmp3lame', 'libx264'))
-            ->save('test.mp4');
+        $dim = $ffmpeg->getVideoStream()->getDimensions();
+        $in_width = $dim->getWidth();
+        $in_height = $dim->getHeight();
+
+        $ffmpeg->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height) {
+            $filters->crop(new \FFMpeg\Coordinate\Point(((int) ($in_width / 3)), 0), new \FFMpeg\Coordinate\Dimension(((int) ($in_width / 3)), $in_height));
+        })->export()->inFormat(new X264('libmp3lame', 'libx264'))->save($output);
+
+        SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($output)->addFilter(function (VideoFilters $filters) use (&$width, &$height) {
+            $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
+        })->export()->inFormat(new X264('libmp3lame', 'libx264'))->save('converted/' . uniqid() . '.mp4');
+
+        Storage::delete($output);
     }
 }

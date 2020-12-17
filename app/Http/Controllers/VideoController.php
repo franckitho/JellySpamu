@@ -45,7 +45,7 @@ class VideoController extends Controller
         $path = $request->file('video')->store('video');
 
         $video = new Video();
-        $video->convert($path);
+        $video->convert($path, 1080, 1920);
 
         return back();
     }
