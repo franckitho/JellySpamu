@@ -24,14 +24,7 @@
                         <a class="text-blue-300" target="_blank" href="https://github.com/protonemedia/laravel-ffmpeg">Github</a>
                     </div>
                 </div>
-            </div>
-
-            <!--
-    Mobile menu, toggle classes based on menu state.
-
-    Menu open: "block", Menu closed: "hidden"
-    -->
-           
+            </div> 
         </nav>
 
     </div>

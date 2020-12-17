@@ -54,8 +54,9 @@ class Video extends Model
         $framerate = $ffprobe->get('r_frame_rate');
         $bitrate = $ffprobe->get('bit_rate');
         $codec = $ffprobe->get('codec_name');
-
-        $preview_path = 'preview/' . uniqid() . '.png';
+        $uniqid = uniqid();
+        $preview_path = 'public/preview/' . $uniqid . '.png';
+        $preview_pathdata = 'preview/' . $uniqid . '.png';
         SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename)->getFrameFromSeconds($preview_moment)->export()->save($preview_path);
 
         return [
@@ -65,7 +66,7 @@ class Video extends Model
             'framerate' => $framerate,
             'bitrate' => $bitrate,
             'codec' => $codec,
-            'preview' => $preview_path
+            'preview' => $preview_pathdata
         ];
     }
 
@@ -84,7 +85,7 @@ class Video extends Model
 
         dd($ffmpeg->getFFProbe()->videos()->first()->get('r_frame_rate'));
 
-        $output = 'converted/' . uniqid() . '.mp4';
+        $output = 'public/converted/' . uniqid() . '.mp4';
 
         $dim = $ffmpeg->getVideoStream()->getDimensions();
         $in_width = $dim->getWidth();
@@ -108,7 +109,7 @@ class Video extends Model
                 $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
             })
             ->export()->inFormat(new X264('libmp3lame', 'libx264'))
-            ->save('converted/' . uniqid() . '.mp4');
+            ->save('public/converted/' . uniqid() . '.mp4');
 
         Storage::delete($output);
     }
