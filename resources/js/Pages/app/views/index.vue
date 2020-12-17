@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav-bar />
-        <div class="min-h-screen flex justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="h-screen flex justify-center bg-gray-900 py-4 px-4 sm:px-6 lg:px-8">
             <div class="max-w-4xl w-full space-y-8">
                 <div>
                     <img class="mx-auto h-40 w-auto" src="/img/logo.png">
@@ -12,6 +12,7 @@
                 <form-converter />
             </div>
         </div>
+        </span>
     </div>
     
 </template>
@@ -33,4 +34,3 @@
 
    
 </script>
-   

@@ -4404,13 +4404,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -4426,6 +4419,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
 /* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/Pages/app/components/navbar.vue");
+//
 //
 //
 //
@@ -50002,7 +49996,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "min-h-screen flex justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8"
+            "h-screen flex justify-center bg-gray-900 py-4 px-4 sm:px-6 lg:px-8"
         },
         [
           _c(
@@ -64720,8 +64714,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
