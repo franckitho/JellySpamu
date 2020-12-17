@@ -97,6 +97,8 @@ class VideoController extends Controller
         $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, [])['output_path'];
         $video->data = $data;
         $video->save();
+
+        return response()->json(['status' => 'success']);
     }
 
     public function download(Video $video)
