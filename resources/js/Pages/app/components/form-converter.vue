@@ -13,10 +13,12 @@
                 type="text" v-model="form.url" placeholder="Paste a video URL..." />
 
             <button
-class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded-br-full focus:outline-none   cursor-pointer hover:bg-blue-600 text-white"
-                v-on:click="submitFile()"><span v-if="!inLoad">Validate</span><span v-if="inLoad" class="text-transparent">Valida</span><i v-if="inLoad" class=" animate-spin fas fa-circle-notch "></i></button>
+                class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded-br-full focus:outline-none   cursor-pointer hover:bg-blue-600 text-white"
+                v-on:click="submitFile()"><span v-if="!inLoad">Validate</span><span v-if="inLoad"
+                    class="text-transparent">Valida</span><i v-if="inLoad"
+                    class=" animate-spin fas fa-circle-notch "></i></button>
         </div>
-        <form  @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
+        <form @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
             <div v-if="step2 == true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
@@ -24,48 +26,63 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
                     <div class="container mx-auto w-full  h-4/5 bg-white rounded-lg">
-                        <h3 class="uppercase pt-2 text-gray-600 font-semibold ml-3"> Metadata of {{ filedata.properties.name }} :</h3>
-                        <div class="flex flex-row justify-between">
-                            <div>
-                                 <ul class="ml-3 text-sm text-gray-400">
-                            <li>Size : <span class="font-semibold">{{filedata.properties.size}}</span> </li>
-                            <li>Codec : <span class="font-semibold">{{filedata.properties.codec}}</span> </li>
-                            <li>Duration : <span class="font-semibold">{{filedata.properties.duration}}</span> </li>
-                            <li>Orientation : <span class="font-semibold">{{filedata.properties.orientation}}</span> </li>
+                        <h3 class="uppercase pt-2 w-full text-center text-gray-600 font-semibold "> Metadata   </h3> 
                        
-                        </ul>
+                         <ul class="ml-3 text-md text-gray-400">
+                                    <li>Name : <span class="font-semibold">{{filedata.properties.name}}</span></li>
+          
+                                </ul>
+                        <div class="flex flex-row justify-between">
+
+                            <div>
+                                <ul class="ml-3 text-md text-gray-400">
+                                    <li class="pt-2">Resolution : <span class="font-semibold">{{filedata.properties.resolution}}</span></li>
+                                    <li class="pt-2">Duration  : <span class="font-semibold">{{filedata.properties.duration}}</span></li>
+                                    <li class="pt-2">Orientation : <span class="font-semibold">{{filedata.properties.orientation}}</span> </li>
+
+                                </ul>
                             </div>
                             <div>
-                            <ul class="mr-3 text-sm text-gray-400">
-                            <li>Resolution : <span class="font-semibold">{{filedata.properties.resolution}}</span></li>
-                            <li>Framerate : <span class="font-semibold">{{filedata.properties. framerate}}</span></li>
-                            <li>Bitrate : <span class="font-semibold">{{filedata.properties. bitrate}}</span></li>
-                        </ul>
+                                <ul class="mr-3 text-md text-gray-400">
+                                    <li class="pt-1">Codec : <span class="font-semibold uppercase">{{filedata.properties.codec}}</span> </li>
+                                    <li class="pt-1">Framerate : <span class="font-semibold">{{filedata.properties. framerate}}</span></li>
+                                    <li class="pt-1">Bitrate : <span class="font-semibold">{{filedata.properties. bitrate}}</span></li>
+                                    <li class="pt-1">Size : <span class="font-semibold">{{filedata.properties.size}}</span> </li>
+                                    
+                                </ul>
 
                             </div>
                         </div>
-                        
-                       
+
+
                     </div>
-                    <div v-if="step2" class="flex flex-row mt-4 justify-start">
-                        <i v-if="downloadable ==2" class="ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "></i>
-                         <a v-if="downloadable == 3" :href="'/video/'+filedata.resource_id+'/download'"
+                    <div class="flex flex-row mt-4 justify-start">
+                        <i v-if="downloadable ==2"
+                            class="ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "></i>
+                        <a v-if="downloadable == 3" :href="'/video/'+filedata.resource_id+'/download'"
                             class="flex h-full flex-row items-center  pr-4 bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline">
                             Download <i class=" ml-3 fa fa-download" />
                         </a>
                         <div v-if="downloadable == 0" class="inline-block relative">
                             <select
-                                class="block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
+                                class="block appearance-none w-full pr-14 bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full justify-items-start shadow leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="form.export">
-                                <option value="null">Export for...</option>
-                                <option value="1080x1920">Export for TikTok</option>
-                                <option value="1920x1080">Export for Youtube</option>
-                                <option value="600x600">Export fo Instagram</option>
-                                <option value="1080x1920">Export for Snapchat</option>
-                                <option value="1280x720">Export for Facebook</option>
+                             
+                                <option value="youtube">Export for Youtube</option>
+                                <option value="tiktok">Export for TikTok</option>
+                                <option value="instagram">Export fo Instagram</option>
+                                <option value="snapchat">Export for Snapchat</option>
+                                <option value="facebook">Export for Facebook</option>
                             </select>
                             <div
+                            
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <img v-if="form.export =='youtube'" class="w-6 h-5 mr-2" src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png" alt="">
+                                  <img v-if="form.export =='tiktok'" class="w-5 h-5 mr-2" src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="">
+                                  <img v-if="form.export =='instagram'" class="w-5 h-5 mr-2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="">
+                                  <img v-if="form.export =='snapchat'" class="w-5 h-5 mr-2" src="https://upload.wikimedia.org/wikipedia/fr/archive/a/ad/20190808214526%21Logo-Snapchat.png" alt="">
+                                  <img v-if="form.export =='facebook'" class="w-5 h-5 mr-2" src="https://assets.stickpng.com/thumbs/584ac2d03ac3a570f94a666d.png" alt="">
+                                
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path
@@ -73,18 +90,18 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                                 </svg>
                             </div>
                         </div>
-                        <button v-if="downloadable == 0" 
+                        <button v-if="downloadable == 0"
                             class="flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white"
                             v-bind:class="'disabled_submit'" type="submit">
                             Convertir <i class="fas fa-sync ml-3" />
                         </button>
-                        
-                         
+
+
                     </div>
-                   
+
                 </div>
             </div>
-            </form>
+        </form>
 
     </div>
 </template>
@@ -98,46 +115,45 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
         data() {
             return {
                 filedata: {
-                    properties:{
-                        bitrate: "0",
+                    properties: {
+                        bitrate: "10000",
                         codec: "Unknown",
-                        duration: 0,
+                        duration: 10000,
                         framerate: "00/00",
                         name: "File_name.mp4",
                         orientation: "Orientation",
-                        preview: "preview/defaultvideo.png",
+                        preview: "defaultvideo.png",
                         resolution: "0000x0000",
                         size: 0,
                     },
-                    resource_id:'',
+                    resource_id: '',
                 },
                 step2: false,
-                inLoad : false,
-                inLoadDownlad:false,
-                downloadable : 0,
+                inLoad: false,
+                inLoadDownlad: false,
+                downloadable: 0,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 form: {
                     url: null,
                     image: null,
-                    export: null,
+                    export: "youtube",
                 },
             }
         },
         methods: {
             convertFile(e) {
-                if(this.downloadable != 3){
+                if (this.downloadable != 3) {
                     this.downloadable = 2;
-
-               
-                e.preventDefault();
-                axios.get('/video/'+this.filedata.resource_id+'/convert')
-                    .then(response => {
+                    e.preventDefault();
+                    axios.get('/video/' + this.filedata.resource_id + '/convert')
+                        .then(response => {
                             this.downloadable = 3;
                             console.log(response.data)
                         })
                         .catch(e => {
                             this.errors.push(e)
-                        }) }
+                        })
+                }
             },
             handleFileUpload() {
                 this.form.image = this.$refs.file.files[0];
@@ -155,7 +171,7 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                 formData.append('export', this.form.export);
                 this.inLoad = true;
                 if (sendToBack) {
-        
+
                     axios.post('/video',
                             formData, {
                                 headers: {
@@ -163,7 +179,7 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                                 }
                             }
                         ).then(response => {
-                          
+                            
                             this.filedata = response.data
                             this.step2 = true
                             this.inLoad = false;
@@ -175,11 +191,8 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                 } else {
                     console.log("Saisie invalie")
                 }
-
-
             }
         }
     };
 
 </script>
-
