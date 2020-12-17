@@ -4409,6 +4409,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4429,7 +4430,8 @@ __webpack_require__.r(__webpack_exports__);
           resolution: "0000x0000",
           size: 0
         },
-        resource_id: ''
+        resource_id: '',
+        status: ''
       },
       step2: false,
       inLoad: false,
@@ -50531,7 +50533,7 @@ var render = function() {
             domProps: { value: _vm.csrf }
           }),
           _vm._v(" "),
-          _vm.step2 == true
+          _vm.step2 == false
             ? _c(
                 "div",
                 { staticClass: "flex flex-row  justify-between mb-4" },
@@ -50551,7 +50553,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "container mx-auto w-full  h-4/5 bg-white rounded-lg"
+                          "container mx-auto w-full h-48 bg-white rounded-lg"
                       },
                       [
                         _c(

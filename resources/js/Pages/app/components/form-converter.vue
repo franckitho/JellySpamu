@@ -20,12 +20,13 @@
         </div>
         <form @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
-            <div v-if="step2 == true" class="flex flex-row  justify-between mb-4">
+            <div v-if="step2 == false" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
+                
                     <img class="object-fill rounded-lg " :src="'/storage/'+filedata.properties.preview" alt="">
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
-                    <div class="container mx-auto w-full  h-4/5 bg-white rounded-lg">
+                    <div class="container mx-auto w-full h-48 bg-white rounded-lg">
                         <h3 class="uppercase pt-2 w-full text-center text-gray-600 font-semibold "> Metadata   </h3> 
                        
                          <ul class="ml-3 text-md text-gray-400">
