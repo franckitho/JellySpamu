@@ -4429,7 +4429,8 @@ __webpack_require__.r(__webpack_exports__);
           resolution: "0000x0000",
           size: 0
         },
-        resource_id: ''
+        resource_id: '',
+        status: ''
       },
       step2: false,
       inLoad: false,
@@ -65864,8 +65865,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

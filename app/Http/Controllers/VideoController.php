@@ -71,7 +71,18 @@ class VideoController extends Controller
         
             if(self::INSTAGRAM_DOMAINE == $host){
                 $video = new Video();
-                $video->insta($request->get('url'));
+                $path = $video->insta($request->get('url'));
+                $spec = array_merge($video->getProperties($path), [
+                    'name' => basename(Storage::url($path)),
+                    'size' => Storage::size($path),
+                    'file_path' => $path,
+                ]);
+                $video->data = $spec;
+                $video->title = $spec['name'];
+                $video->vid_time = $spec['duration'];
+                $video->plateform = 'Instagram';
+                $video->save();
+                
             }elseif(self::YOUTUBE_DOMAINE == $host){
                 $video = new Video();
                 $data = $video->youtube($request->get('url'));

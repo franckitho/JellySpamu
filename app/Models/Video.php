@@ -62,7 +62,6 @@ class Video extends Model
         $downloader->setUrl($url);
         if($downloader->hasVideo()){
             $videoDownloadLink = $downloader->getVideoDownloadLink();
-            //dd($videoDownloadLink);
             $videoTitle = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['title'];
             $videoQuality = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['qualityLabel'];
             $videoFormat = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['format'];
