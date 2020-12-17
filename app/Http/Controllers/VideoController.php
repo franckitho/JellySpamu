@@ -29,7 +29,7 @@ class VideoController extends Controller
     public function create()
     {
         $vid = new Video();
-        $vid->getVideoByUri('https://www.youtube.com/watch?v=MKIsl5CetuQ');
+        $vid->getVideoByUri('https://www.youtube.com/watch?v=Y5HSR_gUS6E&ab_channel=SEB');
     }
 
     /**

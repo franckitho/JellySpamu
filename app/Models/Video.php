@@ -49,12 +49,11 @@ class Video extends Model
         $downloader->setUrl($url);
         if($downloader->hasVideo()){ 
             $videoDownloadLink = $downloader->getVideoDownloadLink(); 
-             
-            $videoTitle = $videoDownloadLink[0]['title']; 
-            $videoQuality = $videoDownloadLink[0]['qualityLabel']; 
-            $videoFormat = $videoDownloadLink[0]['format']; 
+            $videoTitle = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['title']; 
+            $videoQuality = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['qualityLabel']; 
+            $videoFormat = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['format']; 
             $videoFileName = strtolower(str_replace(' ', '_', $videoTitle)).'.'.$videoFormat; 
-            $downloadURL = $videoDownloadLink[0]['url'];
+            $downloadURL = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['url'];
             $fileName = preg_replace('/[^A-Za-z0-9.\_\-]/', '', basename($videoFileName)); 
              
             if(!empty($downloadURL)){ 
