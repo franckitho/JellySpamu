@@ -4417,7 +4417,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     convertFile: function convertFile(e) {
       e.preventDefault();
-      var data = this.$inertia.get('/video/' + this.filedata.resource_id + '/get');
+      var data = this.$inertia.get('/video/' + this.filedata.resource_id + '/convert');
     },
     handleFileUpload: function handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
@@ -4430,13 +4430,6 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('video', this.form.image);
       formData.append('url', this.form.url);
       formData.append('export', this.form["export"]);
-      this.step2 = true;
-      /*if (this.form.url == null || this.form.video == null ) {
-          sendToBack = false
-      }
-      else if(!this.validURL(this.form.url)){
-          sendToBack = false
-      }*/
 
       if (sendToBack) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/video', formData, {
@@ -4445,22 +4438,13 @@ __webpack_require__.r(__webpack_exports__);
           }
         }).then(function (response) {
           _this.filedata = response.data;
+          _this.step2 = true;
         })["catch"](function (e) {
           _this.errors.push(e);
         });
       } else {
         console.log("Saisie invalie");
       }
-    },
-    validURL: function validURL(str) {
-      var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-
-      return !!pattern.test(str);
     }
   }
 });
@@ -50482,7 +50466,8 @@ var render = function() {
         "form",
         {
           staticClass: "flex flex-col w-full",
-          attrs: { enctype: "multipart/form-data" }
+          attrs: { enctype: "multipart/form-data" },
+          on: { submit: _vm.convertFile }
         },
         [
           _c("input", {
@@ -50495,7 +50480,7 @@ var render = function() {
                 "div",
                 { staticClass: "flex flex-row  justify-between mb-4" },
                 [
-                  _c("div", { staticClass: "flex flex-col  mt-4 mr-4 " }, [
+                  _c("div", { staticClass: "flex flex-col  mt-4 mr-4 w-3/4" }, [
                     _c("img", {
                       staticClass: "object-fill rounded-lg ",
                       attrs: {
@@ -50884,7 +50869,7 @@ var staticRenderFns = [
                       staticClass: "text-blue-300",
                       attrs: {
                         target: "_blank",
-                        href: "https://github.com/protonemedia/laravel-ffmpeg"
+                        href: "https://github.com/noxyz20/Jellyspamu"
                       }
                     },
                     [_vm._v("Github")]

@@ -87,7 +87,6 @@ class Video extends Model
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
 
-        dd($ffmpeg->getFFProbe()->videos()->first()->get('r_frame_rate'));
 
         $output = 'public/converted/' . uniqid() . '.mp4';
 
