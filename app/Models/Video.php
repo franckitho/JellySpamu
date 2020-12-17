@@ -146,5 +146,9 @@ class Video extends Model
             ->save('public/converted/' . uniqid() . '.mp4');
 
         Storage::delete($output);
+
+        return [
+            'output_path' => $output
+        ];
     }
 }
