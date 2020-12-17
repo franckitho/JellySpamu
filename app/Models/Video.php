@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use ProtoneMedia\LaravelFFMpeg\FFMpeg\FFProbe as FFMpegFFProbe;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg as SupportFFMpeg;
+use App\Services\YoutubeServices;
 
 class Video extends Model
 {
@@ -30,11 +31,7 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'data',
-        'title',
-        'plateform',
-        'vid_time',
-        'categories',
+        'data'
     ];
 
     /**
@@ -45,6 +42,37 @@ class Video extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    public function getVideoByUri($url) {
+        $handler = new YoutubeServices();
+        $downloader = $handler->getDownloader($url);
+        $downloader->setUrl($url);
+        if($downloader->hasVideo()){ 
+            $videoDownloadLink = $downloader->getVideoDownloadLink(); 
+             
+            $videoTitle = $videoDownloadLink[0]['title']; 
+            $videoQuality = $videoDownloadLink[0]['qualityLabel']; 
+            $videoFormat = $videoDownloadLink[0]['format']; 
+            $videoFileName = strtolower(str_replace(' ', '_', $videoTitle)).'.'.$videoFormat; 
+            $downloadURL = $videoDownloadLink[0]['url'];
+            $fileName = preg_replace('/[^A-Za-z0-9.\_\-]/', '', basename($videoFileName)); 
+             
+            if(!empty($downloadURL)){ 
+                // Define header for force download 
+                header("Cache-Control: public"); 
+                header("Content-Description: File Transfer"); 
+                header("Content-Disposition: attachment; filename=$fileName"); 
+                header("Content-Type: application/zip"); 
+                header("Content-Transfer-Encoding: binary"); 
+     
+                readfile($downloadURL); 
+            }else{
+                echo "The video is not found, please check YouTube URL."; 
+            }
+        }else{
+            echo "Please provide valid YouTube URL."; 
+        }
+    }
 
     public function getProperties(string $filename, int $preview_moment = 1)
     {
