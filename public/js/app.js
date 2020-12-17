@@ -4374,6 +4374,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -49254,7 +49259,19 @@ var staticRenderFns = [
                   staticClass:
                     "absolute inset-y-0 right-0 flex text-gray-300 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
                 },
-                [_vm._v("\n                    v 1.0\n                ")]
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-blue-300",
+                      attrs: {
+                        target: "_blank",
+                        href: "https://github.com/protonemedia/laravel-ffmpeg"
+                      }
+                    },
+                    [_vm._v("Github")]
+                  )
+                ]
               )
             ]
           )
@@ -49299,7 +49316,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "max-w-4xl w-full space-y-8" },
-            [_c("form-converter")],
+            [_vm._m(0), _vm._v(" "), _c("form-converter")],
             1
           )
         ]
@@ -49308,7 +49325,29 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("img", {
+        staticClass: "mx-auto h-36 w-auto  ",
+        attrs: { src: "/img/logo.png" }
+      }),
+      _vm._v(" "),
+      _c(
+        "h3",
+        { staticClass: "mt-4 text-center text-2xl font-extrabold text-white" },
+        [
+          _vm._v(
+            "\n                    Jellyspamu Video Converter\n                "
+          )
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
