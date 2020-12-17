@@ -115,8 +115,13 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
         methods: {
             convertFile(e) {
                 e.preventDefault();
-                let data = this.$inertia.get('/video/'+this.filedata.resource_id+'/convert')
-
+                axios.get('/video/'+this.filedata.resource_id+'/convert')
+                    .then(response => {
+                            console.log(response.data)
+                        })
+                        .catch(e => {
+                            this.errors.push(e)
+                        })
             },
             handleFileUpload() {
                 this.form.image = this.$refs.file.files[0];
@@ -146,10 +151,7 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                         })
                         .catch(e => {
                             this.inLoad = false;
-                      
                             this.errors.push(e)
-                           
-                            
                         })
                 } else {
                     console.log("Saisie invalie")
