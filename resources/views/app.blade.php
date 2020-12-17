@@ -24,7 +24,7 @@
 
 </head>
 
-<body id="scene" class="font-sans antialiased">
+<body id="scene" class="font-sans antialiased bg-gray-900">
     <span id="layer-back" class="h-screen w-screen" data-depth="0.2"></span>
     <span id="layer-front" class="h-screen w-screen" >
         @inertia

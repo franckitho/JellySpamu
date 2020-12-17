@@ -50927,8 +50927,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass:
-            "min-h-screen flex justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8"
+          staticClass: "h-full flex justify-center  py-12 px-4 sm:px-6 lg:px-8"
         },
         [
           _c(

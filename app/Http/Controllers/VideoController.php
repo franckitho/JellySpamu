@@ -46,7 +46,7 @@ class VideoController extends Controller
         ]);
 
         $format = explode("x", $request->get('export'));
-
+            //dd($request->file('video'));
         $video = new Video([
             'title' => $request->file('video')->getClientOriginalName(),
         ]);
@@ -63,7 +63,7 @@ class VideoController extends Controller
         // traitement autre (url)
 
         $video->data = $spec;
-        $video->vid_time = $spec['duration'];
+        $video->duration = $spec['duration'];
         $video->save();
 
         return response()->json([
