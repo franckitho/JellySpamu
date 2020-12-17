@@ -65808,6 +65808,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_inertiajs_inertia_vue__WEBPACK_I
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(laravel_jetstream__WEBPACK_IMPORTED_MODULE_2__["InertiaForm"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(portal_vue__WEBPACK_IMPORTED_MODULE_3___default.a);
 var app = document.getElementById('app');
+var scene = document.getElementById('scene');
+var parallaxInstance = new Parallax(scene);
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   render: function render(h) {
     return h(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_1__["InertiaApp"], {
@@ -65862,8 +65864,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

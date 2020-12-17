@@ -18,6 +18,9 @@ Vue.use(PortalVue);
 const app = document.getElementById('app');
 
 
+var scene = document.getElementById('scene');
+var parallaxInstance = new Parallax(scene);
+ 
 new Vue({
     render: (h) =>
         h(InertiaApp, {

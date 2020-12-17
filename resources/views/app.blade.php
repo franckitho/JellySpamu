@@ -24,24 +24,13 @@
 
 </head>
 
-<body id="scene" class="font-sans antialiased bg-gray-900">
-    <span id="layer-back" class="h-screen w-screen" data-depth="0.2"></span>
-    <span id="layer-front" class="h-screen w-screen" >
+<body id="scene" class="font-sans antialiased  overflow-x-hidden bg-gray-900">
+    <span id="layer-back" class="h-screen w-screen  bg-repeat" style="background-image: url('/img/bg.png');" data-depth="0.2"></span>
+    <span id="layer-back" class="h-screen w-screen  bg-repeat" style="background-image: url('/img/bg2.png');" data-depth="0.4"></span>
+    <span id="layer-front" class="h-screen w-screen " style="pointer-events: all !important;" >
         @inertia
     </span>
-    
 </body>
 
-<style>
-    #layer-back {
-        background-image: url('bg.png');
-        background-repeat: repeat;
-        background-size: cover;
-     
-    }
-    #layer-front {
-        pointer-events: all !important;
-    }
-</style>
 </html>
 
