@@ -16,7 +16,7 @@
 class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-br-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
                 v-on:click="submitFile()">Validate</button>
         </div>
-        <form @submit="formSubmit" enctype="multipart/form-data" class="flex flex-col w-full">
+        <form enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
             <div v-if="step2 == true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 ">
@@ -99,7 +99,8 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                         preview: "preview/defaultvideo.png",
                         resolution: "0000x0000",
                         size: 0,
-                    }
+                    },
+                    resource_id:'',
                 },
                 step2: false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -111,24 +112,9 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
             }
         },
         methods: {
-            formSubmit(e) {
-
+            convertFile(e) {
                 e.preventDefault();
-                let currentObj = this;
-
-                const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    }
-                }
-
-                let formData = new FormData();
-                formData.append('video', this.form.image);
-                formData.append('url', this.form.url);
-                formData.append('export', this.form.export);
-
-                let data = this.$inertia.post('/video', formData, config)
-                console.log(data)
+                let data = this.$inertia.get('/video/'+this.filedata.resource_id+'/get')
 
             },
             handleFileUpload() {
@@ -142,13 +128,13 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                 formData.append('video', this.form.image);
                 formData.append('url', this.form.url);
                 formData.append('export', this.form.export);
-
-                if (this.form.url == null || this.form.video == null ) {
+                this.step2 = true
+                /*if (this.form.url == null || this.form.video == null ) {
                     sendToBack = false
                 }
                 else if(!this.validURL(this.form.url)){
                     sendToBack = false
-                }
+                }*/
                 
 
                 if (sendToBack) {
@@ -159,8 +145,9 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                                 }
                             }
                         ).then(response => {
+                          
                             this.filedata = response.data
-                            this.step2 = true
+                            
                         })
                         .catch(e => {
                             this.errors.push(e)

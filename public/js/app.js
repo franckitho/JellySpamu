@@ -4402,7 +4402,8 @@ __webpack_require__.r(__webpack_exports__);
           preview: "preview/defaultvideo.png",
           resolution: "0000x0000",
           size: 0
-        }
+        },
+        resource_id: ''
       },
       step2: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -4414,20 +4415,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    formSubmit: function formSubmit(e) {
+    convertFile: function convertFile(e) {
       e.preventDefault();
-      var currentObj = this;
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
-      };
-      var formData = new FormData();
-      formData.append('video', this.form.image);
-      formData.append('url', this.form.url);
-      formData.append('export', this.form["export"]);
-      var data = this.$inertia.post('/video', formData, config);
-      console.log(data);
+      var data = this.$inertia.get('/video/' + this.filedata.resource_id + '/get');
     },
     handleFileUpload: function handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
@@ -4440,12 +4430,13 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('video', this.form.image);
       formData.append('url', this.form.url);
       formData.append('export', this.form["export"]);
-
-      if (this.form.url == null || this.form.video == null) {
-        sendToBack = false;
-      } else if (!this.validURL(this.form.url)) {
-        sendToBack = false;
+      this.step2 = true;
+      /*if (this.form.url == null || this.form.video == null ) {
+          sendToBack = false
       }
+      else if(!this.validURL(this.form.url)){
+          sendToBack = false
+      }*/
 
       if (sendToBack) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/video', formData, {
@@ -4454,7 +4445,6 @@ __webpack_require__.r(__webpack_exports__);
           }
         }).then(function (response) {
           _this.filedata = response.data;
-          _this.step2 = true;
         })["catch"](function (e) {
           _this.errors.push(e);
         });
@@ -50492,8 +50482,7 @@ var render = function() {
         "form",
         {
           staticClass: "flex flex-col w-full",
-          attrs: { enctype: "multipart/form-data" },
-          on: { submit: _vm.formSubmit }
+          attrs: { enctype: "multipart/form-data" }
         },
         [
           _c("input", {
