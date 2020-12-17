@@ -13,8 +13,8 @@
                 type="text" v-model="form.url" placeholder="Paste a video URL..." />
 
             <button
-class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-br-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
-                v-on:click="submitFile()">Validate</button>
+class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded-br-full focus:outline-none   cursor-pointer hover:bg-blue-600 text-white"
+                v-on:click="submitFile()"><span v-if="!inLoad">Validate</span><span v-if="inLoad" class="text-transparent">Valida</span><i v-if="inLoad" class=" animate-spin fas fa-circle-notch "></i></button>
         </div>
         <form  @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
@@ -103,6 +103,7 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                     resource_id:'',
                 },
                 step2: false,
+                inLoad : false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 form: {
                     url: null,
@@ -128,11 +129,9 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                 formData.append('video', this.form.image);
                 formData.append('url', this.form.url);
                 formData.append('export', this.form.export);
-              
-               
-                
-
+                this.inLoad = true;
                 if (sendToBack) {
+        
                     axios.post('/video',
                             formData, {
                                 headers: {
@@ -143,10 +142,14 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
                           
                             this.filedata = response.data
                             this.step2 = true
-                            
+                            this.inLoad = false;
                         })
                         .catch(e => {
+                            this.inLoad = false;
+                      
                             this.errors.push(e)
+                           
+                            
                         })
                 } else {
                     console.log("Saisie invalie")
@@ -158,3 +161,4 @@ class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-
     };
 
 </script>
+

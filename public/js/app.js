@@ -4406,6 +4406,7 @@ __webpack_require__.r(__webpack_exports__);
         resource_id: ''
       },
       step2: false,
+      inLoad: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         url: null,
@@ -4430,6 +4431,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('video', this.form.image);
       formData.append('url', this.form.url);
       formData.append('export', this.form["export"]);
+      this.inLoad = true;
 
       if (sendToBack) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/video', formData, {
@@ -4439,7 +4441,10 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           _this.filedata = response.data;
           _this.step2 = true;
+          _this.inLoad = false;
         })["catch"](function (e) {
+          _this.inLoad = false;
+
           _this.errors.push(e);
         });
       } else {
@@ -50451,14 +50456,24 @@ var render = function() {
           "button",
           {
             staticClass:
-              "flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-br-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
+              "flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded-br-full focus:outline-none   cursor-pointer hover:bg-blue-600 text-white",
             on: {
               click: function($event) {
                 return _vm.submitFile()
               }
             }
           },
-          [_vm._v("Validate")]
+          [
+            !_vm.inLoad ? _c("span", [_vm._v("Validate")]) : _vm._e(),
+            _vm.inLoad
+              ? _c("span", { staticClass: "text-transparent" }, [
+                  _vm._v("Valida")
+                ])
+              : _vm._e(),
+            _vm.inLoad
+              ? _c("i", { staticClass: " animate-spin fas fa-circle-notch " })
+              : _vm._e()
+          ]
         )
       ]),
       _vm._v(" "),
@@ -65563,15 +65578,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./resources/js/Pages/app/views/index.vue ***!
   \************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_vue_vue_type_template_id_6ace79ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=6ace79ec& */ "./resources/js/Pages/app/views/index.vue?vue&type=template&id=6ace79ec&");
 /* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -65601,7 +65615,7 @@ component.options.__file = "resources/js/Pages/app/views/index.vue"
 /*!*************************************************************************!*\
   !*** ./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js& ***!
   \*************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
