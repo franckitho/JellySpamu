@@ -39,13 +39,15 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'video' => ['required']
+            'video' => 'file|required',
+            'width' => 'required',
+            'height' => 'required',
         ]);
 
         $path = $request->file('video')->store('video');
 
         $video = new Video();
-        $video->convert($path, 1080, 1920);
+        $video->convert($path, intval($request->get('width')), intval($request->get('height')), []);
 
         return back();
     }

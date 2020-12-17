@@ -46,7 +46,7 @@ class Video extends Model
      * @param  string $filename
      * @return void
      */
-    public function convert(string $filename, int $width, int $height)
+    public function convert(string $filename, int $width, int $height, array $metadatas)
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
 
@@ -56,13 +56,25 @@ class Video extends Model
         $in_width = $dim->getWidth();
         $in_height = $dim->getHeight();
 
-        $ffmpeg->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height) {
-            $filters->crop(new \FFMpeg\Coordinate\Point(((int) ($in_width / 3)), 0), new \FFMpeg\Coordinate\Dimension(((int) ($in_width / 3)), $in_height));
-        })->export()->inFormat(new X264('libmp3lame', 'libx264'))->save($output);
+        $format = new X264('libmp3lame', 'libx264');
+        $format->on('progress', function($video, $format, $percentage) {
+            echo $percentage . '%';
+        });
 
-        SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($output)->addFilter(function (VideoFilters $filters) use (&$width, &$height) {
-            $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
-        })->export()->inFormat(new X264('libmp3lame', 'libx264'))->save('converted/' . uniqid() . '.mp4');
+        foreach ($metadatas as $key => $metadata) $ffmpeg->addFilter('-metadata', $key . '=' . $metadata);
+
+        $ffmpeg
+            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height) {
+                $filters->crop(new \FFMpeg\Coordinate\Point(((int) ($in_width / 3)), 0), new \FFMpeg\Coordinate\Dimension(((int) ($in_width / 3)), $in_height));
+            })
+            ->export()->inFormat($format)->save($output);
+
+        SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($output)
+            ->addFilter(function (VideoFilters $filters) use (&$width, &$height) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
+            })
+            ->export()->inFormat(new X264('libmp3lame', 'libx264'))
+            ->save('converted/' . uniqid() . '.mp4');
 
         Storage::delete($output);
     }
