@@ -42,7 +42,7 @@ class Video extends Model
         'data' => 'array',
     ];
 
-    public function getProperties(string $filename)
+    public function getProperties(string $filename, int $preview_moment = 1)
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
 
@@ -55,6 +55,9 @@ class Video extends Model
         $bitrate = $ffprobe->get('bit_rate');
         $codec = $ffprobe->get('codec_name');
 
+        $preview_path = 'preview/' . uniqid() . '.png';
+        SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename)->getFrameFromSeconds($preview_moment)->export()->save($preview_path);
+
         return [
             'orientation' => ($in_width > $in_height) ? 'Horizontal' : 'Vertical',
             'resolution' => $in_width . 'x' . $in_height,
@@ -62,6 +65,7 @@ class Video extends Model
             'framerate' => $framerate,
             'bitrate' => $bitrate,
             'codec' => $codec,
+            'preview' => $preview_path
         ];
     }
 
