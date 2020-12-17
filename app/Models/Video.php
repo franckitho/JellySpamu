@@ -113,6 +113,7 @@ class Video extends Model
 
 
         $output = 'public/converted/' . uniqid() . '.mp4';
+        $output_f = 'public/converted/' . uniqid() . '.mp4';
 
         $dim = $ffmpeg->getVideoStream()->getDimensions();
         $in_width = $dim->getWidth();
@@ -136,12 +137,12 @@ class Video extends Model
                 $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
             })
             ->export()->inFormat(new X264('libmp3lame', 'libx264'))
-            ->save('public/converted/' . uniqid() . '.mp4');
+            ->save($output_f);
 
         Storage::delete($output);
 
         return [
-            'output_path' => $output
+            'output_path' => $output_f
         ];
     }
 }
