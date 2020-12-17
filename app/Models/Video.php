@@ -61,14 +61,7 @@ class Video extends Model
             $fileName = preg_replace('/[^A-Za-z0-9.\_\-]/', '', basename($videoFileName));
 
             if(!empty($downloadURL)){
-                // Define header for force download
-                header("Cache-Control: public");
-                header("Content-Description: File Transfer");
-                header("Content-Disposition: attachment; filename=$fileName");
-                header("Content-Type: application/zip");
-                header("Content-Transfer-Encoding: binary");
-
-                readfile($downloadURL);
+                Storage::disk('local')->put('/video/'.  str_replace('/', '_', $videoTitle) .'.mp4', file_get_contents($downloadURL));
             }else{
                 echo "The video is not found, please check YouTube URL.";
             }
