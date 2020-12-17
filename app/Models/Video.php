@@ -4,11 +4,13 @@ namespace App\Models;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\FFMpeg;
+use FFMpeg\FFProbe;
 use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\LaravelFFMpeg\FFMpeg\FFProbe as FFMpegFFProbe;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg as SupportFFMpeg;
 
 class Video extends Model
@@ -40,15 +42,43 @@ class Video extends Model
         'data' => 'array',
     ];
 
+    public function getProperties(string $filename)
+    {
+        $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
+
+        $dim = $ffmpeg->getVideoStream()->getDimensions();
+        $in_width = $dim->getWidth();
+        $in_height = $dim->getHeight();
+
+        $ffprobe = FFMpegFFProbe::create()->streams(Storage::disk('local')->path($filename))->videos()->first();
+        $framerate = $ffprobe->get('r_frame_rate');
+        $bitrate = $ffprobe->get('bit_rate');
+        $codec = $ffprobe->get('codec_name');
+
+        return [
+            'orientation' => ($in_width > $in_height) ? 'Horizontal' : 'Vertical',
+            'resolution' => $in_width . 'x' . $in_height,
+            'duration' => $ffmpeg->getDurationInSeconds(),
+            'framerate' => $framerate,
+            'bitrate' => $bitrate,
+            'codec' => $codec,
+        ];
+    }
+
     /**
-     * Convert a stored file
+     * convert
      *
      * @param  string $filename
+     * @param  int    $width
+     * @param  int    $height
+     * @param  array  $metadatas
      * @return void
      */
     public function convert(string $filename, int $width, int $height, array $metadatas)
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
+
+        dd($ffmpeg->getFFProbe()->videos()->first()->get('r_frame_rate'));
 
         $output = 'converted/' . uniqid() . '.mp4';
 

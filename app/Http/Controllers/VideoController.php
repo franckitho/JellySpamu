@@ -6,6 +6,7 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Services\VideoServices;
+use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
@@ -37,20 +38,30 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         $request->validate([
-            'video' => 'file|required',
+            'video' => 'file|sometimes',
+            'url' => 'string|sometimes'
         ]);
 
-        $format = explode("x", $request->export);
+        $format = explode("x", $request->get('export'));
 
-        $path = $request->file('video')->store('video');
         $video = new Video();
-        $video->convert($path, intval($format[0]), intval($format[1]), []);
+
+        if ($request->hasFile('video')) {
+            $path = $request->file('video')->store('video');
+            session(['path' => $path]);
+
+            $spec = array_merge($video->getProperties($path), [
+                'name' => basename($path),
+                'size' => Storage::size($path),
+            ]);
+        }
+
+        // traitement autre (url)
 
         return response()->json([
-            'alert' => 'Success',
-            'message' => 'La vidéo a été convertie'
+            'properties' => $spec
         ]);
     }
 
@@ -99,5 +110,10 @@ class VideoController extends Controller
     public function destroy(Video $video)
     {
         //
+    }
+
+    public function convert(Video $video)
+    {
+        $video->convert(session('path'), 1080, 1920, []);
     }
 }
