@@ -8,12 +8,12 @@
                     class=" flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white">
                     <p class="pr-2">Upload </p>
                     <i class="fas fa-upload"></i>
-                    <input type="file" v-on:change="onImageChange, step2 = true" class="hidden" />
+                    <input type="file" v-on:change="onImageChange" class="hidden" />
                 </label>
                 <h3 class="text-white px-4 py-2 font-bold">OR</h3>
                 <input
                     class="appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white"
-                    type="text" v-on:change="step2=true" v-model="form.url" placeholder="Paste a video URL..." />
+                    type="text" v-on:change="step2=true" v-model="form.url" placeholder="Paste a /deo URL..." />
             </div>
             <div v-if="step2 == true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 ">
@@ -68,7 +68,7 @@
     export default {
         data() {
             return {
-                step2 : false,
+                step2 : true,
                 file_name : "Default name",
                 file_size: "20mo",
                 file_type: "mp4",
@@ -88,7 +88,6 @@
             onImageChange(e) {
                 console.log(e.target.files[0]);
                 this.form.image = e.target.files[0];
-                this.nextStep(e)
             },
             formSubmit(e) {
               
@@ -112,8 +111,3 @@
     };
 
 </script>
-
-
-<style lang="csss">
-    cur
-</style>

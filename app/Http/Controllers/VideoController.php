@@ -45,7 +45,6 @@ class VideoController extends Controller
         $format = explode("x", $request->export);
 
         $path = $request->file('video')->store('video');
-
         $video = new Video();
         $video->convert($path, intval($format[0]), intval($format[1]), []);
 
