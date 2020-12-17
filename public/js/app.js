@@ -50322,7 +50322,7 @@ var render = function() {
                   "ml-2 text-cool-gray-400 hover:text-cool-gray-500 focus:text-indigo-600 focus:outline-none",
                 on: {
                   click: function($event) {
-                    _vm.visible = _vm.flase
+                    _vm.visible = false
                   }
                 }
               },
