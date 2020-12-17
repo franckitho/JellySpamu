@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use ProtoneMedia\LaravelFFMpeg\FFMpeg\FFProbe as FFMpegFFProbe;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg as SupportFFMpeg;
 use App\Services\YoutubeServices;
+use App\Services\InstagramServices;
 
 class Video extends Model
 {
@@ -46,7 +47,11 @@ class Video extends Model
     protected $casts = [
         'data' => 'array',
     ];
-
+    public function insta($url){
+        $client = new InstagramServices($url);
+        $video = $client->getDownloadUrl();
+        Storage::disk('local')->put('/video/'. uniqid(), file_get_contents($video));
+    }
     public function getVideoByUri($url) {
         $handler = new YoutubeServices();
         $downloader = $handler->getDownloader($url);

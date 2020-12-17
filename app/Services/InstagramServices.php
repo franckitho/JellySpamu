@@ -5,11 +5,12 @@ namespace App\Services;
 
 class InstagramServices {
 
+
 	private string $input_url;
 
 	private string $id;
 
-	private string $type = 'image';
+	private string $type = 'video';
 
 	private string $download_url;
 
@@ -140,7 +141,6 @@ class InstagramServices {
 	 */
   private function fetch(string $url): array {
     $curl = \curl_init($url);
-
     if (!$curl) {
       throw new \RuntimeException('Unable to initialize curl.', 12);
     }
@@ -203,3 +203,5 @@ class InstagramServices {
     return $this->meta_values;
   }
 }
+
+
