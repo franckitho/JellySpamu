@@ -62,7 +62,7 @@ class VideoController extends Controller
         // traitement autre (url)
 
         $video->data = $spec;
-        $video->duration = $spec['duration'];
+        $video->vid_time = $spec['duration'];
         $video->save();
 
         return response()->json([
