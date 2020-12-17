@@ -1,38 +1,53 @@
 <template>
-    <div>
+    <div class="flex flex-col w-full justify-items-center">
+        <div class="flex flex-row w-full">
+            <label
+                class=" flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white">
+                <p class="pr-2">Upload </p>
+                <i class="fas fa-upload"></i>
+                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()" class="hidden" />
+            </label>
+            <h3 class="text-white px-4 py-2 font-bold">OR</h3>
+            <input
+                class="appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-tl-full rounded-bl-full focus:bg-white"
+                type="text" v-model="form.url" placeholder="Paste a video URL..." />
 
+            <button
+class="flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-br-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
+                v-on:click="submitFile()">Validate</button>
+        </div>
         <form @submit="formSubmit" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
-            <div class="flex flex-row w-full">
-                <label
-                    class=" flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white">
-                    <p class="pr-2">Upload </p>
-                    <i class="fas fa-upload"></i>
-                    <input type="file" v-on:change="onImageChange" class="hidden" />
-                </label>
-                <h3 class="text-white px-4 py-2 font-bold">OR</h3>
-                <input
-                    class="appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white"
-                    type="text" v-on:change="step2=true" v-model="form.url" placeholder="Paste a /deo URL..." />
-            </div>
             <div v-if="step2 == true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 ">
-                    <img class="object-fill rounded-lg " src="/img/defaultvideo.png" alt="">
+                    <img class="object-fill rounded-lg " :src="'/storage/'+filedata.properties.preview" alt="">
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
                     <div class="container mx-auto w-full h-full bg-white rounded-lg">
-                        <h3 class="uppercase pt-2 text-gray-600 font-semibold ml-3"> Metadata :</h3>
-                        <ul class="ml-3 text-sm text-gray-400">
-                        <li >Name : <span class="font-semibold">{{file_name}}</span> </li>
-                        <li>Size : <span class="font-semibold">{{file_size}}</span> </li>
-                        <li>Type : <span class="font-semibold">{{file_type}}</span> </li>
-                        <li>Duration : <span class="font-semibold">{{file_duration}}</span> </li>
-                        <li>Orientation : <span class="font-semibold">{{file_orientation}}</span> </li>
-                        <li>Resolution : <span class="font-semibold">{{file_witdh}} x {{file_height}}</span></li>
+                        <h3 class="uppercase pt-2 text-gray-600 font-semibold ml-3"> Metadata of {{ filedata.properties.name }} :</h3>
+                        <div class="flex flex-row justify-between">
+                            <div>
+                                 <ul class="ml-3 text-sm text-gray-400">
+                            <li>Size : <span class="font-semibold">{{filedata.properties.size}}</span> </li>
+                            <li>Codec : <span class="font-semibold">{{filedata.properties.codec}}</span> </li>
+                            <li>Duration : <span class="font-semibold">{{filedata.properties.duration}}</span> </li>
+                            <li>Orientation : <span class="font-semibold">{{filedata.properties.orientation}}</span> </li>
+                       
+                        </ul>
+                            </div>
+                            <div>
+                            <ul class="mr-3 text-sm text-gray-400">
+                            <li>Resolution : <span class="font-semibold">{{filedata.properties.resolution}}</span></li>
+                            <li>Framerate : <span class="font-semibold">{{filedata.properties. framerate}}</span></li>
+                            <li>Bitrate : <span class="font-semibold">{{filedata.properties. bitrate}}</span></li>
                         </ul>
 
+                            </div>
+                        </div>
+                        
+                       
                     </div>
-                    <div class="flex flex-row mt-4 justify-start">
+                    <div v-if="step2" class="flex flex-row mt-4 justify-start">
                         <div class="inline-block relative">
                             <select
                                 class="block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -55,7 +70,7 @@
                         </div>
                         <button
                             class="flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white"
-                             v-bind:class="'disabled_submit'" type="submit">
+                            v-bind:class="'disabled_submit'" type="submit">
                             Convertir <i class="fas fa-sync ml-3" />
                         </button>
                     </div>
@@ -65,17 +80,28 @@
     </div>
 </template>
 <script>
+    import axios from 'axios';
+    import Button from '../../../Jetstream/Button.vue';
     export default {
+        components: {
+            Button
+        },
         data() {
             return {
-                step2 : true,
-                file_name : "Default name",
-                file_size: "20mo",
-                file_type: "mp4",
-                file_duration: "2m10",
-                file_witdh: "1920",
-                file_height: "1080",
-                file_orientation: "Horizontal",
+                filedata: {
+                    properties:{
+                        bitrate: "0",
+                        codec: "Unknown",
+                        duration: 0,
+                        framerate: "00/00",
+                        name: "File_name.mp4",
+                        orientation: "Orientation",
+                        preview: "preview/defaultvideo.png",
+                        resolution: "0000x0000",
+                        size: 0,
+                    }
+                },
+                step2: false,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 form: {
                     url: null,
@@ -85,12 +111,8 @@
             }
         },
         methods: {
-            onImageChange(e) {
-                console.log(e.target.files[0]);
-                this.form.image = e.target.files[0];
-            },
             formSubmit(e) {
-              
+
                 e.preventDefault();
                 let currentObj = this;
 
@@ -105,7 +127,59 @@
                 formData.append('url', this.form.url);
                 formData.append('export', this.form.export);
 
-                this.$inertia.post('/video', formData, config)
+                let data = this.$inertia.post('/video', formData, config)
+                console.log(data)
+
+            },
+            handleFileUpload() {
+                this.form.image = this.$refs.file.files[0];
+
+
+            },
+            submitFile() {
+                let sendToBack = true;
+                let formData = new FormData();
+                this.step2 = true
+                formData.append('video', this.form.image);
+                formData.append('url', this.form.url);
+                formData.append('export', this.form.export);
+
+                /*if (this.form.url != null && this.validURL(this.form.url)) {
+                    this.form.video = null
+                    sendToBack = true
+                } else if (this.form.video != null) {
+                    this.form.url = null
+                    sendToBack = true
+                }*/
+
+                if (sendToBack) {
+                    axios.post('/video',
+                            formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data'
+                                }
+                            }
+                        ).then(response => {
+                            this.filedata = response.data
+                            console.log(this.filedata)
+                        })
+                        .catch(e => {
+                            this.errors.push(e)
+                        })
+                } else {
+                    console.log("Saisie invalie")
+                }
+
+
+            },
+            validURL(str) {
+                var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+                    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+                    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                    '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+                return !!pattern.test(str);
             }
         }
     };

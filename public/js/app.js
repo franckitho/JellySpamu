@@ -4299,6 +4299,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
 //
 //
 //
@@ -4365,17 +4368,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      step2: true,
-      file_name: "Default name",
-      file_size: "20mo",
-      file_type: "mp4",
-      file_duration: "2m10",
-      file_witdh: "1920",
-      file_height: "1080",
-      file_orientation: "Horizontal",
+      filedata: {
+        properties: {
+          bitrate: "0",
+          codec: "Unknown",
+          duration: 0,
+          framerate: "00/00",
+          name: "File_name.mp4",
+          orientation: "Orientation",
+          preview: "preview/defaultvideo.png",
+          resolution: "0000x0000",
+          size: 0
+        }
+      },
+      step2: false,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         url: null,
@@ -4385,10 +4414,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    onImageChange: function onImageChange(e) {
-      console.log(e.target.files[0]);
-      this.form.image = e.target.files[0];
-    },
     formSubmit: function formSubmit(e) {
       e.preventDefault();
       var currentObj = this;
@@ -4401,7 +4426,53 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('video', this.form.image);
       formData.append('url', this.form.url);
       formData.append('export', this.form["export"]);
-      this.$inertia.post('/video', formData, config);
+      var data = this.$inertia.post('/video', formData, config);
+      console.log(data);
+    },
+    handleFileUpload: function handleFileUpload() {
+      this.form.image = this.$refs.file.files[0];
+    },
+    submitFile: function submitFile() {
+      var _this = this;
+
+      var sendToBack = true;
+      var formData = new FormData();
+      this.step2 = true;
+      formData.append('video', this.form.image);
+      formData.append('url', this.form.url);
+      formData.append('export', this.form["export"]);
+      /*if (this.form.url != null && this.validURL(this.form.url)) {
+          this.form.video = null
+          sendToBack = true
+      } else if (this.form.video != null) {
+          this.form.url = null
+          sendToBack = true
+      }*/
+
+      if (sendToBack) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/video', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (response) {
+          _this.filedata = response.data;
+          console.log(_this.filedata);
+        })["catch"](function (e) {
+          _this.errors.push(e);
+        });
+      } else {
+        console.log("Saisie invalie");
+      }
+    },
+    validURL: function validURL(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+
+      return !!pattern.test(str);
     }
   }
 });
@@ -50306,7 +50377,7 @@ var render = function() {
               _c("i", { staticClass: "fas fa-check" })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "flex-1" }, [_vm._v("zebi")]),
+            _c("div", { staticClass: "flex-1" }, [_vm._v("Alerte")]),
             _vm._v(" "),
             _c(
               "button",
@@ -50348,267 +50419,393 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "form",
-      {
-        staticClass: "flex flex-col w-full",
-        attrs: { enctype: "multipart/form-data" },
-        on: { submit: _vm.formSubmit }
-      },
-      [
-        _c("input", {
-          attrs: { type: "hidden", name: "_token" },
-          domProps: { value: _vm.csrf }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex flex-row w-full" }, [
-          _c(
-            "label",
-            {
-              staticClass:
-                " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
-            },
-            [
-              _c("p", { staticClass: "pr-2" }, [_vm._v("Upload ")]),
-              _vm._v(" "),
-              _c("i", { staticClass: "fas fa-upload" }),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "hidden",
-                attrs: { type: "file" },
-                on: { change: _vm.onImageChange }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
-            _vm._v("OR")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.form.url,
-                expression: "form.url"
-              }
-            ],
+  return _c(
+    "div",
+    { staticClass: "flex flex-col w-full justify-items-center" },
+    [
+      _c("div", { staticClass: "flex flex-row w-full" }, [
+        _c(
+          "label",
+          {
             staticClass:
-              "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
-            attrs: { type: "text", placeholder: "Paste a /deo URL..." },
-            domProps: { value: _vm.form.url },
-            on: {
-              change: function($event) {
-                _vm.step2 = true
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
+          },
+          [
+            _c("p", { staticClass: "pr-2" }, [_vm._v("Upload ")]),
+            _vm._v(" "),
+            _c("i", { staticClass: "fas fa-upload" }),
+            _vm._v(" "),
+            _c("input", {
+              ref: "file",
+              staticClass: "hidden",
+              attrs: { type: "file", id: "file" },
+              on: {
+                change: function($event) {
+                  return _vm.handleFileUpload()
                 }
-                _vm.$set(_vm.form, "url", $event.target.value)
               }
-            }
-          })
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
+          _vm._v("OR")
         ]),
         _vm._v(" "),
-        _vm.step2 == true
-          ? _c("div", { staticClass: "flex flex-row  justify-between mb-4" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex flex-col mt-4 w-3/4 " }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "container mx-auto w-full h-full bg-white rounded-lg"
-                  },
-                  [
-                    _c(
-                      "h3",
-                      {
-                        staticClass:
-                          "uppercase pt-2 text-gray-600 font-semibold ml-3"
-                      },
-                      [_vm._v(" Metadata :")]
-                    ),
-                    _vm._v(" "),
-                    _c("ul", { staticClass: "ml-3 text-sm text-gray-400" }, [
-                      _c("li", [
-                        _vm._v("Name : "),
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(_vm.file_name))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v("Size : "),
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(_vm.file_size))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v("Type : "),
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(_vm.file_type))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v("Duration : "),
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(_vm.file_duration))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v("Orientation : "),
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(_vm._s(_vm.file_orientation))
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("li", [
-                        _vm._v("Resolution : "),
-                        _c("span", { staticClass: "font-semibold" }, [
-                          _vm._v(
-                            _vm._s(_vm.file_witdh) +
-                              " x " +
-                              _vm._s(_vm.file_height)
-                          )
-                        ])
-                      ])
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex flex-row mt-4 justify-start" }, [
-                  _c("div", { staticClass: "inline-block relative" }, [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.export,
-                            expression: "form.export"
-                          }
-                        ],
-                        staticClass:
-                          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.form,
-                              "export",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "null" } }, [
-                          _vm._v("Export for...")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "1080x1920" } }, [
-                          _vm._v("Export for TikTok")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "1920x1080" } }, [
-                          _vm._v("Export for Youtube")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "600x600" } }, [
-                          _vm._v("Export fo Instagram")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "1080x1920" } }, [
-                          _vm._v("Export for Snapchat")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "1280x720" } }, [
-                          _vm._v("Export for Facebook")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.url,
+              expression: "form.url"
+            }
+          ],
+          staticClass:
+            "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-tl-full rounded-bl-full focus:bg-white",
+          attrs: { type: "text", placeholder: "Paste a video URL..." },
+          domProps: { value: _vm.form.url },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "url", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "flex flex-row items-center px-4 py-0 bg-blue-500 rounded-tr-full rounded-br-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
+            on: {
+              click: function($event) {
+                return _vm.submitFile()
+              }
+            }
+          },
+          [_vm._v("Validate")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "flex flex-col w-full",
+          attrs: { enctype: "multipart/form-data" },
+          on: { submit: _vm.formSubmit }
+        },
+        [
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf }
+          }),
+          _vm._v(" "),
+          _vm.step2 == true
+            ? _c(
+                "div",
+                { staticClass: "flex flex-row  justify-between mb-4" },
+                [
+                  _c("div", { staticClass: "flex flex-col  mt-4 mr-4 " }, [
+                    _c("img", {
+                      staticClass: "object-fill rounded-lg ",
+                      attrs: {
+                        src: "/storage/" + _vm.filedata.properties.preview,
+                        alt: ""
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex flex-col mt-4 w-3/4 " }, [
                     _c(
                       "div",
                       {
                         staticClass:
-                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                          "container mx-auto w-full h-full bg-white rounded-lg"
                       },
                       [
                         _c(
-                          "svg",
+                          "h3",
                           {
-                            staticClass: "fill-current h-4 w-4",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 20 20"
-                            }
+                            staticClass:
+                              "uppercase pt-2 text-gray-600 font-semibold ml-3"
                           },
                           [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                              }
-                            })
+                            _vm._v(
+                              " Metadata of " +
+                                _vm._s(_vm.filedata.properties.name) +
+                                " :"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "flex flex-row justify-between" },
+                          [
+                            _c("div", [
+                              _c(
+                                "ul",
+                                { staticClass: "ml-3 text-sm text-gray-400" },
+                                [
+                                  _c("li", [
+                                    _vm._v("Size : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.filedata.properties.size)
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _vm._v("Codec : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.filedata.properties.codec)
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _vm._v("Duration : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.filedata.properties.duration
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _vm._v("Orientation : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.filedata.properties.orientation
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c(
+                                "ul",
+                                { staticClass: "mr-3 text-sm text-gray-400" },
+                                [
+                                  _c("li", [
+                                    _vm._v("Resolution : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.filedata.properties.resolution
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _vm._v("Framerate : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.filedata.properties.framerate
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", [
+                                    _vm._v("Bitrate : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.filedata.properties.bitrate
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ]
+                              )
+                            ])
                           ]
                         )
                       ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white",
-                      class: "disabled_submit",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _vm._v("\n                        Convertir "),
-                      _c("i", { staticClass: "fas fa-sync ml-3" })
-                    ]
-                  )
-                ])
-              ])
-            ])
-          : _vm._e()
-      ]
-    )
-  ])
+                    ),
+                    _vm._v(" "),
+                    _vm.step2
+                      ? _c(
+                          "div",
+                          { staticClass: "flex flex-row mt-4 justify-start" },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "inline-block relative" },
+                              [
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.export,
+                                        expression: "form.export"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "export",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "null" } }, [
+                                      _vm._v("Export for...")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "1080x1920" } },
+                                      [_vm._v("Export for TikTok")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "1920x1080" } },
+                                      [_vm._v("Export for Youtube")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "600x600" } },
+                                      [_vm._v("Export fo Instagram")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "1080x1920" } },
+                                      [_vm._v("Export for Snapchat")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "1280x720" } },
+                                      [_vm._v("Export for Facebook")]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                                  },
+                                  [
+                                    _c(
+                                      "svg",
+                                      {
+                                        staticClass: "fill-current h-4 w-4",
+                                        attrs: {
+                                          xmlns: "http://www.w3.org/2000/svg",
+                                          viewBox: "0 0 20 20"
+                                        }
+                                      },
+                                      [
+                                        _c("path", {
+                                          attrs: {
+                                            d:
+                                              "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white",
+                                class: "disabled_submit",
+                                attrs: { type: "submit" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                            Convertir "
+                                ),
+                                _c("i", { staticClass: "fas fa-sync ml-3" })
+                              ]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ])
+                ]
+              )
+            : _vm._e()
+        ]
+      )
+    ]
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-col  mt-4 mr-4 " }, [
-      _c("img", {
-        staticClass: "object-fill rounded-lg ",
-        attrs: { src: "/img/defaultvideo.png", alt: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
