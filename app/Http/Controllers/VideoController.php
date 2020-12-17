@@ -66,7 +66,8 @@ class VideoController extends Controller
         $video->save();
 
         return response()->json([
-            'properties' => $spec
+            'properties' => $spec,
+            'resource_id' => $video->id
         ]);
     }
 
