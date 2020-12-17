@@ -4268,6 +4268,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -4281,40 +4307,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4369,11 +4361,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
 /* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/Pages/app/components/navbar.vue");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -49062,75 +49049,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "form",
+      {
+        staticClass: "flex flex-col w-full",
+        attrs: {
+          action: "/video/store",
+          method: "POST",
+          enctype: "multipart/form-data"
+        }
+      },
+      [
+        _c("div", { staticClass: "flex flex-row w-full" }, [
+          _c(
+            "label",
+            {
+              staticClass:
+                " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
+            },
+            [
+              _c("p", { staticClass: "pr-2" }, [_vm._v("Upload")]),
+              _vm._v(" "),
+              _c("i", { staticClass: "fas fa-upload" }),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "hidden",
+                attrs: { type: "file" },
+                domProps: { value: _vm.csrf }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
+            _vm._v("OR")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass:
+              "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
+            attrs: {
+              type: "text",
+              name: "",
+              placeholder: "Paste a video URL..."
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex flex-row w-full" }, [
+          _c("div", { staticClass: "flex flex-col" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex flex-col" }, [
+            _c("div", { staticClass: "inline-block relative w-64" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                },
+                [
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "fill-current h-4 w-4",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        viewBox: "0 0 20 20"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass:
+                " flex flex-row items-center  px-4 py-0 font-bold bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
+              attrs: { type: "submit" }
+            }),
+            _vm._v("\n                 Convertir "),
+            _c("i", { staticClass: "fas fa-sync ml-3" })
+          ])
+        ])
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("form", [
-        _c("div", { staticClass: "flex flex-col items-center w-full" }, [
-          _c("div", { staticClass: "flex w-full" }, [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "shadow bg-red-600 h-full hover:bg-red-700 focus:shadow-outline focus:outline-none text-white font-bold py-4 rounded-r-none rounded-bl-none px-6 text-xl rounded-md",
-                attrs: { type: "button" }
-              },
-              [_c("i", { staticClass: "fas fa-upload" })]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              staticClass:
-                "appearance-none block w-full bg-gray-200 text-gray-700 text-3xl py-3 px-4 leading-tight focus:outline-none rounded-tr-md focus:bg-white",
-              attrs: {
-                type: "text",
-                name: "",
-                placeholder: "Lien de la vidéo a convertir..."
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-full h-px bg-black" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex w-full" }, [
-            _c(
-              "select",
-              {
-                staticClass:
-                  "appearance-none block w-full bg-gray-200 text-gray-700 rounded-bl-md text-3xl py-3 px-4 leading-tight focus:outline-none focus:bg-white",
-                attrs: { name: "" }
-              },
-              [
-                _c("option", { attrs: { value: "" } }, [_vm._v("TikTok")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "" } }, [_vm._v("Youtube")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "" } }, [_vm._v("Instagram")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "" } }, [_vm._v("Snapchat")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "flex items-center shadow bg-red-600 h-full hover:bg-red-700 focus:shadow-outline focus:outline-none text-white font-bold py-4 rounded-tr-none rounded-l-none px-6 text-xl rounded-md",
-                attrs: { type: "button" }
-              },
-              [
-                _vm._v("\n                    Convertir "),
-                _c("i", { staticClass: "fas fa-sync ml-3" })
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
+    return _c(
+      "select",
+      {
+        staticClass:
+          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
+      },
+      [
+        _c("option", { attrs: { value: "" } }, [_vm._v("Export for TikTok")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Youtube")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "" } }, [_vm._v("Export fo Instagram")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Snapchat")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Facebook")])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -49154,216 +49191,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("nav", { staticClass: "bg-gray-800" }, [
-      _c("div", { staticClass: "max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" }, [
-        _c(
-          "div",
-          { staticClass: "relative flex items-center justify-between h-16" },
-          [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "absolute inset-y-0 left-0 flex items-center sm:hidden"
-              },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass:
-                      "inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white",
-                    attrs: { "aria-expanded": "false" }
-                  },
-                  [
-                    _c("span", { staticClass: "sr-only" }, [
-                      _vm._v("Open main menu")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "block h-6 w-6",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          fill: "none",
-                          viewBox: "0 0 24 24",
-                          stroke: "currentColor",
-                          "aria-hidden": "true"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d: "M4 6h16M4 12h16M4 18h16"
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "hidden h-6 w-6",
-                        attrs: {
-                          xmlns: "http://www.w3.org/2000/svg",
-                          fill: "none",
-                          viewBox: "0 0 24 24",
-                          stroke: "currentColor",
-                          "aria-hidden": "true"
-                        }
-                      },
-                      [
-                        _c("path", {
-                          attrs: {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "2",
-                            d: "M6 18L18 6M6 6l12 12"
-                          }
-                        })
-                      ]
-                    )
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "absolute inset-y-0 right-0 flex text-gray-300 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-              },
-              [_vm._v("\n                    v 1.0\n                ")]
-            )
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _vm._m(1)
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
-      },
-      [
-        _c("div", { staticClass: "flex-shrink-0 flex items-center" }, [
-          _c("img", {
-            staticClass: "block h-8 w-auto",
-            attrs: { src: "/img/logo_blanc.png" }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-white ml-2 font-bold" }, [
-            _vm._v("JellySpamu")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "hidden sm:block sm:ml-6" }, [
-          _c("div", { staticClass: "flex space-x-4" }, [
-            _c(
-              "a",
-              {
+    return _c("div", [
+      _c("nav", { staticClass: "bg-gray-900" }, [
+        _c("div", { staticClass: "max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" }, [
+          _c(
+            "div",
+            { staticClass: "relative flex items-center justify-between h-16" },
+            [
+              _c("div", {
                 staticClass:
-                  "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Dashboard")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Team")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Projects")]
-            ),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass:
-                  "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Calendar")]
-            )
-          ])
+                  "absolute inset-y-0 left-0 flex items-center sm:hidden"
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "flex-shrink-0 flex items-center" },
+                    [
+                      _c("img", {
+                        staticClass: "block h-8 w-auto ",
+                        attrs: { src: "/img/logo_blanc.png" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-white ml-2 font-bold" }, [
+                        _vm._v("JellySpamu")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "hidden sm:block sm:ml-6" }, [
+                    _c("div", { staticClass: "flex space-x-4" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium",
+                          attrs: { href: "/" }
+                        },
+                        [_vm._v("Video Converter")]
+                      )
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "absolute inset-y-0 right-0 flex text-gray-300 items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+                },
+                [_vm._v("\n                    v 1.0\n                ")]
+              )
+            ]
+          )
         ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "hidden sm:hidden" }, [
-      _c("div", { staticClass: "px-2 pt-2 pb-3 space-y-1" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Dashboard")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Team")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Projects")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass:
-              "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Calendar")]
-        )
       ])
     ])
   }
@@ -49398,13 +49293,13 @@ var render = function() {
         "div",
         {
           staticClass:
-            "min-h-screen flex justify-center bg-gray-800 py-12 px-4 sm:px-6 lg:px-8"
+            "min-h-screen flex justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8"
         },
         [
           _c(
             "div",
             { staticClass: "max-w-4xl w-full space-y-8" },
-            [_vm._m(0), _vm._v(" "), _c("form-converter")],
+            [_c("form-converter")],
             1
           )
         ]
@@ -49413,31 +49308,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("img", {
-        staticClass: "mx-auto h-40 w-auto",
-        attrs: { src: "/img/logo_blanc.png" }
-      }),
-      _vm._v(" "),
-      _c(
-        "h2",
-        {
-          staticClass: "mt-6 text-center text-5xl font-extrabold text-white-900"
-        },
-        [
-          _vm._v(
-            "\n                    Jellyspamu Video Converter\n                "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -63166,7 +63037,7 @@ var map = {
 	"./Profile/UpdatePasswordForm.vue": "./resources/js/Pages/Profile/UpdatePasswordForm.vue",
 	"./Profile/UpdateProfileInformationForm": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
 	"./Profile/UpdateProfileInformationForm.vue": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
-	"./app/components/form-converter": "./resources/js/Pages/app/components/form-converter",
+	"./app/components/form-converter": "./resources/js/Pages/app/components/form-converter.vue",
 	"./app/components/form-converter.vue": "./resources/js/Pages/app/components/form-converter.vue",
 	"./app/components/navbar": "./resources/js/Pages/app/components/navbar.vue",
 	"./app/components/navbar.vue": "./resources/js/Pages/app/components/navbar.vue",
@@ -63819,17 +63690,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/Pages/app/components/form-converter":
-/*!**********************************************************!*\
-  !*** ./resources/js/Pages/app/components/form-converter ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projet\\web\\jellyspamu\\resources\\js\\Pages\\app\\components\\form-converter'");
-
-/***/ }),
-
 /***/ "./resources/js/Pages/app/components/form-converter.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/Pages/app/components/form-converter.vue ***!
@@ -64125,8 +63985,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
