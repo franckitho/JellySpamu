@@ -4458,9 +4458,47 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\resources\\js\\Pages\\app\\views\\index.vue: Unexpected token (34:2)\n\n\u001b[0m \u001b[90m 32 | \u001b[39m                csrf\u001b[33m:\u001b[39m document\u001b[33m.\u001b[39mquerySelector(\u001b[32m'meta[name=\"csrf-token\"]'\u001b[39m)\u001b[33m.\u001b[39mgetAttribute(\u001b[32m'content'\u001b[39m)\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 33 | \u001b[39m            }\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 34 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 35 | \u001b[39m        }}\u001b[0m\n\u001b[0m \u001b[90m 36 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 37 | \u001b[39m        }\u001b[33m,\u001b[39m\u001b[0m\n    at Parser._raise (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:748:17)\n    at Parser.raiseWithData (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:741:17)\n    at Parser.raise (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.unexpected (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9101:16)\n    at Parser.parseExprAtom (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10575:20)\n    at Parser.parseExprSubscripts (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOpBaseRightExpr (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10080:34)\n    at Parser.parseExprOpRightExpr (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10073:21)\n    at Parser.parseExprOp (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10039:27)\n    at Parser.parseExprOps (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9995:17)\n    at Parser.parseMaybeConditional (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at Parser.parseExpressionBase (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9871:23)\n    at C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9865:39\n    at Parser.allowInAnd (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11541:16)\n    at Parser.parseExpression (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9865:17)\n    at Parser.parseReturnStatement (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12045:28)\n    at Parser.parseStatementContent (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11724:21)\n    at Parser.parseStatement (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11676:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12258:25)\n    at Parser.parseBlockBody (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12249:10)\n    at Parser.parseBlock (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12233:10)\n    at Parser.parseFunctionBody (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11221:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11205:10)\n    at Parser.parseMethod (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11155:10)\n    at Parser.parseObjectMethod (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11084:19)\n    at Parser.parseObjPropValue (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11117:23)\n    at Parser.parsePropertyDefinition (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11041:10)\n    at Parser.parseObjectLike (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10931:25)\n    at Parser.parseExprAtom (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10491:23)\n    at Parser.parseExprSubscripts (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
+/* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/Pages/app/components/navbar.vue");
+/* harmony import */ var _components_alert_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/alert.vue */ "./resources/js/Pages/app/components/alert.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    FormConverter: _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    NavBar: _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Alert: _components_alert_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  }
+});
 
 /***/ }),
 
