@@ -28,6 +28,8 @@ class VideoController extends Controller
      */
     public function create()
     {
+        $insta = new \App\Service\InstagramService('https://www.instagram.com/p/CI6OoflhvdY/');
+
         $vid = new Video();
         $vid->getVideoByUri('https://www.youtube.com/watch?v=Y5HSR_gUS6E&ab_channel=SEB');
     }
@@ -42,16 +44,16 @@ class VideoController extends Controller
     {
         $request->validate([
             'video' => 'file|sometimes',
-            'url' => 'string|sometimes'
+            'url' => 'url|sometimes'
         ]);
 
         $format = explode("x", $request->get('export'));
 
-        $video = new Video([
-            'title' => $request->file('video')->getClientOriginalName(),
-        ]);
+        if ($request->hasFile('video') && $request->file('video')) {
+            $video = new Video([
+                'title' => $request->file('video')->getClientOriginalName(),
+            ]);
 
-        if ($request->hasFile('video')) {
             $path = $request->file('video')->store('video');
 
             $spec = array_merge($video->getProperties($path), [
@@ -59,17 +61,24 @@ class VideoController extends Controller
                 'size' => Storage::size($path),
                 'file_path' => $path,
             ]);
+
+            $video->data = $spec;
+            $video->vid_time = $spec['duration'];
+            $video->save();
         }
-        // traitement autre (url)
+        else if ($request->has('url') && $request->get('url')) {
+            $host = parse_url($request->get('url'), PHP_URL_HOST);
 
-        $video->data = $spec;
-        $video->vid_time = $spec['duration'];
-        $video->save();
+        }
 
-        return response()->json([
-            'properties' => $spec,
-            'resource_id' => $video->id
-        ]);
+        if (isset($video)) {
+            return response()->json([
+                'status' => 'success',
+                'properties' => $spec,
+                'resource_id' => $video->id
+            ]);
+        }
+        else return response()->json(['status' => 'failed']);
     }
 
     /**
