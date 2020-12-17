@@ -4417,14 +4417,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     convertFile: function convertFile(e) {
+      var _this = this;
+
       e.preventDefault();
-      var data = this.$inertia.get('/video/' + this.filedata.resource_id + '/convert');
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
+        console.log(response.data);
+      })["catch"](function (e) {
+        _this.errors.push(e);
+      });
     },
     handleFileUpload: function handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
     },
     submitFile: function submitFile() {
-      var _this = this;
+      var _this2 = this;
 
       var sendToBack = true;
       var formData = new FormData();
@@ -4439,13 +4445,13 @@ __webpack_require__.r(__webpack_exports__);
             'Content-Type': 'multipart/form-data'
           }
         }).then(function (response) {
-          _this.filedata = response.data;
-          _this.step2 = true;
-          _this.inLoad = false;
+          _this2.filedata = response.data;
+          _this2.step2 = true;
+          _this2.inLoad = false;
         })["catch"](function (e) {
-          _this.inLoad = false;
+          _this2.inLoad = false;
 
-          _this.errors.push(e);
+          _this2.errors.push(e);
         });
       } else {
         console.log("Saisie invalie");
