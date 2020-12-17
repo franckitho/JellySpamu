@@ -4392,7 +4392,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50701,11 +50700,6 @@ var render = function() {
                                         "/video/" +
                                         _vm.filedata.resource_id +
                                         "/download"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.downloadFile()
-                                      }
                                     }
                                   },
                                   [

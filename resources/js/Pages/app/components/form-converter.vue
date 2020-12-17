@@ -50,8 +50,7 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                     <div v-if="step2" class="flex flex-row mt-4 justify-start">
                         <i v-if="downloadable ==2" class="ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "></i>
                          <a v-if="downloadable == 3" :href="'/video/'+filedata.resource_id+'/download'"
-                            class="flex h-full flex-row items-center  pr-4 bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline"
-                             v-on:click="downloadFile()">
+                            class="flex h-full flex-row items-center  pr-4 bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline">
                             Download <i class=" ml-3 fa fa-download" />
                         </a>
                         <div v-if="downloadable == 0" class="inline-block relative">
