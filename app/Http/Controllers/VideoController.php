@@ -46,19 +46,24 @@ class VideoController extends Controller
 
         $format = explode("x", $request->get('export'));
 
-        $video = new Video();
+        $video = new Video([
+            'title' => $request->file('video')->getClientOriginalName(),
+        ]);
 
         if ($request->hasFile('video')) {
             $path = $request->file('video')->store('video');
-            session(['path' => $path]);
 
             $spec = array_merge($video->getProperties($path), [
-                'name' => basename($path),
+                'name' => $request->file('video')->getClientOriginalName(),
                 'size' => Storage::size($path),
+                'file_path' => $path,
             ]);
         }
-
         // traitement autre (url)
+
+        $video->data = $spec;
+        $video->duration = $spec['duration'];
+        $video->save();
 
         return response()->json([
             'properties' => $spec
@@ -112,8 +117,14 @@ class VideoController extends Controller
         //
     }
 
+    /**
+     * convert
+     *
+     * @param  mixed $video
+     * @return void
+     */
     public function convert(Video $video)
     {
-        $video->convert(session('path'), 1080, 1920, []);
+        $video->convert($video->data['file_path'], 1080, 1920, []);
     }
 }

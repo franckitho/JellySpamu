@@ -30,7 +30,11 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'data'
+        'data',
+        'title',
+        'plateform',
+        'vid_time',
+        'categories',
     ];
 
     /**
