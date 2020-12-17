@@ -4245,6 +4245,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/alert.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/components/alert.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/components/form-converter.vue?vue&type=script&lang=js& ***!
@@ -4413,44 +4434,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/views/index.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
-/* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/Pages/app/components/navbar.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    FormConverter: _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    NavBar: _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  data: function data() {
-    return {
-      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    };
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\resources\\js\\Pages\\app\\views\\index.vue: Unexpected token (38:0)\n\n\u001b[0m \u001b[90m 36 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 37 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n    at Parser._raise (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:748:17)\n    at Parser.raiseWithData (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:741:17)\n    at Parser.raise (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.unexpected (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9101:16)\n    at Parser.parseIdentifierName (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11344:18)\n    at Parser.parseIdentifier (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11317:23)\n    at Parser.parseMaybePrivateName (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10645:19)\n    at Parser.parsePropertyName (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11130:155)\n    at Parser.parsePropertyDefinition (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11016:22)\n    at Parser.parseObjectLike (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10931:25)\n    at Parser.parseExprAtom (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10491:23)\n    at Parser.parseExprSubscripts (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)\n    at Parser.parseMaybeConditional (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9893:39\n    at Parser.allowInAnd (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11541:16)\n    at Parser.parseMaybeAssignAllowIn (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:9893:17)\n    at Parser.parseExportDefaultExpression (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12885:24)\n    at Parser.parseExport (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12795:31)\n    at Parser.parseStatementContent (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11782:27)\n    at Parser.parseStatement (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11676:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12258:25)\n    at Parser.parseBlockBody (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:12249:10)\n    at Parser.parseTopLevel (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:11607:10)\n    at Parser.parse (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:13415:10)\n    at parse (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\parser\\lib\\index.js:13468:38)\n    at parser (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)\n    at run.next (<anonymous>)\n    at Function.transform (C:\\Dossiers Personnel\\Documents Personnels\\Concours\\Hackathon 2020\\JellySpamu\\node_modules\\@babel\\core\\lib\\transform.js:27:41)");
 
 /***/ }),
 
@@ -49585,6 +49571,59 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/alert.vue?vue&type=template&id=7335504c&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/components/alert.vue?vue&type=template&id=7335504c& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "fixed flex max-w-xs w-full mt-4 mr-4 top-0 right-0 bg-white rounded shadow p-4"
+      },
+      [
+        _c("div", { staticClass: "mr-2 text-green-500" }, [
+          _c("i", { staticClass: "fas fa-check" })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex-1" }, [_vm._v("zebi")]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass:
+              "ml-2 text-cool-gray-400 hover:text-cool-gray-500 focus:text-indigo-600 focus:outline-none"
+          },
+          [_c("i", { staticClass: "far fa-times-circle" })]
+        )
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9&":
 /*!***************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/app/components/form-converter.vue?vue&type=template&id=2cdddbc9& ***!
@@ -49992,11 +50031,13 @@ var render = function() {
     [
       _c("nav-bar"),
       _vm._v(" "),
+      _c("alert"),
+      _vm._v(" "),
       _c(
         "div",
         {
           staticClass:
-            "h-screen flex justify-center bg-gray-900 py-4 px-4 sm:px-6 lg:px-8"
+            "min-h-screen flex justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8"
         },
         [
           _c(
@@ -63762,6 +63803,8 @@ var map = {
 	"./Profile/UpdatePasswordForm.vue": "./resources/js/Pages/Profile/UpdatePasswordForm.vue",
 	"./Profile/UpdateProfileInformationForm": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
 	"./Profile/UpdateProfileInformationForm.vue": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
+	"./app/components/alert": "./resources/js/Pages/app/components/alert.vue",
+	"./app/components/alert.vue": "./resources/js/Pages/app/components/alert.vue",
 	"./app/components/form-converter": "./resources/js/Pages/app/components/form-converter.vue",
 	"./app/components/form-converter.vue": "./resources/js/Pages/app/components/form-converter.vue",
 	"./app/components/navbar": "./resources/js/Pages/app/components/navbar.vue",
@@ -64410,6 +64453,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateProfileInformationForm_vue_vue_type_template_id_f38ebb82___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UpdateProfileInformationForm_vue_vue_type_template_id_f38ebb82___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/app/components/alert.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Pages/app/components/alert.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _alert_vue_vue_type_template_id_7335504c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./alert.vue?vue&type=template&id=7335504c& */ "./resources/js/Pages/app/components/alert.vue?vue&type=template&id=7335504c&");
+/* harmony import */ var _alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./alert.vue?vue&type=script&lang=js& */ "./resources/js/Pages/app/components/alert.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _alert_vue_vue_type_template_id_7335504c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _alert_vue_vue_type_template_id_7335504c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/app/components/alert.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/app/components/alert.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Pages/app/components/alert.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./alert.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/alert.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/app/components/alert.vue?vue&type=template&id=7335504c&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Pages/app/components/alert.vue?vue&type=template&id=7335504c& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_template_id_7335504c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./alert.vue?vue&type=template&id=7335504c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/app/components/alert.vue?vue&type=template&id=7335504c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_template_id_7335504c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_alert_vue_vue_type_template_id_7335504c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
