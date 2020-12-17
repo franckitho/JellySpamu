@@ -31,7 +31,11 @@ class Video extends Model
      * @var array
      */
     protected $fillable = [
-        'data'
+        'title',
+        'data',
+        'plateform',
+        'vid_time',
+        'categories',
     ];
 
     /**
@@ -47,29 +51,29 @@ class Video extends Model
         $handler = new YoutubeServices();
         $downloader = $handler->getDownloader($url);
         $downloader->setUrl($url);
-        if($downloader->hasVideo()){ 
-            $videoDownloadLink = $downloader->getVideoDownloadLink(); 
-            $videoTitle = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['title']; 
-            $videoQuality = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['qualityLabel']; 
-            $videoFormat = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['format']; 
-            $videoFileName = strtolower(str_replace(' ', '_', $videoTitle)).'.'.$videoFormat; 
+        if($downloader->hasVideo()){
+            $videoDownloadLink = $downloader->getVideoDownloadLink();
+            $videoTitle = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['title'];
+            $videoQuality = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['qualityLabel'];
+            $videoFormat = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['format'];
+            $videoFileName = strtolower(str_replace(' ', '_', $videoTitle)).'.'.$videoFormat;
             $downloadURL = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['url'];
-            $fileName = preg_replace('/[^A-Za-z0-9.\_\-]/', '', basename($videoFileName)); 
-             
-            if(!empty($downloadURL)){ 
-                // Define header for force download 
-                header("Cache-Control: public"); 
-                header("Content-Description: File Transfer"); 
-                header("Content-Disposition: attachment; filename=$fileName"); 
-                header("Content-Type: application/zip"); 
-                header("Content-Transfer-Encoding: binary"); 
-     
-                readfile($downloadURL); 
+            $fileName = preg_replace('/[^A-Za-z0-9.\_\-]/', '', basename($videoFileName));
+
+            if(!empty($downloadURL)){
+                // Define header for force download
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=$fileName");
+                header("Content-Type: application/zip");
+                header("Content-Transfer-Encoding: binary");
+
+                readfile($downloadURL);
             }else{
-                echo "The video is not found, please check YouTube URL."; 
+                echo "The video is not found, please check YouTube URL.";
             }
         }else{
-            echo "Please provide valid YouTube URL."; 
+            echo "Please provide valid YouTube URL.";
         }
     }
 
