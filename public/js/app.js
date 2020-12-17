@@ -4294,7 +4294,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      form: {
+        url: null,
+        image: null,
+        "export": null
+      }
+    };
+  },
+  methods: {
+    onImageChange: function onImageChange(e) {
+      console.log(e.target.files[0]);
+      this.form.image = e.target.files[0];
+    },
+    formSubmit: function formSubmit(e) {
+      e.preventDefault();
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('video', this.form.image);
+      formData.append('url', this.form.url);
+      formData.append('export', this.form["export"]);
+      this.$inertia.post('/video', formData, config);
+    }
+  }
+});
 
 /***/ }),
 
@@ -4361,12 +4393,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
 /* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/Pages/app/components/navbar.vue");
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -49059,13 +49085,15 @@ var render = function() {
       "form",
       {
         staticClass: "flex flex-col w-full",
-        attrs: {
-          action: "/video/store",
-          method: "POST",
-          enctype: "multipart/form-data"
-        }
+        attrs: { enctype: "multipart/form-data" },
+        on: { submit: _vm.formSubmit }
       },
       [
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
         _c("div", { staticClass: "flex flex-row w-full" }, [
           _c(
             "label",
@@ -49081,7 +49109,7 @@ var render = function() {
               _c("input", {
                 staticClass: "hidden",
                 attrs: { type: "file" },
-                domProps: { value: _vm.csrf }
+                on: { change: _vm.onImageChange }
               })
             ]
           ),
@@ -49091,12 +49119,25 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.url,
+                expression: "form.url"
+              }
+            ],
             staticClass:
               "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
-            attrs: {
-              type: "text",
-              name: "",
-              placeholder: "Paste a video URL..."
+            attrs: { type: "text", placeholder: "Paste a video URL..." },
+            domProps: { value: _vm.form.url },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "url", $event.target.value)
+              }
             }
           })
         ]),
@@ -49106,7 +49147,61 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col" }, [
             _c("div", { staticClass: "inline-block relative w-64" }, [
-              _vm._m(0),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.export,
+                      expression: "form.export"
+                    }
+                  ],
+                  staticClass:
+                    "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.form,
+                        "export",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "1080x1920" } }, [
+                    _vm._v("Export for TikTok")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1920x1080" } }, [
+                    _vm._v("Export for Youtube")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "600x600" } }, [
+                    _vm._v("Export fo Instagram")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1080x1920" } }, [
+                    _vm._v("Export for Snapchat")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1280x720" } }, [
+                    _vm._v("Export for Facebook")
+                  ])
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -49139,7 +49234,7 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               staticClass:
-                " flex flex-row items-center  px-4 py-0 font-bold bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
+                "flex flex-row items-center  px-4 py-0 font-bold bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
               attrs: { type: "submit" }
             }),
             _vm._v("\n                 Convertir "),
@@ -49150,31 +49245,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass:
-          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
-      },
-      [
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for TikTok")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Youtube")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export fo Instagram")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Snapchat")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Facebook")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49316,7 +49387,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "max-w-4xl w-full space-y-8" },
-            [_vm._m(0), _vm._v(" "), _c("form-converter")],
+            [_c("form-converter")],
             1
           )
         ]
@@ -49325,29 +49396,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("img", {
-        staticClass: "mx-auto h-36 w-auto  ",
-        attrs: { src: "/img/logo.png" }
-      }),
-      _vm._v(" "),
-      _c(
-        "h3",
-        { staticClass: "mt-4 text-center text-2xl font-extrabold text-white" },
-        [
-          _vm._v(
-            "\n                    Jellyspamu Video Converter\n                "
-          )
-        ]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
