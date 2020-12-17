@@ -4383,6 +4383,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4393,13 +4419,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       filedata: {
         properties: {
-          bitrate: "0",
+          bitrate: "10000",
           codec: "Unknown",
-          duration: 0,
+          duration: 10000,
           framerate: "00/00",
           name: "File_name.mp4",
           orientation: "Orientation",
-          preview: "preview/defaultvideo.png",
+          preview: "defaultvideo.png",
           resolution: "0000x0000",
           size: 0
         },
@@ -4407,11 +4433,13 @@ __webpack_require__.r(__webpack_exports__);
       },
       step2: false,
       inLoad: false,
+      inLoadDownlad: false,
+      downloadable: 0,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         url: null,
         image: null,
-        "export": null
+        "export": "youtube"
       }
     };
   },
@@ -4419,12 +4447,16 @@ __webpack_require__.r(__webpack_exports__);
     convertFile: function convertFile(e) {
       var _this = this;
 
-      e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
-        console.log(response.data);
-      })["catch"](function (e) {
-        _this.errors.push(e);
-      });
+      if (this.downloadable != 3) {
+        this.downloadable = 2;
+        e.preventDefault();
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
+          _this.downloadable = 3;
+          console.log(response.data);
+        })["catch"](function (e) {
+          _this.errors.push(e);
+        });
+      }
     },
     handleFileUpload: function handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
@@ -4432,6 +4464,9 @@ __webpack_require__.r(__webpack_exports__);
     submitFile: function submitFile() {
       var _this2 = this;
 
+      this.inLoad = false;
+      this.downloadable = 0;
+      this.step2 = false;
       var sendToBack = true;
       var formData = new FormData();
       formData.append('video', this.form.image);
@@ -50516,21 +50551,28 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "container mx-auto w-full h-full bg-white rounded-lg"
+                          "container mx-auto w-full  h-4/5 bg-white rounded-lg"
                       },
                       [
                         _c(
                           "h3",
                           {
                             staticClass:
-                              "uppercase pt-2 text-gray-600 font-semibold ml-3"
+                              "uppercase pt-2 w-full text-center text-gray-600 font-semibold "
                           },
+                          [_vm._v(" Metadata   ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "ml-3 text-md text-gray-400" },
                           [
-                            _vm._v(
-                              " Metadata of " +
-                                _vm._s(_vm.filedata.properties.name) +
-                                " :"
-                            )
+                            _c("li", [
+                              _vm._v("Name : "),
+                              _c("span", { staticClass: "font-semibold" }, [
+                                _vm._v(_vm._s(_vm.filedata.properties.name))
+                              ])
+                            ])
                           ]
                         ),
                         _vm._v(" "),
@@ -50541,36 +50583,25 @@ var render = function() {
                             _c("div", [
                               _c(
                                 "ul",
-                                { staticClass: "ml-3 text-sm text-gray-400" },
+                                { staticClass: "ml-3 text-md text-gray-400" },
                                 [
-                                  _c("li", [
-                                    _vm._v("Size : "),
+                                  _c("li", { staticClass: "pt-2" }, [
+                                    _vm._v("Resolution : "),
                                     _c(
                                       "span",
                                       { staticClass: "font-semibold" },
                                       [
                                         _vm._v(
-                                          _vm._s(_vm.filedata.properties.size)
+                                          _vm._s(
+                                            _vm.filedata.properties.resolution
+                                          )
                                         )
                                       ]
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _c("li", [
-                                    _vm._v("Codec : "),
-                                    _c(
-                                      "span",
-                                      { staticClass: "font-semibold" },
-                                      [
-                                        _vm._v(
-                                          _vm._s(_vm.filedata.properties.codec)
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _vm._v("Duration : "),
+                                  _c("li", { staticClass: "pt-2" }, [
+                                    _vm._v("Duration  : "),
                                     _c(
                                       "span",
                                       { staticClass: "font-semibold" },
@@ -50584,7 +50615,7 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _c("li", [
+                                  _c("li", { staticClass: "pt-2" }, [
                                     _vm._v("Orientation : "),
                                     _c(
                                       "span",
@@ -50605,24 +50636,24 @@ var render = function() {
                             _c("div", [
                               _c(
                                 "ul",
-                                { staticClass: "mr-3 text-sm text-gray-400" },
+                                { staticClass: "mr-3 text-md text-gray-400" },
                                 [
-                                  _c("li", [
-                                    _vm._v("Resolution : "),
+                                  _c("li", { staticClass: "pt-1" }, [
+                                    _vm._v("Codec : "),
                                     _c(
                                       "span",
-                                      { staticClass: "font-semibold" },
+                                      {
+                                        staticClass: "font-semibold uppercase"
+                                      },
                                       [
                                         _vm._v(
-                                          _vm._s(
-                                            _vm.filedata.properties.resolution
-                                          )
+                                          _vm._s(_vm.filedata.properties.codec)
                                         )
                                       ]
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _c("li", [
+                                  _c("li", { staticClass: "pt-1" }, [
                                     _vm._v("Framerate : "),
                                     _c(
                                       "span",
@@ -50637,7 +50668,7 @@ var render = function() {
                                     )
                                   ]),
                                   _vm._v(" "),
-                                  _c("li", [
+                                  _c("li", { staticClass: "pt-1" }, [
                                     _vm._v("Bitrate : "),
                                     _c(
                                       "span",
@@ -50650,6 +50681,19 @@ var render = function() {
                                         )
                                       ]
                                     )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("li", { staticClass: "pt-1" }, [
+                                    _vm._v("Size : "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.filedata.properties.size)
+                                        )
+                                      ]
+                                    )
                                   ])
                                 ]
                               )
@@ -50659,12 +50703,39 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm.step2
-                      ? _c(
-                          "div",
-                          { staticClass: "flex flex-row mt-4 justify-start" },
-                          [
-                            _c(
+                    _c(
+                      "div",
+                      { staticClass: "flex flex-row mt-4 justify-start" },
+                      [
+                        _vm.downloadable == 2
+                          ? _c("i", {
+                              staticClass:
+                                "ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.downloadable == 3
+                          ? _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "flex h-full flex-row items-center  pr-4 bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline",
+                                attrs: {
+                                  href:
+                                    "/video/" +
+                                    _vm.filedata.resource_id +
+                                    "/download"
+                                }
+                              },
+                              [
+                                _vm._v("\n                        Download "),
+                                _c("i", { staticClass: " ml-3 fa fa-download" })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.downloadable == 0
+                          ? _c(
                               "div",
                               { staticClass: "inline-block relative" },
                               [
@@ -50680,7 +50751,7 @@ var render = function() {
                                       }
                                     ],
                                     staticClass:
-                                      "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+                                      "block appearance-none w-full pr-14 bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full justify-items-start shadow leading-tight focus:outline-none focus:shadow-outline",
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -50705,37 +50776,33 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c("option", { attrs: { value: "null" } }, [
-                                      _vm._v("Export for...")
-                                    ]),
-                                    _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "1080x1920" } },
-                                      [_vm._v("Export for TikTok")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "1920x1080" } },
+                                      { attrs: { value: "youtube" } },
                                       [_vm._v("Export for Youtube")]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "600x600" } },
+                                      { attrs: { value: "tiktok" } },
+                                      [_vm._v("Export for TikTok")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "option",
+                                      { attrs: { value: "instagram" } },
                                       [_vm._v("Export fo Instagram")]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "1080x1920" } },
+                                      { attrs: { value: "snapchat" } },
                                       [_vm._v("Export for Snapchat")]
                                     ),
                                     _vm._v(" "),
                                     _c(
                                       "option",
-                                      { attrs: { value: "1280x720" } },
+                                      { attrs: { value: "facebook" } },
                                       [_vm._v("Export for Facebook")]
                                     )
                                   ]
@@ -50748,6 +50815,61 @@ var render = function() {
                                       "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
                                   },
                                   [
+                                    _vm.form.export == "youtube"
+                                      ? _c("img", {
+                                          staticClass: "w-6 h-5 mr-2",
+                                          attrs: {
+                                            src:
+                                              "https://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.form.export == "tiktok"
+                                      ? _c("img", {
+                                          staticClass: "w-5 h-5 mr-2",
+                                          attrs: {
+                                            src:
+                                              "https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.form.export == "instagram"
+                                      ? _c("img", {
+                                          staticClass: "w-5 h-5 mr-2",
+                                          attrs: {
+                                            src:
+                                              "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.form.export == "snapchat"
+                                      ? _c("img", {
+                                          staticClass: "w-5 h-5 mr-2",
+                                          attrs: {
+                                            src:
+                                              "https://upload.wikimedia.org/wikipedia/fr/archive/a/ad/20190808214526%21Logo-Snapchat.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.form.export == "facebook"
+                                      ? _c("img", {
+                                          staticClass: "w-5 h-5 mr-2",
+                                          attrs: {
+                                            src:
+                                              "https://assets.stickpng.com/thumbs/584ac2d03ac3a570f94a666d.png",
+                                            alt: ""
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
                                     _c(
                                       "svg",
                                       {
@@ -50769,9 +50891,11 @@ var render = function() {
                                   ]
                                 )
                               ]
-                            ),
-                            _vm._v(" "),
-                            _c(
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.downloadable == 0
+                          ? _c(
                               "button",
                               {
                                 staticClass:
@@ -50780,15 +50904,13 @@ var render = function() {
                                 attrs: { type: "submit" }
                               },
                               [
-                                _vm._v(
-                                  "\n                            Convertir "
-                                ),
+                                _vm._v("\n                        Convertir "),
                                 _c("i", { staticClass: "fas fa-sync ml-3" })
                               ]
                             )
-                          ]
-                        )
-                      : _vm._e()
+                          : _vm._e()
+                      ]
+                    )
                   ])
                 ]
               )
@@ -50933,7 +51055,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "h-full flex justify-center  py-12 px-4 sm:px-6 lg:px-8"
+          staticClass: "h-full flex justify-center  py-4 px-4 sm:px-6 lg:px-8"
         },
         [
           _c(
@@ -65740,8 +65862,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

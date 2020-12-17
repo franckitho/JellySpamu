@@ -31,7 +31,7 @@ class VideoController extends Controller
         $insta = new \App\Service\InstagramService('https://www.instagram.com/p/CI6OoflhvdY/');
 
         $vid = new Video();
-        $vid->getVideoByUri('https://www.youtube.com/watch?v=Y5HSR_gUS6E&ab_channel=SEB');
+        $vid->insta("https://www.instagram.com/p/CI6OoflhvdY/");
     }
 
     /**
