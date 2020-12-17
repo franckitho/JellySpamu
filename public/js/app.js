@@ -4409,7 +4409,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50539,11 +50538,13 @@ var render = function() {
                 { staticClass: "flex flex-row  justify-between mb-4" },
                 [
                   _c("div", { staticClass: "flex flex-col  mt-4 mr-4 w-3/4" }, [
-                    _c("img", {
-                      staticClass: "object-fill rounded-lg ",
+                    _c("canvas", {
+                      staticClass: " rounded-lg",
                       attrs: {
-                        src: "/storage/" + _vm.filedata.properties.preview,
-                        alt: ""
+                        id: "canvas_preview",
+                        width: "100%",
+                        height: "100%",
+                        src: "/storage/" + _vm.filedata.properties.preview
                       }
                     })
                   ]),
@@ -50952,7 +50953,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("nav", { staticClass: "bg-gray-900" }, [
+      _c("nav", { staticClass: "bg-transparent" }, [
         _c("div", { staticClass: "max-w-7xl mx-auto px-2 sm:px-6 lg:px-8" }, [
           _c(
             "div",

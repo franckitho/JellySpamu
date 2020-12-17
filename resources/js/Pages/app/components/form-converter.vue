@@ -22,8 +22,7 @@
             <input type="hidden" name="_token" :value="csrf">
             <div v-if="step2 == false" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
-                
-                    <img class="object-fill rounded-lg " :src="'/storage/'+filedata.properties.preview" alt="">
+                <canvas class=" rounded-lg"  id="canvas_preview" width="100%" height="100%" :src="'/storage/'+filedata.properties.preview"></canvas>
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
                     <div class="container mx-auto w-full h-48 bg-white rounded-lg">
