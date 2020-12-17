@@ -48,7 +48,10 @@ class VideoController extends Controller
         $video = new Video();
         $video->convert($path, intval($format[0]), intval($format[1]), []);
 
-        return back();
+        return response()->json([
+            'alert' => 'Success',
+            'message' => 'La vidéo a été convertie'
+        ]);
     }
 
     /**
