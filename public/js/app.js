@@ -4442,21 +4442,11 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    downloadFile: function downloadFile(e) {
-      var _this2 = this;
-
-      e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/download').then(function (response) {
-        console.log(response.data + "ddd");
-      })["catch"](function (e) {
-        _this2.errors.push(e);
-      });
-    },
     handleFileUpload: function handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
     },
     submitFile: function submitFile() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.inLoad = false;
       this.downloadable = 0;
@@ -4474,13 +4464,13 @@ __webpack_require__.r(__webpack_exports__);
             'Content-Type': 'multipart/form-data'
           }
         }).then(function (response) {
-          _this3.filedata = response.data;
-          _this3.step2 = true;
-          _this3.inLoad = false;
+          _this2.filedata = response.data;
+          _this2.step2 = true;
+          _this2.inLoad = false;
         })["catch"](function (e) {
-          _this3.inLoad = false;
+          _this2.inLoad = false;
 
-          _this3.errors.push(e);
+          _this2.errors.push(e);
         });
       } else {
         console.log("Saisie invalie");
@@ -50702,10 +50692,16 @@ var render = function() {
                             _vm._v(" "),
                             _vm.downloadable == 3
                               ? _c(
-                                  "button",
+                                  "a",
                                   {
                                     staticClass:
-                                      "flex h-full flex-row items-center  pr-4  bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline",
+                                      "flex h-full flex-row items-center  pr-4 bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline",
+                                    attrs: {
+                                      href:
+                                        "/video/" +
+                                        _vm.filedata.resource_id +
+                                        "/download"
+                                    },
                                     on: {
                                       click: function($event) {
                                         return _vm.downloadFile()

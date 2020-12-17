@@ -49,11 +49,11 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                     </div>
                     <div v-if="step2" class="flex flex-row mt-4 justify-start">
                         <i v-if="downloadable ==2" class="ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "></i>
-                         <button v-if="downloadable == 3"
-                            class="flex h-full flex-row items-center  pr-4  bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline"
+                         <a v-if="downloadable == 3" :href="'/video/'+filedata.resource_id+'/download'"
+                            class="flex h-full flex-row items-center  pr-4 bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline"
                              v-on:click="downloadFile()">
                             Download <i class=" ml-3 fa fa-download" />
-                        </button>
+                        </a>
                         <div v-if="downloadable == 0" class="inline-block relative">
                             <select
                                 class="block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -74,7 +74,7 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                                 </svg>
                             </div>
                         </div>
-                        <button v-if="downloadable == 0"
+                        <button v-if="downloadable == 0" 
                             class="flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white"
                             v-bind:class="'disabled_submit'" type="submit">
                             Convertir <i class="fas fa-sync ml-3" />
@@ -139,16 +139,6 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                         .catch(e => {
                             this.errors.push(e)
                         }) }
-            },
-            downloadFile(e) {
-                e.preventDefault();
-                axios.get('/video/'+this.filedata.resource_id+'/download')
-                    .then(response => {
-                            console.log(response.data+ "ddd")
-                        })
-                        .catch(e => {
-                            this.errors.push(e)
-                        })
             },
             handleFileUpload() {
                 this.form.image = this.$refs.file.files[0];
