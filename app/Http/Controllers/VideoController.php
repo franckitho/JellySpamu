@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
 {
+    private const INSTAGRAM_DOMAINE = "www.instagram.com";
+    private const YOUTUBE_DOMAINE = "www.youtube.com";
+    private const TIKTOK_DOMAINE = "www.tiktok.com";
+    private const FACEBOOK_DOMAINE = "www.facebook.com";
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +32,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        $insta = new \App\Service\InstagramService('https://www.instagram.com/p/CI6OoflhvdY/');
-
-        $vid = new Video();
-        $vid->insta("https://www.instagram.com/p/CI6OoflhvdY/");
+        //
     }
 
     /**
@@ -43,10 +44,10 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'video' => 'file|sometimes',
-            'url' => 'url|sometimes'
+            'video' => 'sometimes',
+            'url' => 'string|sometimes'
         ]);
-
+       
         $format = explode("x", $request->get('export'));
 
         if ($request->hasFile('video') && $request->file('video')) {
@@ -61,14 +62,41 @@ class VideoController extends Controller
                 'size' => Storage::size($path),
                 'file_path' => $path,
             ]);
-
             $video->data = $spec;
             $video->vid_time = $spec['duration'];
             $video->save();
         }
         else if ($request->has('url') && $request->get('url')) {
             $host = parse_url($request->get('url'), PHP_URL_HOST);
+        
+            if(self::INSTAGRAM_DOMAINE == $host){
+                $video = new Video();
+                $video->insta($request->get('url'));
+            }elseif(self::YOUTUBE_DOMAINE == $host){
+                $video = new Video();
+                $data = $video->youtube($request->get('url'));
+                $spec = [
+                    "name" => $data['data']['download_link']['title'],
+                    "size" => 935994,
+                    "codec" => "h264",
+                    "bitrate" => "389608",
+                    "preview" => $data['data']['preview'],
+                    "duration" => $data['vid_time'],
+                    "file_path" => $data['data']['path'],
+                    "framerate" => $data['data']['download_link']['fps'],
+                    "resolution" => "640x360",
+                    "orientation" => "Horizontal"
+                ];
+                $video->data = $spec;
+                $video->title = $data['title'];
+                $video->vid_time = $data['vid_time'];
+                $video->plateform = $data['platform'];
+                $video->save();
+            }elseif(self::FACEBOOK_DOMAINE == $host){
 
+            }elseif(self::TIKTOK_DOMAINE == $host){
+
+            }
         }
 
         if (isset($video)) {

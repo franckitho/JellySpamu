@@ -127,6 +127,7 @@
                         size: 0,
                     },
                     resource_id: '',
+                    status: '',
                 },
                 step2: false,
                 inLoad: false,

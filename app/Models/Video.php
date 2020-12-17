@@ -47,26 +47,41 @@ class Video extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
     public function insta($url){
         $client = new InstagramServices($url);
         $video = $client->getDownloadUrl();
-        Storage::disk('local')->put('/video/'. uniqid(), file_get_contents($video));
+        $path = '/video/'. uniqid() . '.mp4';
+        Storage::disk('local')->put($path, file_get_contents($video));
+        return $path;
     }
-    public function getVideoByUri($url) {
+
+    public function youtube($url) {
         $handler = new YoutubeServices();
         $downloader = $handler->getDownloader($url);
         $downloader->setUrl($url);
         if($downloader->hasVideo()){
             $videoDownloadLink = $downloader->getVideoDownloadLink();
+            //dd($videoDownloadLink);
             $videoTitle = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['title'];
             $videoQuality = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['qualityLabel'];
             $videoFormat = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['format'];
+            $videoTime = (int)$videoDownloadLink[\sizeof($videoDownloadLink)-1]['approxDurationMs']/1000;
             $videoFileName = strtolower(str_replace(' ', '_', $videoTitle)).'.'.$videoFormat;
             $downloadURL = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['url'];
             $fileName = preg_replace('/[^A-Za-z0-9.\_\-]/', '', basename($videoFileName));
-
+            $path = 'video/'. uniqid() .'.mp4';
             if(!empty($downloadURL)){
-                Storage::disk('local')->put('/video/'.  str_replace('/', '_', $videoTitle) .'.mp4', file_get_contents($downloadURL));
+                Storage::disk('local')->put($path, file_get_contents($downloadURL));
+                $preview_path = 'preview/' . uniqid() . '.png';
+                SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($path)->getFrameFromSeconds(1)->export()->save('public/' . $preview_path);
+                return [
+                    'data' => ['download_link' => $videoDownloadLink[\sizeof($videoDownloadLink)-1],  'path' => $path, 'preview' => $preview_path],
+                    'title' => $videoTitle,
+                    'path' => $path,
+                    'vid_time' => $videoTime,
+                    'platform' => 'youtube',
+                ];
             }else{
                 echo "The video is not found, please check YouTube URL.";
             }
@@ -87,10 +102,8 @@ class Video extends Model
         $framerate = $ffprobe->get('r_frame_rate');
         $bitrate = $ffprobe->get('bit_rate');
         $codec = $ffprobe->get('codec_name');
-        $uniqid = uniqid();
-        $preview_path = 'public/preview/' . $uniqid . '.png';
-        $preview_pathdata = 'preview/' . $uniqid . '.png';
-        SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename)->getFrameFromSeconds($preview_moment)->export()->save($preview_path);
+        $preview_path = 'preview/' . uniqid() . '.png';
+        SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename)->getFrameFromSeconds($preview_moment)->export()->save('public/'.$preview_path);
 
         return [
             'orientation' => ($in_width > $in_height) ? 'Horizontal' : 'Vertical',
@@ -99,7 +112,7 @@ class Video extends Model
             'framerate' => $framerate,
             'bitrate' => $bitrate,
             'codec' => $codec,
-            'preview' => $preview_pathdata
+            'preview' => $preview_path
         ];
     }
 
