@@ -84,7 +84,7 @@ class VideoController extends Controller
             'video' => $video
         ]);
     }
-    
+
     /**
      * convert
      *
@@ -93,7 +93,10 @@ class VideoController extends Controller
      */
     public function convert(Video $video)
     {
-        $video->convert($video->data['file_path'], 1080, 1920, []);
+        $data = $video->data;
+        $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, [])['output_path'];
+        $video->data = $data;
+        $video->save();
     }
 
     public function download(Video $video)
