@@ -4383,6 +4383,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4407,6 +4417,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       step2: false,
       inLoad: false,
+      inLoadDownlad: false,
+      downloadable: 0,
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         url: null,
@@ -4419,19 +4431,36 @@ __webpack_require__.r(__webpack_exports__);
     convertFile: function convertFile(e) {
       var _this = this;
 
+      if (this.downloadable != 3) {
+        this.downloadable = 2;
+        e.preventDefault();
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
+          _this.downloadable = 3;
+          console.log(response.data);
+        })["catch"](function (e) {
+          _this.errors.push(e);
+        });
+      }
+    },
+    downloadFile: function downloadFile(e) {
+      var _this2 = this;
+
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
-        console.log(response.data);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/download').then(function (response) {
+        console.log(response.data + "ddd");
       })["catch"](function (e) {
-        _this.errors.push(e);
+        _this2.errors.push(e);
       });
     },
     handleFileUpload: function handleFileUpload() {
       this.form.image = this.$refs.file.files[0];
     },
     submitFile: function submitFile() {
-      var _this2 = this;
+      var _this3 = this;
 
+      this.inLoad = false;
+      this.downloadable = 0;
+      this.step2 = false;
       var sendToBack = true;
       var formData = new FormData();
       formData.append('video', this.form.image);
@@ -4445,13 +4474,13 @@ __webpack_require__.r(__webpack_exports__);
             'Content-Type': 'multipart/form-data'
           }
         }).then(function (response) {
-          _this2.filedata = response.data;
-          _this2.step2 = true;
-          _this2.inLoad = false;
+          _this3.filedata = response.data;
+          _this3.step2 = true;
+          _this3.inLoad = false;
         })["catch"](function (e) {
-          _this2.inLoad = false;
+          _this3.inLoad = false;
 
-          _this2.errors.push(e);
+          _this3.errors.push(e);
         });
       } else {
         console.log("Saisie invalie");
@@ -50516,7 +50545,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "container mx-auto w-full h-full bg-white rounded-lg"
+                          "container mx-auto w-full  h-4/5 bg-white rounded-lg"
                       },
                       [
                         _c(
@@ -50664,128 +50693,168 @@ var render = function() {
                           "div",
                           { staticClass: "flex flex-row mt-4 justify-start" },
                           [
-                            _c(
-                              "div",
-                              { staticClass: "inline-block relative" },
-                              [
-                                _c(
-                                  "select",
+                            _vm.downloadable == 2
+                              ? _c("i", {
+                                  staticClass:
+                                    "ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.downloadable == 3
+                              ? _c(
+                                  "button",
                                   {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.export,
-                                        expression: "form.export"
-                                      }
-                                    ],
                                     staticClass:
-                                      "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+                                      "flex h-full flex-row items-center  pr-4  bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline",
                                     on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.form,
-                                          "export",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
+                                      click: function($event) {
+                                        return _vm.downloadFile()
                                       }
                                     }
                                   },
                                   [
-                                    _c("option", { attrs: { value: "null" } }, [
-                                      _vm._v("Export for...")
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "1080x1920" } },
-                                      [_vm._v("Export for TikTok")]
+                                    _vm._v(
+                                      "\n                            Download "
                                     ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "1920x1080" } },
-                                      [_vm._v("Export for Youtube")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "600x600" } },
-                                      [_vm._v("Export fo Instagram")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "1080x1920" } },
-                                      [_vm._v("Export for Snapchat")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { attrs: { value: "1280x720" } },
-                                      [_vm._v("Export for Facebook")]
-                                    )
+                                    _c("i", {
+                                      staticClass: " ml-3 fa fa-download"
+                                    })
                                   ]
-                                ),
-                                _vm._v(" "),
-                                _c(
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.downloadable == 0
+                              ? _c(
                                   "div",
-                                  {
-                                    staticClass:
-                                      "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                                  },
+                                  { staticClass: "inline-block relative" },
                                   [
                                     _c(
-                                      "svg",
+                                      "select",
                                       {
-                                        staticClass: "fill-current h-4 w-4",
-                                        attrs: {
-                                          xmlns: "http://www.w3.org/2000/svg",
-                                          viewBox: "0 0 20 20"
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.export,
+                                            expression: "form.export"
+                                          }
+                                        ],
+                                        staticClass:
+                                          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+                                        on: {
+                                          change: function($event) {
+                                            var $$selectedVal = Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function(o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function(o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                            _vm.$set(
+                                              _vm.form,
+                                              "export",
+                                              $event.target.multiple
+                                                ? $$selectedVal
+                                                : $$selectedVal[0]
+                                            )
+                                          }
                                         }
                                       },
                                       [
-                                        _c("path", {
-                                          attrs: {
-                                            d:
-                                              "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                          }
-                                        })
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "null" } },
+                                          [_vm._v("Export for...")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1080x1920" } },
+                                          [_vm._v("Export for TikTok")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1920x1080" } },
+                                          [_vm._v("Export for Youtube")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "600x600" } },
+                                          [_vm._v("Export fo Instagram")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1080x1920" } },
+                                          [_vm._v("Export for Snapchat")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1280x720" } },
+                                          [_vm._v("Export for Facebook")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                                      },
+                                      [
+                                        _c(
+                                          "svg",
+                                          {
+                                            staticClass: "fill-current h-4 w-4",
+                                            attrs: {
+                                              xmlns:
+                                                "http://www.w3.org/2000/svg",
+                                              viewBox: "0 0 20 20"
+                                            }
+                                          },
+                                          [
+                                            _c("path", {
+                                              attrs: {
+                                                d:
+                                                  "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                              }
+                                            })
+                                          ]
+                                        )
                                       ]
                                     )
                                   ]
                                 )
-                              ]
-                            ),
+                              : _vm._e(),
                             _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white",
-                                class: "disabled_submit",
-                                attrs: { type: "submit" }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            Convertir "
-                                ),
-                                _c("i", { staticClass: "fas fa-sync ml-3" })
-                              ]
-                            )
+                            _vm.downloadable == 0
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white",
+                                    class: "disabled_submit",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            Convertir "
+                                    ),
+                                    _c("i", { staticClass: "fas fa-sync ml-3" })
+                                  ]
+                                )
+                              : _vm._e()
                           ]
                         )
                       : _vm._e()

@@ -23,7 +23,7 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                     <img class="object-fill rounded-lg " :src="'/storage/'+filedata.properties.preview" alt="">
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
-                    <div class="container mx-auto w-full h-full bg-white rounded-lg">
+                    <div class="container mx-auto w-full  h-4/5 bg-white rounded-lg">
                         <h3 class="uppercase pt-2 text-gray-600 font-semibold ml-3"> Metadata of {{ filedata.properties.name }} :</h3>
                         <div class="flex flex-row justify-between">
                             <div>
@@ -48,7 +48,13 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                        
                     </div>
                     <div v-if="step2" class="flex flex-row mt-4 justify-start">
-                        <div class="inline-block relative">
+                        <i v-if="downloadable ==2" class="ml-2 mr3 mt-2 animate-spin text-white fas fa-circle-notch "></i>
+                         <button v-if="downloadable == 3"
+                            class="flex h-full flex-row items-center  pr-4  bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white block appearance-none bg-white  hover:border-gray-500 px-4 py-2 shadow leading-tight focus:outline-none focus:shadow-outline"
+                             v-on:click="downloadFile()">
+                            Download <i class=" ml-3 fa fa-download" />
+                        </button>
+                        <div v-if="downloadable == 0" class="inline-block relative">
                             <select
                                 class="block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="form.export">
@@ -68,15 +74,19 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                                 </svg>
                             </div>
                         </div>
-                        <button
+                        <button v-if="downloadable == 0"
                             class="flex flex-row items-center ml-4  pl-4 pr-4 font-semibold bg-blue-500 rounded-full   cursor-pointer hover:bg-blue-600 text-white"
                             v-bind:class="'disabled_submit'" type="submit">
                             Convertir <i class="fas fa-sync ml-3" />
                         </button>
+                        
+                         
                     </div>
+                   
                 </div>
             </div>
-        </form>
+            </form>
+
     </div>
 </template>
 <script>
@@ -104,6 +114,8 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
                 },
                 step2: false,
                 inLoad : false,
+                inLoadDownlad:false,
+                downloadable : 0,
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 form: {
                     url: null,
@@ -114,10 +126,25 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
         },
         methods: {
             convertFile(e) {
+                if(this.downloadable != 3){
+                    this.downloadable = 2;
+
+               
                 e.preventDefault();
                 axios.get('/video/'+this.filedata.resource_id+'/convert')
                     .then(response => {
+                            this.downloadable = 3;
                             console.log(response.data)
+                        })
+                        .catch(e => {
+                            this.errors.push(e)
+                        }) }
+            },
+            downloadFile(e) {
+                e.preventDefault();
+                axios.get('/video/'+this.filedata.resource_id+'/download')
+                    .then(response => {
+                            console.log(response.data+ "ddd")
                         })
                         .catch(e => {
                             this.errors.push(e)
@@ -129,6 +156,9 @@ class="flex flex-row items-center px-4 py-0  bg-blue-500 rounded-tr-full rounded
 
             },
             submitFile() {
+                this.inLoad = false;
+                this.downloadable = 0;
+                this.step2 = false;
                 let sendToBack = true;
                 let formData = new FormData();
                 formData.append('video', this.form.image);
