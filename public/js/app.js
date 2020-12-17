@@ -4294,7 +4294,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  }
+});
 
 /***/ }),
 
@@ -4361,7 +4369,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_converter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/form-converter.vue */ "./resources/js/Pages/app/components/form-converter.vue");
 /* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/Pages/app/components/navbar.vue");
-//
 //
 //
 //
@@ -49055,53 +49062,25 @@ var render = function() {
       {
         staticClass: "flex flex-col w-full",
         attrs: {
-          action: "/video/store",
-          method: "POST",
+          action: "/video",
+          method: "post",
           enctype: "multipart/form-data"
         }
       },
       [
-        _c("div", { staticClass: "flex flex-row w-full" }, [
-          _c(
-            "label",
-            {
-              staticClass:
-                " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
-            },
-            [
-              _c("p", { staticClass: "pr-2" }, [_vm._v("Upload")]),
-              _vm._v(" "),
-              _c("i", { staticClass: "fas fa-upload" }),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "hidden",
-                attrs: { type: "file" },
-                domProps: { value: _vm.csrf }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
-            _vm._v("OR")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass:
-              "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
-            attrs: {
-              type: "text",
-              name: "",
-              placeholder: "Paste a video URL..."
-            }
-          })
-        ]),
+        _c("input", {
+          attrs: { type: "hidden", name: "_token" },
+          domProps: { value: _vm.csrf }
+        }),
+        _vm._v(" "),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "flex flex-row w-full" }, [
           _c("div", { staticClass: "flex flex-col" }),
           _vm._v(" "),
           _c("div", { staticClass: "flex flex-col" }, [
             _c("div", { staticClass: "inline-block relative w-64" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "div",
@@ -49134,7 +49113,7 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               staticClass:
-                " flex flex-row items-center  px-4 py-0 font-bold bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
+                "flex flex-row items-center  px-4 py-0 font-bold bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white",
               attrs: { type: "submit" }
             }),
             _vm._v("\n                 Convertir "),
@@ -49150,22 +49129,71 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex flex-row w-full" }, [
+      _c(
+        "label",
+        {
+          staticClass:
+            " flex flex-row items-center px-4 py-0 bg-blue-500 rounded-full  tracking-wide cursor-pointer hover:bg-blue-600 text-white"
+        },
+        [
+          _c("p", { staticClass: "pr-2" }, [_vm._v("Upload")]),
+          _vm._v(" "),
+          _c("i", { staticClass: "fas fa-upload" }),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "hidden",
+            attrs: { type: "file", name: "video" }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("h3", { staticClass: "text-white px-4 py-2 font-bold" }, [
+        _vm._v("OR")
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass:
+          "appearance-none w-full bg-white text-gray-900  py-3 px-4 leading-tight focus:outline-none rounded-full focus:bg-white",
+        attrs: {
+          type: "text",
+          name: "url",
+          placeholder: "Paste a video URL..."
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "select",
       {
         staticClass:
-          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline"
+          "block appearance-none w-full bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full shadow leading-tight focus:outline-none focus:shadow-outline",
+        attrs: { name: "export" }
       },
       [
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for TikTok")]),
+        _c("option", { attrs: { value: "tiktok" } }, [
+          _vm._v("Export for TikTok")
+        ]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Youtube")]),
+        _c("option", { attrs: { value: "youtube" } }, [
+          _vm._v("Export for Youtube")
+        ]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export fo Instagram")]),
+        _c("option", { attrs: { value: "instagram" } }, [
+          _vm._v("Export fo Instagram")
+        ]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Snapchat")]),
+        _c("option", { attrs: { value: "snapchat" } }, [
+          _vm._v("Export for Snapchat")
+        ]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("Export for Facebook")])
+        _c("option", { attrs: { value: "facebook" } }, [
+          _vm._v("Export for Facebook")
+        ])
       ]
     )
   }
@@ -63037,7 +63065,7 @@ var map = {
 	"./Profile/UpdatePasswordForm.vue": "./resources/js/Pages/Profile/UpdatePasswordForm.vue",
 	"./Profile/UpdateProfileInformationForm": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
 	"./Profile/UpdateProfileInformationForm.vue": "./resources/js/Pages/Profile/UpdateProfileInformationForm.vue",
-	"./app/components/form-converter": "./resources/js/Pages/app/components/form-converter.vue",
+	"./app/components/form-converter": "./resources/js/Pages/app/components/form-converter",
 	"./app/components/form-converter.vue": "./resources/js/Pages/app/components/form-converter.vue",
 	"./app/components/navbar": "./resources/js/Pages/app/components/navbar.vue",
 	"./app/components/navbar.vue": "./resources/js/Pages/app/components/navbar.vue",
@@ -63690,6 +63718,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/app/components/form-converter":
+/*!**********************************************************!*\
+  !*** ./resources/js/Pages/app/components/form-converter ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Projet\\web\\jellyspamu\\resources\\js\\Pages\\app\\components\\form-converter'");
+
+/***/ }),
+
 /***/ "./resources/js/Pages/app/components/form-converter.vue":
 /*!**************************************************************!*\
   !*** ./resources/js/Pages/app/components/form-converter.vue ***!
@@ -63985,8 +64024,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
