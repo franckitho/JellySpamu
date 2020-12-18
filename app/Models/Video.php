@@ -178,8 +178,8 @@ class Video extends Model
             ->export()->inFormat($format)->save($output);
 
         SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($output)
-            ->addFilter(function (VideoFilters $filters) use (&$width, &$height) {
-                $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
+            ->addFilter(function (VideoFilters $filters) use (&$width, &$height, &$res_final) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension($res_final[0], $res_final[1]));
             })
             ->export()->inFormat(new X264('libmp3lame', 'libx264'))
             ->save($output_f);
