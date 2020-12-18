@@ -4454,8 +4454,6 @@ __webpack_require__.r(__webpack_exports__);
     Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    position: '';
-
     return {
       filedata: {
         properties: {
@@ -4481,7 +4479,9 @@ __webpack_require__.r(__webpack_exports__);
       form: {
         url: null,
         image: null,
-        "export": "youtube"
+        "export": "youtube",
+        x_pos: "150",
+        y_pos: "150"
       }
     };
   },
@@ -51134,6 +51134,7 @@ var render = function() {
             expression: "position"
           }
         ],
+        staticClass: "hidden",
         attrs: { id: "cursor_pos", value: "" },
         domProps: { value: _vm.position },
         on: {

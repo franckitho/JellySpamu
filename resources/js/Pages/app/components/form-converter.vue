@@ -139,7 +139,7 @@
         </div>
 
 
-        <input id="cursor_pos" value="" v-model="position">
+        <input class="hidden" id="cursor_pos" value="" v-model="position">
     </div>
 
 </template>
@@ -151,7 +151,7 @@
             Button
         },
         data() {
-            position:''
+
             return {
                 filedata: {
                     properties: {
@@ -178,6 +178,8 @@
                     url: null,
                     image: null,
                     export: "youtube",
+                    x_pos: "150",
+                    y_pos: "150",
                     
                 },
             }
