@@ -324,8 +324,6 @@
                         var marker = new Marker();
                         marker.XPos = mouseXPos - (marker.Width / 2);
                         marker.YPos = mouseYPos - (marker.Height / 2);
-                        this.form.x_pos = marker.XPos
-                        this.form.y_pos = marker.YPos
                         Markers.pop();
                         Markers.push(marker);
                     }
