@@ -50689,16 +50689,21 @@ var render = function() {
             domProps: { value: _vm.csrf }
           }),
           _vm._v(" "),
-          _vm.tag == _vm.filedata.properties.tags
+          _vm.step2 == true && typeof _vm.tags !== "undefined"
             ? _c(
                 "div",
                 { staticClass: "bg-white p-4 mt-3 rounded" },
                 [
                   _vm._v("\n                tags: "),
                   _vm._l(_vm.filedata.properties.tags, function(tag) {
-                    return _c("span", { staticClass: "font-semibold" }, [
-                      _vm._v(_vm._s(tag[1] + ", "))
-                    ])
+                    return _c(
+                      "span",
+                      {
+                        staticClass:
+                          "bg-gray-500 text-black p-1 mr-1 font-bold rounded"
+                      },
+                      [_vm._v(_vm._s(tag[1]))]
+                    )
                   })
                 ],
                 2
@@ -66094,8 +66099,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
