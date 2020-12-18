@@ -19,6 +19,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "pbmedia/laravel-ffmpeg": "^7.4",
+        "ssovit/tiktok-api": "^1.1",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {
