@@ -67,6 +67,8 @@ class Video extends Model
         $handler = new YoutubeServices();
         $downloader = $handler->getDownloader($url);
         $downloader->setUrl($url);
+        $connect = file_get_contents("$url");
+            preg_match_all('|<meta property="og\:video\:tag" content="(.+?)">|si', $connect, $tags, PREG_SET_ORDER);
         if($downloader->hasVideo()){
             $videoDownloadLink = $downloader->getVideoDownloadLink();
             $videoTitle = $videoDownloadLink[\sizeof($videoDownloadLink)-1]['title'];
@@ -82,7 +84,7 @@ class Video extends Model
                 $preview_path = 'preview/' . uniqid() . '.png';
                 SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($path)->getFrameFromSeconds(1)->export()->save('public/' . $preview_path);
                 return [
-                    'data' => ['download_link' => $videoDownloadLink[\sizeof($videoDownloadLink)-1],  'path' => $path, 'preview' => $preview_path],
+                    'data' => ['download_link' => $videoDownloadLink[\sizeof($videoDownloadLink)-1],  'path' => $path, 'preview' => $preview_path, 'tags' => $tags],
                     'title' => $videoTitle,
                     'path' => $path,
                     'vid_time' => $videoTime,

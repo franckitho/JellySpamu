@@ -31,6 +31,8 @@ class VideoController extends Controller
      */
     public function create()
     {
+        $vid = new Video();
+        $vid = $vid->youtube('https://www.youtube.com/watch?v=JWFZtElbYwk');
     }
 
     /**
@@ -89,6 +91,7 @@ class VideoController extends Controller
                     "size" => 935994,
                     "codec" => "h264",
                     "bitrate" => "389608",
+                    "tags" => $data['data']['tags'],
                     "preview" => $data['data']['preview'],
                     "duration" => $data['vid_time'],
                     "file_path" => $data['data']['path'],
