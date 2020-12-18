@@ -4444,6 +4444,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4462,7 +4464,8 @@ __webpack_require__.r(__webpack_exports__);
           orientation: "Orientation",
           preview: "defaultvideo.png",
           resolution: "604x327",
-          size: 0
+          size: 0,
+          tags: []
         },
         resource_id: '',
         status: ''
@@ -50689,6 +50692,22 @@ var render = function() {
           _vm.step2 == true
             ? _c(
                 "div",
+                { staticClass: "bg-white p-4 mt-3 rounded" },
+                [
+                  _vm._v("\n                tags: "),
+                  _vm._l(_vm.filedata.properties.tags, function(tag) {
+                    return _c("span", { staticClass: "font-semibold" }, [
+                      _vm._v(_vm._s(tag[1] + ", "))
+                    ])
+                  })
+                ],
+                2
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.step2 == true
+            ? _c(
+                "div",
                 { staticClass: "flex flex-row  justify-between mb-4" },
                 [
                   _c("div", { staticClass: "flex flex-col  mt-4 mr-4 w-3/4" }, [
@@ -50837,8 +50856,9 @@ var render = function() {
                                       [
                                         _vm._v(
                                           _vm._s(
-                                            _vm.filedata.properties.bitrate
-                                          )
+                                            _vm.filedata.properties.bitrate /
+                                              1000
+                                          ) + " Mo/s"
                                         )
                                       ]
                                     )
@@ -66074,8 +66094,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

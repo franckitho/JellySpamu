@@ -56,7 +56,7 @@
                                     <li class="pt-1">Framerate : <span
                                             class="font-semibold">{{filedata.properties. framerate}}</span></li>
                                     <li class="pt-1">Bitrate : <span
-                                            class="font-semibold">{{filedata.properties. bitrate}}</span></li>
+                                            class="font-semibold">{{filedata.properties. bitrate / 1000}} Mo/s</span></li>
                                     <li class="pt-1">Size : <span
                                             class="font-semibold">{{filedata.properties.size}}</span> </li>
 
