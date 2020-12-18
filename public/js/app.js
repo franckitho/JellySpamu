@@ -50689,7 +50689,7 @@ var render = function() {
             domProps: { value: _vm.csrf }
           }),
           _vm._v(" "),
-          _vm.step2 == true && typeof _vm.tags !== "undefined"
+          _vm.step2 == true
             ? _c(
                 "div",
                 { staticClass: "bg-white p-4 mt-3 rounded" },

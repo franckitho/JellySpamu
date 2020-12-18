@@ -20,7 +20,7 @@
         </div>
         <form @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
-            <div class="bg-white p-4 mt-3 rounded" v-if=" step2== true && typeof(tags) !== 'undefined'">
+            <div class="bg-white p-4 mt-3 rounded" v-if=" step2== true">
                     tags: <span class="bg-gray-500 text-black p-1 mr-1 font-bold rounded" v-for="tag in filedata.properties.tags">{{tag[1]}}</span>
             </div>
             <div v-if="step2== true" class="flex flex-row  justify-between mb-4">
