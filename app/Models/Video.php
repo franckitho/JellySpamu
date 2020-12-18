@@ -141,30 +141,39 @@ class Video extends Model
         $output_f = 'public/converted/' . uniqid() . '.mp4';
 
         $dim = $ffmpeg->getVideoStream()->getDimensions();
-        $in_width = $dim->getWidth();
-        $in_height = $dim->getHeight();
+        $in_width = intval($dim->getWidth());
+        $in_height = intval($dim->getHeight());
 
-        $res_final = $output_rules[0];
-
-        $buffer_cw = $in_width - $output_rules[0][0];
-        if ($buffer_cw < 0) $buffer_cw += $buffer_cw * 2;
-
-        $buffer_ch = $in_height - $output_rules[0][1];
-        if ($buffer_ch < 0) $buffer_ch += $buffer_ch * 2;
-
-        foreach ($output_rules as $rule) {
-            if (($in_width - $rule[0]) < $buffer_cw && ($in_height - $rule[1]) < $buffer_ch) {
-                $res_final = $rule;
-
-                $buffer_cw = $in_width - $output_rules[0][0];
-                if ($buffer_cw < 0) $buffer_cw += $buffer_cw * 2;
-
-                $buffer_ch = $in_height - $output_rules[0][1];
-                if ($buffer_ch < 0) $buffer_ch += $buffer_ch * 2;
-            }
+        $res_final = array_map('intval',$output_rules[0]);
+        $resize = $res_final;
+        $orientation = 'H';
+        if($res_final[0] < $res_final[1]){
+            $orientation = 'V';
+            $buffer = $res_final[1];
+            $res_final[1] = $res_final[0];
+            $res_final[0] = $buffer;
         }
-        dd([$res_final,$output_rules]);
+        elseif($res_final[0] == $res_final[1]){
+            $orientation='C';
+        }
 
+        if($orientation =='V' && $resize[0] < $resize[1]){
+            $buffer = $resize[1];
+            $resize[1] = $resize[0];
+            $resize[0] = $buffer;
+        }
+
+        $buffer_cw = abs($in_width - $output_rules[0][0]) ;
+        $buffer_ch = abs($in_height - $output_rules[0][1]);
+ 
+        foreach ($output_rules as $rule) if (($in_width - $rule[0]) < $buffer_cw && ($in_height - $rule[1]) < $buffer_ch){
+                $res_final = $rule;
+                $buffer_cw = abs($in_width - $output_rules[0][0]);
+                $buffer_ch = abs($in_height - $output_rules[0][1]);
+            
+        }
+
+        
         $format = new X264('libmp3lame', 'libx264');
         $format->on('progress', function($video, $format, $percentage) {
             echo $percentage . '%';
@@ -174,16 +183,21 @@ class Video extends Model
 
         $crop_x = ($crop_x == -1) ? ((int) ($in_width / 3)) : $crop_x;
         $crop_y = ($crop_y == -1) ? 0 : $crop_y;
-
+      
+        $crop_w = ($orientation == 'V') ? $in_width/3 : $res_final[0];
+        $crop_h = ($orientation == 'V') ? $in_height : $res_final[1];
+        $crop_w = ($orientation == 'C') ? $res_final[0] : $crop_w;
+        $crop_h = ($orientation == 'C') ? $res_final[1] : $crop_h;
+  
         $ffmpeg
-            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height, &$crop_x, &$crop_y, &$res_final) {
-                $filters->crop(new \FFMpeg\Coordinate\Point($crop_x, $crop_y), new \FFMpeg\Coordinate\Dimension($res_final[0], $res_final[1]));
+            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height, &$crop_x, &$crop_y,&$crop_w,&$crop_h) {
+                $filters->crop(new \FFMpeg\Coordinate\Point($crop_x, $crop_y), new \FFMpeg\Coordinate\Dimension($crop_w, $crop_h));
             })
             ->export()->inFormat($format)->save($output);
 
         SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($output)
-            ->addFilter(function (VideoFilters $filters) use (&$width, &$height, &$res_final) {
-                $filters->resize(new \FFMpeg\Coordinate\Dimension($res_final[0], $res_final[1]));
+            ->addFilter(function (VideoFilters $filters) use (&$width, &$height, &$resize) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension($resize[0], $resize[1]));
             })
             ->export()->inFormat(new X264('libmp3lame', 'libx264'))
             ->save($output_f);
