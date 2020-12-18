@@ -4444,9 +4444,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4485,12 +4482,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  watch: {
-    position: function position(newPos, oldPos) {
-      console.log("New : " + newPos);
-      console.log("Old : " + oldPos);
-    }
-  },
   computed: {
     getHeight: function getHeight() {
       var result = this.filedata.properties.resolution.split('x')[1];
@@ -4518,8 +4509,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.downloadable != 3) {
         this.downloadable = 2;
         e.preventDefault();
-        console.log("form pos" + this.position);
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert?x_pos=' + this.form.x_pos + '&y_pos=' + this.form.y_pos).then(function (response) {
           _this.downloadable = 3;
           console.log(response.data);
         })["catch"](function (e) {
@@ -4631,8 +4621,8 @@ __webpack_require__.r(__webpack_exports__);
           var marker = new Marker();
           marker.XPos = mouseXPos - marker.Width / 2;
           marker.YPos = mouseYPos - marker.Height / 2;
-          var chain = String(parseInt(marker.XPos) + ',' + parseInt(marker.YPos));
-          document.getElementById("cursor_pos").value = chain;
+          this.form.x_pos = marker.XPos;
+          this.form.y_pos = marker.YPos;
           Markers.pop();
           Markers.push(marker);
         };
@@ -51123,29 +51113,7 @@ var render = function() {
             ]
           )
         ]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.position,
-            expression: "position"
-          }
-        ],
-        staticClass: "hidden",
-        attrs: { id: "cursor_pos", value: "" },
-        domProps: { value: _vm.position },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.position = $event.target.value
-          }
-        }
-      })
+      )
     ]
   )
 }
