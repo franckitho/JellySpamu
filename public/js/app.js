@@ -4471,7 +4471,6 @@ __webpack_require__.r(__webpack_exports__);
       inLoad: false,
       inLoadDownlad: false,
       downloadable: 0,
-      position: "",
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         url: null,
@@ -4496,7 +4495,7 @@ __webpack_require__.r(__webpack_exports__);
       var result = this.filedata.properties.resolution.split('x')[0];
 
       if (parseInt(result) > 700) {
-        result = String(parseInt(result) * 0.60);
+        result = String(parseInt(result) * 0.6);
       }
 
       return result;
@@ -4612,6 +4611,7 @@ __webpack_require__.r(__webpack_exports__);
           this.YPos = 0;
         };
 
+        var vm = this;
         var Markers = new Array();
 
         var mouseClicked = function mouseClicked(mouse) {
@@ -4621,6 +4621,8 @@ __webpack_require__.r(__webpack_exports__);
           var marker = new Marker();
           marker.XPos = mouseXPos - marker.Width / 2;
           marker.YPos = mouseYPos - marker.Height / 2;
+          vm.form.x_pos = marker.XPos;
+          vm.form.y_pos = marker.YPos;
           Markers.pop();
           Markers.push(marker);
         };
