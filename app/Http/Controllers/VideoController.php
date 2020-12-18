@@ -21,8 +21,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $video = new VideoServices();
-        $video->getMetaVideo();
+        
     }
 
     /**
@@ -32,7 +31,6 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -106,7 +104,18 @@ class VideoController extends Controller
             }elseif(self::FACEBOOK_DOMAINE == $host){
 
             }elseif(self::TIKTOK_DOMAINE == $host){
-
+                $video = new Video();
+                $path = $video->tiktok($request->get('url'));
+                $spec = array_merge($video->getProperties($path), [
+                    'name' => basename(Storage::url($path)),
+                    'size' => Storage::size($path),
+                    'file_path' => $path,
+                ]);
+                $video->data = $spec;
+                $video->title = $spec['name'];
+                $video->vid_time = $spec['duration'];
+                $video->plateform = 'TikTok';
+                $video->save();
             }
         }
 

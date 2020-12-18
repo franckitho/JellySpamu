@@ -14,6 +14,7 @@ use ProtoneMedia\LaravelFFMpeg\FFMpeg\FFProbe as FFMpegFFProbe;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg as SupportFFMpeg;
 use App\Services\YoutubeServices;
 use App\Services\InstagramServices;
+use App\Services\TiktokServices;
 
 class Video extends Model
 {
@@ -47,7 +48,13 @@ class Video extends Model
     protected $casts = [
         'data' => 'array',
     ];
-
+    public function tiktok($url){
+        $api = new \Sovit\TikTok\Api();
+        $result = $api->getNoWatermark($url);
+        $path = '/video/'. uniqid() . '.mp4';
+        Storage::disk('local')->put($path, file_get_contents($result->url));
+        return $path;
+    }
     public function insta($url){
         $client = new InstagramServices($url);
         $video = $client->getDownloadUrl();
