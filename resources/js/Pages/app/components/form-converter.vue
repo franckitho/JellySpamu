@@ -137,9 +137,6 @@
 
             </div>
         </div>
-
-
-        <input class="hidden" id="cursor_pos" value="" v-model="position">
     </div>
 
 </template>
@@ -184,12 +181,6 @@
                 },
             }
         },
-        watch:{
-            position(newPos,oldPos){
-                console.log("New : "+newPos)
-                console.log("Old : "+oldPos)
-            }
-        },
         computed: {
             getHeight() {
                 let result = this.filedata.properties.resolution.split('x')[1]
@@ -211,8 +202,7 @@
                 if (this.downloadable != 3) {
                     this.downloadable = 2;
                     e.preventDefault();
-                         console.log("form pos"+this.position)
-                    axios.get('/video/' + this.filedata.resource_id + '/convert')
+                    axios.get('/video/' + this.filedata.resource_id + '/convert?x_pos='+this.form.x_pos+'&y_pos='+this.form.y_pos+'&platform='+this.form.export)
                         .then(response => {
                             this.downloadable = 3;
                             console.log(response.data)
@@ -334,9 +324,6 @@
                         var marker = new Marker();
                         marker.XPos = mouseXPos - (marker.Width / 2);
                         marker.YPos = mouseYPos - (marker.Height / 2);
-        
-                        var chain = String(parseInt(marker.XPos)+','+parseInt(marker.YPos))
-                        document.getElementById("cursor_pos").value = chain
                         Markers.pop();
                         Markers.push(marker);
                     }
