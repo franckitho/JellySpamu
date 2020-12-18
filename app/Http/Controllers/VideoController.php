@@ -169,6 +169,6 @@ class VideoController extends Controller
 
     public function download(Video $video)
     {
-        return Storage::disk('local')->download($video->data['file_path']);
+        return Storage::disk('local')->download($video->data['file_path'], $video->title);
     }
 }
