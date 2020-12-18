@@ -173,8 +173,8 @@ class Video extends Model
         $crop_y = ($crop_y == -1) ? 0 : $crop_y;
 
         $ffmpeg
-            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height, &$crop_x, &$crop_y) {
-                $filters->crop(new \FFMpeg\Coordinate\Point($crop_x, $crop_y), new \FFMpeg\Coordinate\Dimension(((int) ($in_width / 3)), $in_height));
+            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height, &$crop_x, &$crop_y, &$res_final) {
+                $filters->crop(new \FFMpeg\Coordinate\Point($crop_x, $crop_y), new \FFMpeg\Coordinate\Dimension($res_final[0], $res_final[1]));
             })
             ->export()->inFormat($format)->save($output);
 
