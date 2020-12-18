@@ -143,6 +143,7 @@ class Video extends Model
         $in_height = $dim->getHeight();
 
         $res_final = $output_rules[0];
+
         $buffer_cw = $in_width - $output_rules[0][0];
         if ($buffer_cw < 0) $buffer_cw += $buffer_cw * 2;
 
