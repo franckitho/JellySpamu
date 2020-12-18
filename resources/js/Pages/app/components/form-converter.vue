@@ -20,6 +20,9 @@
         </div>
         <form @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
+            <div class="bg-white p-4 mt-3 rounded" v-if="step2== true">
+                    tags: <span v-for="tag in filedata.properties.tags"class="font-semibold">{{tag[1] + ", "}}</span>
+            </div>
             <div v-if="step2== true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
                     <img v-on:click="openMSystem()" class=" modal-open cursor-pointer object-fill rounded-lg "
@@ -53,13 +56,18 @@
                                     <li class="pt-1">Framerate : <span
                                             class="font-semibold">{{filedata.properties. framerate}}/s</span></li>
                                     <li class="pt-1">Bitrate : <span
+<<<<<<< HEAD
                                             class="font-semibold">{{filedata.properties. bitrate}}/s</span></li>
                                     <li class="pt-1">Size : <span
                                             class="font-semibold">{{filedata.properties.size}}</span> </li>
                                     <li class="pt-1">tags : <span v-for="tag in filedata.properties.tags" class="font-semibold">{{tag[1] + " "}}</span> </li>
+=======
+                                            class="font-semibold">{{filedata.properties. bitrate / 1000}} Mo/s</span></li>
+                                    <li class="pt-1">Size : <span
+                                            class="font-semibold">{{filedata.properties.size}}</span> </li>
+>>>>>>> 17d8f8d768cf30ac63480618b4e5285cd95811d6
 
                                 </ul>
-
                             </div>
                         </div>
 
