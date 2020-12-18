@@ -4509,7 +4509,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.downloadable != 3) {
         this.downloadable = 2;
         e.preventDefault();
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert?x_pos=' + this.form.x_pos + '&y_pos=' + this.form.y_pos).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert?x_pos=' + this.form.x_pos + '&y_pos=' + this.form.y_pos + '&platform=' + this.form["export"]).then(function (response) {
           _this.downloadable = 3;
           console.log(response.data);
         })["catch"](function (e) {

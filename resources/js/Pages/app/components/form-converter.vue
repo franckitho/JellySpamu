@@ -202,7 +202,7 @@
                 if (this.downloadable != 3) {
                     this.downloadable = 2;
                     e.preventDefault();
-                    axios.get('/video/' + this.filedata.resource_id + '/convert?x_pos='+this.form.x_pos+'&y_pos='+this.form.y_pos)
+                    axios.get('/video/' + this.filedata.resource_id + '/convert?x_pos='+this.form.x_pos+'&y_pos='+this.form.y_pos+'&platform='+this.form.export)
                         .then(response => {
                             this.downloadable = 3;
                             console.log(response.data)
