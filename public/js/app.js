@@ -4447,10 +4447,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4458,6 +4454,8 @@ __webpack_require__.r(__webpack_exports__);
     Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
+    position: '';
+
     return {
       filedata: {
         properties: {
@@ -4478,6 +4476,7 @@ __webpack_require__.r(__webpack_exports__);
       inLoad: false,
       inLoadDownlad: false,
       downloadable: 0,
+      position: "",
       csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
       form: {
         url: null,
@@ -4485,6 +4484,12 @@ __webpack_require__.r(__webpack_exports__);
         "export": "youtube"
       }
     };
+  },
+  watch: {
+    position: function position(newPos, oldPos) {
+      console.log("New : " + newPos);
+      console.log("Old : " + oldPos);
+    }
   },
   computed: {
     getHeight: function getHeight() {
@@ -4500,7 +4505,7 @@ __webpack_require__.r(__webpack_exports__);
       var result = this.filedata.properties.resolution.split('x')[0];
 
       if (parseInt(result) > 700) {
-        result = String(parseInt(result) * 0.6);
+        result = String(parseInt(result) * 0.60);
       }
 
       return result;
@@ -4513,6 +4518,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.downloadable != 3) {
         this.downloadable = 2;
         e.preventDefault();
+        console.log("form pos" + this.position);
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert').then(function (response) {
           _this.downloadable = 3;
           console.log(response.data);
@@ -4625,8 +4631,8 @@ __webpack_require__.r(__webpack_exports__);
           var marker = new Marker();
           marker.XPos = mouseXPos - marker.Width / 2;
           marker.YPos = mouseYPos - marker.Height / 2;
-          console.log(marker.XPos);
-          console.log(marker.YPos);
+          var chain = String(parseInt(marker.XPos) + ',' + parseInt(marker.YPos));
+          document.getElementById("cursor_pos").value = chain;
           Markers.pop();
           Markers.push(marker);
         };
@@ -51102,47 +51108,7 @@ var render = function() {
                 "modal-container bg-transparent w-auto mx-auto rounded  z-50 overflow-y-auto"
             },
             [
-              _c(
-                "div",
-                { staticClass: "flex justify-between items-center pb-3" },
-                [
-                  _c(
-                    "h3",
-                    {
-                      staticClass:
-                        "text-white uppercase text-xl text-left font-semibold "
-                    },
-                    [_vm._v("Select your interest point")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "modal-close cursor-pointer z-50" },
-                    [
-                      _c(
-                        "svg",
-                        {
-                          staticClass: "fill-current text-white",
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            width: "18",
-                            height: "18",
-                            viewBox: "0 0 18 18"
-                          }
-                        },
-                        [
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
-                            }
-                          })
-                        ]
-                      )
-                    ]
-                  )
-                ]
-              ),
+              _vm._m(0),
               _vm._v(" "),
               _c("canvas", {
                 staticClass:
@@ -51157,11 +51123,45 @@ var render = function() {
             ]
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.position,
+            expression: "position"
+          }
+        ],
+        attrs: { id: "cursor_pos", value: "" },
+        domProps: { value: _vm.position },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.position = $event.target.value
+          }
+        }
+      })
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex justify-center items-center pb-3" }, [
+      _c(
+        "h3",
+        { staticClass: "text-white  text-xl text-left font-semibold " },
+        [_vm._v("(Esc) for close")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

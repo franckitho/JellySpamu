@@ -116,6 +116,7 @@
 
                 </div>
             </div>
+
         </form>
 
         <div
@@ -125,17 +126,9 @@
 
 
 
-                <div class="flex justify-between items-center pb-3">
-                    <h3 class="text-white uppercase text-xl text-left font-semibold ">Select your interest point</h3>
-                    <div class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                            viewBox="0 0 18 18">
-                            <path
-                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
-                            </path>
-                        </svg>
-                    </div>
-
+                <div class="flex justify-center items-center pb-3">
+                    <h3 class="text-white  text-xl text-left font-semibold ">(Esc) for close</h3>
+        
                 </div>
 
                 <canvas :width="getWidth" :height="getHeight"
@@ -144,6 +137,9 @@
 
             </div>
         </div>
+
+
+        <input id="cursor_pos" value="" v-model="position">
     </div>
 
 </template>
@@ -155,6 +151,7 @@
             Button
         },
         data() {
+            position:''
             return {
                 filedata: {
                     properties: {
@@ -175,12 +172,20 @@
                 inLoad: false,
                 inLoadDownlad: false,
                 downloadable: 0,
+                position:"",
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 form: {
                     url: null,
                     image: null,
                     export: "youtube",
+                    
                 },
+            }
+        },
+        watch:{
+            position(newPos,oldPos){
+                console.log("New : "+newPos)
+                console.log("Old : "+oldPos)
             }
         },
         computed: {
@@ -194,7 +199,7 @@
             getWidth() {
                 let result = this.filedata.properties.resolution.split('x')[0]
                 if(parseInt(result)>700){
-                    result = String(parseInt(result)*0.6)
+                    result = String(parseInt(result)*0.60)
                 }
                 return result;
             }
@@ -204,6 +209,7 @@
                 if (this.downloadable != 3) {
                     this.downloadable = 2;
                     e.preventDefault();
+                         console.log("form pos"+this.position)
                     axios.get('/video/' + this.filedata.resource_id + '/convert')
                         .then(response => {
                             this.downloadable = 3;
@@ -216,8 +222,6 @@
             },
             handleFileUpload() {
                 this.form.image = this.$refs.file.files[0];
-
-
             },
             submitFile() {
 
@@ -228,7 +232,7 @@
                 let formData = new FormData();
                 formData.append('video', this.form.image);
                 formData.append('url', this.form.url);
-                formData.append('export', this.form.export);
+                formData.append('export', this.form.export);   
                 this.inLoad = true;
                 if (sendToBack) {
 
@@ -328,8 +332,9 @@
                         var marker = new Marker();
                         marker.XPos = mouseXPos - (marker.Width / 2);
                         marker.YPos = mouseYPos - (marker.Height / 2);
-                        console.log(marker.XPos)
-                        console.log(marker.YPos)
+        
+                        var chain = String(parseInt(marker.XPos)+','+parseInt(marker.YPos))
+                        document.getElementById("cursor_pos").value = chain
                         Markers.pop();
                         Markers.push(marker);
                     }
