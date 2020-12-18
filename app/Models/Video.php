@@ -131,7 +131,7 @@ class Video extends Model
      * @param  array  $metadatas
      * @return void
      */
-    public function convert(string $filename, int $width, int $height, int $crop_x = -1, int $crop_y = -1, array $metadatas)
+    public function convert(string $filename, int $width, int $height, array $metadatas, array $output_rules, int $crop_x = -1, int $crop_y = -1)
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
 
@@ -141,6 +141,26 @@ class Video extends Model
         $dim = $ffmpeg->getVideoStream()->getDimensions();
         $in_width = $dim->getWidth();
         $in_height = $dim->getHeight();
+
+        $res_final = $output_rules[0];
+
+        $buffer_cw = $in_width - $output_rules[0][0];
+        if ($buffer_cw < 0) $buffer_cw += $buffer_cw * 2;
+
+        $buffer_ch = $in_height - $output_rules[0][1];
+        if ($buffer_ch < 0) $buffer_ch += $buffer_ch * 2;
+
+        foreach ($output_rules as $rule) {
+            if (($in_width - $rule[0]) < $buffer_cw && ($in_height - $rule[1] < $buffer_ch)) {
+                $res_final = $rule;
+
+                $buffer_cw = $in_width - $output_rules[0][0];
+                if ($buffer_cw < 0) $buffer_cw += $buffer_cw * 2;
+
+                $buffer_ch = $in_height - $output_rules[0][1];
+                if ($buffer_ch < 0) $buffer_ch += $buffer_ch * 2;
+            }
+        }
 
         $format = new X264('libmp3lame', 'libx264');
         $format->on('progress', function($video, $format, $percentage) {
@@ -159,8 +179,8 @@ class Video extends Model
             ->export()->inFormat($format)->save($output);
 
         SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($output)
-            ->addFilter(function (VideoFilters $filters) use (&$width, &$height) {
-                $filters->resize(new \FFMpeg\Coordinate\Dimension($width, $height));
+            ->addFilter(function (VideoFilters $filters) use (&$width, &$height, &$res_final) {
+                $filters->resize(new \FFMpeg\Coordinate\Dimension($res_final[0], $res_final[1]));
             })
             ->export()->inFormat(new X264('libmp3lame', 'libx264'))
             ->save($output_f);

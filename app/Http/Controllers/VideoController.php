@@ -150,11 +150,15 @@ class VideoController extends Controller
      */
     public function convert(Video $video, Request $request)
     {
+        $request->validate([
+            'platform' => 'string|required'
+        ]);
+
         $x = $request->has('x_pos') ? $request->get('x_pos') : -1;
         $y = $request->has('y_pos') ? $request->get('y_pos') : -1;
 
         $data = $video->data;
-        $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, $x, $y, [])['output_path'];
+        $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, [], config('format.' . $request->get('platform')), $x, $y)['output_path'];
         $video->data = $data;
         $video->save();
 
@@ -165,6 +169,6 @@ class VideoController extends Controller
 
     public function download(Video $video)
     {
-        return Storage::disk('local')->download($video->data['file_path']);
+        return Storage::disk('local')->download($video->data['file_path'], $video->title);
     }
 }
