@@ -56,8 +56,7 @@
                                             class="font-semibold">{{filedata.properties. bitrate}}/s</span></li>
                                     <li class="pt-1">Size : <span
                                             class="font-semibold">{{filedata.properties.size}}</span> </li>
-                                            <li class="pt-1">tags : <span v-for="tag in filedata.properties.tags"
-                                            class="font-semibold">{{tag[1] + " "}}</span> </li>
+                                    <li class="pt-1">tags : <span v-for="tag in filedata.properties.tags" class="font-semibold">{{tag[1] + " "}}</span> </li>
 
                                 </ul>
 

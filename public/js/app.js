@@ -4444,6 +4444,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4462,7 +4463,8 @@ __webpack_require__.r(__webpack_exports__);
           orientation: "Orientation",
           preview: "defaultvideo.png",
           resolution: "604x327",
-          size: 0
+          size: 0,
+          tags: []
         },
         resource_id: '',
         status: ''
@@ -50851,12 +50853,30 @@ var render = function() {
                                       { staticClass: "font-semibold" },
                                       [
                                         _vm._v(
-                                          _vm._s(_vm.filedata.properties.size) +
-                                            "o"
+                                          _vm._s(_vm.filedata.properties.size)
                                         )
                                       ]
                                     )
-                                  ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "li",
+                                    { staticClass: "pt-1" },
+                                    [
+                                      _vm._v("tags : "),
+                                      _vm._l(
+                                        _vm.filedata.properties.tags,
+                                        function(tag) {
+                                          return _c(
+                                            "span",
+                                            { staticClass: "font-semibold" },
+                                            [_vm._v(_vm._s(tag[1] + " "))]
+                                          )
+                                        }
+                                      )
+                                    ],
+                                    2
+                                  )
                                 ]
                               )
                             ])

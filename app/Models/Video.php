@@ -163,6 +163,7 @@ class Video extends Model
                 if ($buffer_ch < 0) $buffer_ch += $buffer_ch * 2;
             }
         }
+        dd([$res_final,$output_rules]);
 
         $format = new X264('libmp3lame', 'libx264');
         $format->on('progress', function($video, $format, $percentage) {
