@@ -131,10 +131,9 @@ class Video extends Model
      * @param  array  $metadatas
      * @return void
      */
-    public function convert(string $filename, int $width, int $height, array $metadatas)
+    public function convert(string $filename, int $width, int $height, int $crop_x = -1, int $crop_y = -1, array $metadatas)
     {
         $ffmpeg = SupportFFMpeg::fromFilesystem(Storage::disk('local'))->open($filename);
-
 
         $output = 'public/converted/' . uniqid() . '.mp4';
         $output_f = 'public/converted/' . uniqid() . '.mp4';
@@ -150,9 +149,12 @@ class Video extends Model
 
         foreach ($metadatas as $key => $metadata) $ffmpeg->addFilter('-metadata', $key . '=' . $metadata);
 
+        $crop_x = ($crop_x == -1) ? ((int) ($in_width / 3)) : $crop_x;
+        $crop_y = ($crop_y == -1) ? 0 : $crop_y;
+
         $ffmpeg
-            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height) {
-                $filters->crop(new \FFMpeg\Coordinate\Point(((int) ($in_width / 3)), 0), new \FFMpeg\Coordinate\Dimension(((int) ($in_width / 3)), $in_height));
+            ->addFilter(function (VideoFilters $filters) use (&$in_width, &$in_height, &$crop_x, &$crop_y) {
+                $filters->crop(new \FFMpeg\Coordinate\Point($crop_x, $crop_y), new \FFMpeg\Coordinate\Dimension(((int) ($in_width / 3)), $in_height));
             })
             ->export()->inFormat($format)->save($output);
 
