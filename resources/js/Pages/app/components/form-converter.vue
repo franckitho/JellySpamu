@@ -22,7 +22,7 @@
             <input type="hidden" name="_token" :value="csrf">
             <div v-if="step2== true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
-                    <img v-on:click="mounted()"   class=" modal-open cursor-pointer object-fill rounded-lg "
+                    <img v-on:click="openMSystem()" class=" modal-open cursor-pointer object-fill rounded-lg "
                         :src="'/storage/'+filedata.properties.preview" alt="">
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
@@ -185,10 +185,18 @@
         },
         computed: {
             getHeight() {
-                return this.filedata.properties.resolution.split('x')[1];
+                let result = this.filedata.properties.resolution.split('x')[1]
+                if(parseInt(result)>700){
+                    result = String(parseInt(result)*0.6)
+                }
+                return result;
             },
             getWidth() {
-                return this.filedata.properties.resolution.split('x')[0]
+                let result = this.filedata.properties.resolution.split('x')[0]
+                if(parseInt(result)>700){
+                    result = String(parseInt(result)*0.6)
+                }
+                return result;
             }
         },
         methods: {
@@ -244,15 +252,19 @@
                 } else {
                     console.log("Saisie invalie")
                 }
-            }
-        },
-        mounted() {
+               
+            },
+
+            openMSystem() {
+                startInterest()
                 var openmodal = document.querySelectorAll('.modal-open')
                 for (var i = 0; i < openmodal.length; i++) {
                     openmodal[i].addEventListener('click', function (event) {
                         event.preventDefault()
                         console.log("Ouverture du modal")
                         toggleModal()
+                        
+                        
                     })
                 }
 
@@ -284,71 +296,72 @@
                     modal.classList.toggle('opacity-0')
                     modal.classList.toggle('pointer-events-none')
                     body.classList.toggle('modal-active')
-                    startInterest()
+             
                 }
 
-            
-
-
-
-            function startInterest() {
+                function startInterest() {
                 var sprite_src = "/img/marker.png";
-                var canvas = document.getElementById('canvas_preview');
-                var context = canvas.getContext("2d");
-                var gheight = canvas.getAttribute('height');
-                var gwidth = canvas.getAttribute('width');
-                var mapSprite = new Image();
-                mapSprite.src = canvas.getAttribute('src');
+                    var canvas = document.getElementById('canvas_preview');
+                    var context = canvas.getContext("2d");
+                    var gheight = canvas.getAttribute('height');
+                    var gwidth = canvas.getAttribute('width');
+
+                   
+                    var mapSprite = new Image();
+                    mapSprite.src = canvas.getAttribute('src');
 
 
-                var Marker = function () {
-                    this.Sprite = new Image();
-                    this.Sprite.src = sprite_src;
-                    this.Width = 30;
-                    this.Height = 30;
-                    this.XPos = 0;
-                    this.YPos = 0;
+                    var Marker = function () {
+                        this.Sprite = new Image();
+                        this.Sprite.src = sprite_src;
+                        this.Width = 30;
+                        this.Height = 30;
+                        this.XPos = 0;
+                        this.YPos = 0;
+                    }
+
+                    var Markers = new Array();
+                    var mouseClicked = function (mouse) {
+                        var rect = canvas.getBoundingClientRect();
+                        var mouseXPos = (mouse.x - rect.left);
+                        var mouseYPos = (mouse.y - rect.top);
+                        var marker = new Marker();
+                        marker.XPos = mouseXPos - (marker.Width / 2);
+                        marker.YPos = mouseYPos - (marker.Height / 2);
+                        console.log(marker.XPos)
+                        console.log(marker.YPos)
+                        Markers.pop();
+                        Markers.push(marker);
+                    }
+
+                    canvas.addEventListener("mousedown", mouseClicked, false);
+                    context.font = "15px Arial";
+                    context.textAlign = "center";
+
+                    var main = function () {
+                        draw();
+                    };
+
+                    var draw = function () {
+                        context.fillStyle = "#000";
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        context.drawImage(mapSprite, 0, 0, gwidth, gheight);
+                        Markers.forEach(tempMarker => {
+                            context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos,
+                                tempMarker
+                                .Width,
+                                tempMarker.Height);
+                        });
+
+
+
+                    }
+
+                    setInterval(main, (1000 / 60));
+
                 }
-
-                var Markers = new Array();
-                var mouseClicked = function (mouse) {
-                    var rect = canvas.getBoundingClientRect();
-                    var mouseXPos = (mouse.x - rect.left);
-                    var mouseYPos = (mouse.y - rect.top);
-                    var marker = new Marker();
-                    marker.XPos = mouseXPos - (marker.Width / 2);
-                    marker.YPos = mouseYPos - (marker.Height / 2);
-
-                    Markers.pop();
-                    Markers.push(marker);
-                }
-
-                canvas.addEventListener("mousedown", mouseClicked, false);
-                context.font = "15px Arial";
-                context.textAlign = "center";
-
-                var main = function () {
-                    draw();
-                };
-
-                var draw = function () {
-                    context.fillStyle = "#000";
-                    context.fillRect(0, 0, canvas.width, canvas.height);
-                    context.drawImage(mapSprite, 0, 0, gwidth, gheight);
-                    Markers.forEach(tempMarker => {
-                        context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker
-                            .Width,
-                            tempMarker.Height);
-                    });
-
-
-
-                }
-
-                setInterval(main, (1000 / 60));
-
-            }
-
+                
+            },
         }
     };
 

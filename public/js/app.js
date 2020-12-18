@@ -4488,10 +4488,22 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     getHeight: function getHeight() {
-      return this.filedata.properties.resolution.split('x')[1];
+      var result = this.filedata.properties.resolution.split('x')[1];
+
+      if (parseInt(result) > 700) {
+        result = String(parseInt(result) * 0.6);
+      }
+
+      return result;
     },
     getWidth: function getWidth() {
-      return this.filedata.properties.resolution.split('x')[0];
+      var result = this.filedata.properties.resolution.split('x')[0];
+
+      if (parseInt(result) > 700) {
+        result = String(parseInt(result) * 0.6);
+      }
+
+      return result;
     }
   },
   methods: {
@@ -4542,100 +4554,102 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         console.log("Saisie invalie");
       }
-    }
-  },
-  mounted: function mounted() {
-    var openmodal = document.querySelectorAll('.modal-open');
-
-    for (var i = 0; i < openmodal.length; i++) {
-      openmodal[i].addEventListener('click', function (event) {
-        event.preventDefault();
-        console.log("Ouverture du modal");
-        toggleModal();
-      });
-    }
-
-    var overlay = document.querySelector('.modal-overlay');
-    overlay.addEventListener('click', toggleModal);
-    var closemodal = document.querySelectorAll('.modal-close');
-
-    for (var i = 0; i < closemodal.length; i++) {
-      closemodal[i].addEventListener('click', toggleModal);
-    }
-
-    document.onkeydown = function (evt) {
-      evt = evt || window.event;
-      var isEscape = false;
-
-      if ("key" in evt) {
-        isEscape = evt.key === "Escape" || evt.key === "Esc";
-      } else {
-        isEscape = evt.keyCode === 27;
-      }
-
-      if (isEscape && document.body.classList.contains('modal-active')) {
-        toggleModal();
-      }
-    };
-
-    function toggleModal() {
-      var body = document.querySelector('body');
-      var modal = document.querySelector('.modal');
-      modal.classList.toggle('opacity-0');
-      modal.classList.toggle('pointer-events-none');
-      body.classList.toggle('modal-active');
+    },
+    openMSystem: function openMSystem() {
       startInterest();
-    }
+      var openmodal = document.querySelectorAll('.modal-open');
 
-    function startInterest() {
-      var sprite_src = "/img/marker.png";
-      var canvas = document.getElementById('canvas_preview');
-      var context = canvas.getContext("2d");
-      var gheight = canvas.getAttribute('height');
-      var gwidth = canvas.getAttribute('width');
-      var mapSprite = new Image();
-      mapSprite.src = canvas.getAttribute('src');
-
-      var Marker = function Marker() {
-        this.Sprite = new Image();
-        this.Sprite.src = sprite_src;
-        this.Width = 30;
-        this.Height = 30;
-        this.XPos = 0;
-        this.YPos = 0;
-      };
-
-      var Markers = new Array();
-
-      var mouseClicked = function mouseClicked(mouse) {
-        var rect = canvas.getBoundingClientRect();
-        var mouseXPos = mouse.x - rect.left;
-        var mouseYPos = mouse.y - rect.top;
-        var marker = new Marker();
-        marker.XPos = mouseXPos - marker.Width / 2;
-        marker.YPos = mouseYPos - marker.Height / 2;
-        Markers.pop();
-        Markers.push(marker);
-      };
-
-      canvas.addEventListener("mousedown", mouseClicked, false);
-      context.font = "15px Arial";
-      context.textAlign = "center";
-
-      var main = function main() {
-        draw();
-      };
-
-      var draw = function draw() {
-        context.fillStyle = "#000";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.drawImage(mapSprite, 0, 0, gwidth, gheight);
-        Markers.forEach(function (tempMarker) {
-          context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker.Width, tempMarker.Height);
+      for (var i = 0; i < openmodal.length; i++) {
+        openmodal[i].addEventListener('click', function (event) {
+          event.preventDefault();
+          console.log("Ouverture du modal");
+          toggleModal();
         });
+      }
+
+      var overlay = document.querySelector('.modal-overlay');
+      overlay.addEventListener('click', toggleModal);
+      var closemodal = document.querySelectorAll('.modal-close');
+
+      for (var i = 0; i < closemodal.length; i++) {
+        closemodal[i].addEventListener('click', toggleModal);
+      }
+
+      document.onkeydown = function (evt) {
+        evt = evt || window.event;
+        var isEscape = false;
+
+        if ("key" in evt) {
+          isEscape = evt.key === "Escape" || evt.key === "Esc";
+        } else {
+          isEscape = evt.keyCode === 27;
+        }
+
+        if (isEscape && document.body.classList.contains('modal-active')) {
+          toggleModal();
+        }
       };
 
-      setInterval(main, 1000 / 60);
+      function toggleModal() {
+        var body = document.querySelector('body');
+        var modal = document.querySelector('.modal');
+        modal.classList.toggle('opacity-0');
+        modal.classList.toggle('pointer-events-none');
+        body.classList.toggle('modal-active');
+      }
+
+      function startInterest() {
+        var sprite_src = "/img/marker.png";
+        var canvas = document.getElementById('canvas_preview');
+        var context = canvas.getContext("2d");
+        var gheight = canvas.getAttribute('height');
+        var gwidth = canvas.getAttribute('width');
+        var mapSprite = new Image();
+        mapSprite.src = canvas.getAttribute('src');
+
+        var Marker = function Marker() {
+          this.Sprite = new Image();
+          this.Sprite.src = sprite_src;
+          this.Width = 30;
+          this.Height = 30;
+          this.XPos = 0;
+          this.YPos = 0;
+        };
+
+        var Markers = new Array();
+
+        var mouseClicked = function mouseClicked(mouse) {
+          var rect = canvas.getBoundingClientRect();
+          var mouseXPos = mouse.x - rect.left;
+          var mouseYPos = mouse.y - rect.top;
+          var marker = new Marker();
+          marker.XPos = mouseXPos - marker.Width / 2;
+          marker.YPos = mouseYPos - marker.Height / 2;
+          console.log(marker.XPos);
+          console.log(marker.YPos);
+          Markers.pop();
+          Markers.push(marker);
+        };
+
+        canvas.addEventListener("mousedown", mouseClicked, false);
+        context.font = "15px Arial";
+        context.textAlign = "center";
+
+        var main = function main() {
+          draw();
+        };
+
+        var draw = function draw() {
+          context.fillStyle = "#000";
+          context.fillRect(0, 0, canvas.width, canvas.height);
+          context.drawImage(mapSprite, 0, 0, gwidth, gheight);
+          Markers.forEach(function (tempMarker) {
+            context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker.Width, tempMarker.Height);
+          });
+        };
+
+        setInterval(main, 1000 / 60);
+      }
     }
   }
 });
@@ -50691,7 +50705,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.mounted()
+                          return _vm.openMSystem()
                         }
                       }
                     })
