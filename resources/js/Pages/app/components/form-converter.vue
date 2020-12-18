@@ -22,7 +22,7 @@
             <input type="hidden" name="_token" :value="csrf">
             <div v-if="step2== true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
-                    <img v-on:click="openSystem()" class=" modal-open cursor-pointer object-fill rounded-lg "
+                    <img v-on:click="mounted()"   class=" modal-open cursor-pointer object-fill rounded-lg "
                         :src="'/storage/'+filedata.properties.preview" alt="">
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
@@ -246,9 +246,7 @@
                 }
             }
         },
-        computed() {
-
-           
+        mounted() {
                 var openmodal = document.querySelectorAll('.modal-open')
                 for (var i = 0; i < openmodal.length; i++) {
                     openmodal[i].addEventListener('click', function (event) {

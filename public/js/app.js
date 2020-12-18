@@ -4302,8 +4302,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -4455,7 +4453,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -4545,101 +4543,102 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log("Saisie invalie");
       }
     }
-  }
-}, "computed", function computed() {
-  var openmodal = document.querySelectorAll('.modal-open');
+  },
+  mounted: function mounted() {
+    var openmodal = document.querySelectorAll('.modal-open');
 
-  for (var i = 0; i < openmodal.length; i++) {
-    openmodal[i].addEventListener('click', function (event) {
-      event.preventDefault();
-      console.log("Ouverture du modal");
-      toggleModal();
-    });
-  }
-
-  var overlay = document.querySelector('.modal-overlay');
-  overlay.addEventListener('click', toggleModal);
-  var closemodal = document.querySelectorAll('.modal-close');
-
-  for (var i = 0; i < closemodal.length; i++) {
-    closemodal[i].addEventListener('click', toggleModal);
-  }
-
-  document.onkeydown = function (evt) {
-    evt = evt || window.event;
-    var isEscape = false;
-
-    if ("key" in evt) {
-      isEscape = evt.key === "Escape" || evt.key === "Esc";
-    } else {
-      isEscape = evt.keyCode === 27;
-    }
-
-    if (isEscape && document.body.classList.contains('modal-active')) {
-      toggleModal();
-    }
-  };
-
-  function toggleModal() {
-    var body = document.querySelector('body');
-    var modal = document.querySelector('.modal');
-    modal.classList.toggle('opacity-0');
-    modal.classList.toggle('pointer-events-none');
-    body.classList.toggle('modal-active');
-    startInterest();
-  }
-
-  function startInterest() {
-    var sprite_src = "/img/marker.png";
-    var canvas = document.getElementById('canvas_preview');
-    var context = canvas.getContext("2d");
-    var gheight = canvas.getAttribute('height');
-    var gwidth = canvas.getAttribute('width');
-    var mapSprite = new Image();
-    mapSprite.src = canvas.getAttribute('src');
-
-    var Marker = function Marker() {
-      this.Sprite = new Image();
-      this.Sprite.src = sprite_src;
-      this.Width = 30;
-      this.Height = 30;
-      this.XPos = 0;
-      this.YPos = 0;
-    };
-
-    var Markers = new Array();
-
-    var mouseClicked = function mouseClicked(mouse) {
-      var rect = canvas.getBoundingClientRect();
-      var mouseXPos = mouse.x - rect.left;
-      var mouseYPos = mouse.y - rect.top;
-      var marker = new Marker();
-      marker.XPos = mouseXPos - marker.Width / 2;
-      marker.YPos = mouseYPos - marker.Height / 2;
-      Markers.pop();
-      Markers.push(marker);
-    };
-
-    canvas.addEventListener("mousedown", mouseClicked, false);
-    context.font = "15px Arial";
-    context.textAlign = "center";
-
-    var main = function main() {
-      draw();
-    };
-
-    var draw = function draw() {
-      context.fillStyle = "#000";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      context.drawImage(mapSprite, 0, 0, gwidth, gheight);
-      Markers.forEach(function (tempMarker) {
-        context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker.Width, tempMarker.Height);
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function (event) {
+        event.preventDefault();
+        console.log("Ouverture du modal");
+        toggleModal();
       });
+    }
+
+    var overlay = document.querySelector('.modal-overlay');
+    overlay.addEventListener('click', toggleModal);
+    var closemodal = document.querySelectorAll('.modal-close');
+
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal);
+    }
+
+    document.onkeydown = function (evt) {
+      evt = evt || window.event;
+      var isEscape = false;
+
+      if ("key" in evt) {
+        isEscape = evt.key === "Escape" || evt.key === "Esc";
+      } else {
+        isEscape = evt.keyCode === 27;
+      }
+
+      if (isEscape && document.body.classList.contains('modal-active')) {
+        toggleModal();
+      }
     };
 
-    setInterval(main, 1000 / 60);
+    function toggleModal() {
+      var body = document.querySelector('body');
+      var modal = document.querySelector('.modal');
+      modal.classList.toggle('opacity-0');
+      modal.classList.toggle('pointer-events-none');
+      body.classList.toggle('modal-active');
+      startInterest();
+    }
+
+    function startInterest() {
+      var sprite_src = "/img/marker.png";
+      var canvas = document.getElementById('canvas_preview');
+      var context = canvas.getContext("2d");
+      var gheight = canvas.getAttribute('height');
+      var gwidth = canvas.getAttribute('width');
+      var mapSprite = new Image();
+      mapSprite.src = canvas.getAttribute('src');
+
+      var Marker = function Marker() {
+        this.Sprite = new Image();
+        this.Sprite.src = sprite_src;
+        this.Width = 30;
+        this.Height = 30;
+        this.XPos = 0;
+        this.YPos = 0;
+      };
+
+      var Markers = new Array();
+
+      var mouseClicked = function mouseClicked(mouse) {
+        var rect = canvas.getBoundingClientRect();
+        var mouseXPos = mouse.x - rect.left;
+        var mouseYPos = mouse.y - rect.top;
+        var marker = new Marker();
+        marker.XPos = mouseXPos - marker.Width / 2;
+        marker.YPos = mouseYPos - marker.Height / 2;
+        Markers.pop();
+        Markers.push(marker);
+      };
+
+      canvas.addEventListener("mousedown", mouseClicked, false);
+      context.font = "15px Arial";
+      context.textAlign = "center";
+
+      var main = function main() {
+        draw();
+      };
+
+      var draw = function draw() {
+        context.fillStyle = "#000";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(mapSprite, 0, 0, gwidth, gheight);
+        Markers.forEach(function (tempMarker) {
+          context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker.Width, tempMarker.Height);
+        });
+      };
+
+      setInterval(main, 1000 / 60);
+    }
   }
-}));
+});
 
 /***/ }),
 
@@ -50692,7 +50691,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.openSystem()
+                          return _vm.mounted()
                         }
                       }
                     })
