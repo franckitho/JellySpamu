@@ -153,7 +153,7 @@ class Video extends Model
         if ($buffer_ch < 0) $buffer_ch += $buffer_ch * 2;
 
         foreach ($output_rules as $rule) {
-            if (($in_width - $rule[0]) < $buffer_cw && ($in_height - $rule[1] < $buffer_ch)) {
+            if (($in_width - $rule[0]) < $buffer_cw && ($in_height - $rule[1]) < $buffer_ch) {
                 $res_final = $rule;
 
                 $buffer_cw = $in_width - $output_rules[0][0];
