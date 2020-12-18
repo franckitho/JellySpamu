@@ -21,7 +21,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-
+   
 </head>
 
 <body id="scene" class="font-sans antialiased  overflow-x-hidden bg-gray-900">

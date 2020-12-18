@@ -4302,6 +4302,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Jetstream/Button.vue */ "./resources/js/Jetstream/Button.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4411,7 +4455,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   components: {
     Button: _Jetstream_Button_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -4426,7 +4470,7 @@ __webpack_require__.r(__webpack_exports__);
           name: "File_name.mp4",
           orientation: "Orientation",
           preview: "defaultvideo.png",
-          resolution: "0000x0000",
+          resolution: "604x327",
           size: 0
         },
         resource_id: '',
@@ -4443,6 +4487,14 @@ __webpack_require__.r(__webpack_exports__);
         "export": "youtube"
       }
     };
+  },
+  computed: {
+    getHeight: function getHeight() {
+      return this.filedata.properties.resolution.split('x')[1];
+    },
+    getWidth: function getWidth() {
+      return this.filedata.properties.resolution.split('x')[0];
+    }
   },
   methods: {
     convertFile: function convertFile(e) {
@@ -4494,7 +4546,100 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }
-});
+}, "computed", function computed() {
+  var openmodal = document.querySelectorAll('.modal-open');
+
+  for (var i = 0; i < openmodal.length; i++) {
+    openmodal[i].addEventListener('click', function (event) {
+      event.preventDefault();
+      console.log("Ouverture du modal");
+      toggleModal();
+    });
+  }
+
+  var overlay = document.querySelector('.modal-overlay');
+  overlay.addEventListener('click', toggleModal);
+  var closemodal = document.querySelectorAll('.modal-close');
+
+  for (var i = 0; i < closemodal.length; i++) {
+    closemodal[i].addEventListener('click', toggleModal);
+  }
+
+  document.onkeydown = function (evt) {
+    evt = evt || window.event;
+    var isEscape = false;
+
+    if ("key" in evt) {
+      isEscape = evt.key === "Escape" || evt.key === "Esc";
+    } else {
+      isEscape = evt.keyCode === 27;
+    }
+
+    if (isEscape && document.body.classList.contains('modal-active')) {
+      toggleModal();
+    }
+  };
+
+  function toggleModal() {
+    var body = document.querySelector('body');
+    var modal = document.querySelector('.modal');
+    modal.classList.toggle('opacity-0');
+    modal.classList.toggle('pointer-events-none');
+    body.classList.toggle('modal-active');
+    startInterest();
+  }
+
+  function startInterest() {
+    var sprite_src = "/img/marker.png";
+    var canvas = document.getElementById('canvas_preview');
+    var context = canvas.getContext("2d");
+    var gheight = canvas.getAttribute('height');
+    var gwidth = canvas.getAttribute('width');
+    var mapSprite = new Image();
+    mapSprite.src = canvas.getAttribute('src');
+
+    var Marker = function Marker() {
+      this.Sprite = new Image();
+      this.Sprite.src = sprite_src;
+      this.Width = 30;
+      this.Height = 30;
+      this.XPos = 0;
+      this.YPos = 0;
+    };
+
+    var Markers = new Array();
+
+    var mouseClicked = function mouseClicked(mouse) {
+      var rect = canvas.getBoundingClientRect();
+      var mouseXPos = mouse.x - rect.left;
+      var mouseYPos = mouse.y - rect.top;
+      var marker = new Marker();
+      marker.XPos = mouseXPos - marker.Width / 2;
+      marker.YPos = mouseYPos - marker.Height / 2;
+      Markers.pop();
+      Markers.push(marker);
+    };
+
+    canvas.addEventListener("mousedown", mouseClicked, false);
+    context.font = "15px Arial";
+    context.textAlign = "center";
+
+    var main = function main() {
+      draw();
+    };
+
+    var draw = function draw() {
+      context.fillStyle = "#000";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(mapSprite, 0, 0, gwidth, gheight);
+      Markers.forEach(function (tempMarker) {
+        context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker.Width, tempMarker.Height);
+      });
+    };
+
+    setInterval(main, 1000 / 60);
+  }
+}));
 
 /***/ }),
 
@@ -50532,19 +50677,23 @@ var render = function() {
             domProps: { value: _vm.csrf }
           }),
           _vm._v(" "),
-          _vm.step2 == false
+          _vm.step2 == true
             ? _c(
                 "div",
                 { staticClass: "flex flex-row  justify-between mb-4" },
                 [
                   _c("div", { staticClass: "flex flex-col  mt-4 mr-4 w-3/4" }, [
-                    _c("canvas", {
-                      staticClass: " rounded-lg",
+                    _c("img", {
+                      staticClass:
+                        " modal-open cursor-pointer object-fill rounded-lg ",
                       attrs: {
-                        id: "canvas_preview",
-                        width: "100%",
-                        height: "100%",
-                        src: "/storage/" + _vm.filedata.properties.preview
+                        src: "/storage/" + _vm.filedata.properties.preview,
+                        alt: ""
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.openSystem()
+                        }
                       }
                     })
                   ]),
@@ -50563,7 +50712,7 @@ var render = function() {
                             staticClass:
                               "uppercase pt-2 w-full text-center text-gray-600 font-semibold "
                           },
-                          [_vm._v(" Metadata   ")]
+                          [_vm._v(" Metadata ")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -50604,7 +50753,7 @@ var render = function() {
                                   ]),
                                   _vm._v(" "),
                                   _c("li", { staticClass: "pt-2" }, [
-                                    _vm._v("Duration  : "),
+                                    _vm._v("Duration : "),
                                     _c(
                                       "span",
                                       { staticClass: "font-semibold" },
@@ -50918,6 +51067,82 @@ var render = function() {
                 ]
               )
             : _vm._e()
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"
+        },
+        [
+          _c("div", {
+            staticClass:
+              "modal-overlay absolute w-full h-full bg-gray-900 opacity-75"
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "modal-container bg-transparent w-auto mx-auto rounded  z-50 overflow-y-auto"
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "flex justify-between items-center pb-3" },
+                [
+                  _c(
+                    "h3",
+                    {
+                      staticClass:
+                        "text-white uppercase text-xl text-left font-semibold "
+                    },
+                    [_vm._v("Select your interest point")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "modal-close cursor-pointer z-50" },
+                    [
+                      _c(
+                        "svg",
+                        {
+                          staticClass: "fill-current text-white",
+                          attrs: {
+                            xmlns: "http://www.w3.org/2000/svg",
+                            width: "18",
+                            height: "18",
+                            viewBox: "0 0 18 18"
+                          }
+                        },
+                        [
+                          _c("path", {
+                            attrs: {
+                              d:
+                                "M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                            }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("canvas", {
+                staticClass:
+                  " cursor-move rounded-lg mx-auto justify-self-center",
+                attrs: {
+                  width: _vm.getWidth,
+                  height: _vm.getHeight,
+                  id: "canvas_preview",
+                  src: "/storage/" + _vm.filedata.properties.preview
+                }
+              })
+            ]
+          )
         ]
       )
     ]
@@ -65867,8 +66092,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Projet\web\jellyspamu\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Projet\web\jellyspamu\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Dossiers Personnel\Documents Personnels\Concours\Hackathon 2020\JellySpamu\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

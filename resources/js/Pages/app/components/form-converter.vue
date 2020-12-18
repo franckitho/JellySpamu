@@ -20,35 +20,43 @@
         </div>
         <form @submit="convertFile" enctype="multipart/form-data" class="flex flex-col w-full">
             <input type="hidden" name="_token" :value="csrf">
-            <div v-if="step2 == false" class="flex flex-row  justify-between mb-4">
+            <div v-if="step2== true" class="flex flex-row  justify-between mb-4">
                 <div class="flex flex-col  mt-4 mr-4 w-3/4">
-                <canvas class=" rounded-lg"  id="canvas_preview" width="100%" height="100%" :src="'/storage/'+filedata.properties.preview"></canvas>
+                    <img v-on:click="openSystem()" class=" modal-open cursor-pointer object-fill rounded-lg "
+                        :src="'/storage/'+filedata.properties.preview" alt="">
                 </div>
                 <div class="flex flex-col mt-4 w-3/4 ">
                     <div class="container mx-auto w-full h-48 bg-white rounded-lg">
-                        <h3 class="uppercase pt-2 w-full text-center text-gray-600 font-semibold "> Metadata   </h3> 
-                       
-                         <ul class="ml-3 text-md text-gray-400">
-                                    <li>Name : <span class="font-semibold">{{filedata.properties.name}}</span></li>
-          
-                                </ul>
+                        <h3 class="uppercase pt-2 w-full text-center text-gray-600 font-semibold "> Metadata </h3>
+
+                        <ul class="ml-3 text-md text-gray-400">
+                            <li>Name : <span class="font-semibold">{{filedata.properties.name}}</span></li>
+
+                        </ul>
                         <div class="flex flex-row justify-between">
 
                             <div>
                                 <ul class="ml-3 text-md text-gray-400">
-                                    <li class="pt-2">Resolution : <span class="font-semibold">{{filedata.properties.resolution}}</span></li>
-                                    <li class="pt-2">Duration  : <span class="font-semibold">{{filedata.properties.duration}}</span></li>
-                                    <li class="pt-2">Orientation : <span class="font-semibold">{{filedata.properties.orientation}}</span> </li>
+                                    <li class="pt-2">Resolution : <span
+                                            class="font-semibold">{{filedata.properties.resolution}}</span></li>
+                                    <li class="pt-2">Duration : <span
+                                            class="font-semibold">{{filedata.properties.duration}}</span></li>
+                                    <li class="pt-2">Orientation : <span
+                                            class="font-semibold">{{filedata.properties.orientation}}</span> </li>
 
                                 </ul>
                             </div>
                             <div>
                                 <ul class="mr-3 text-md text-gray-400">
-                                    <li class="pt-1">Codec : <span class="font-semibold uppercase">{{filedata.properties.codec}}</span> </li>
-                                    <li class="pt-1">Framerate : <span class="font-semibold">{{filedata.properties. framerate}}</span></li>
-                                    <li class="pt-1">Bitrate : <span class="font-semibold">{{filedata.properties. bitrate}}</span></li>
-                                    <li class="pt-1">Size : <span class="font-semibold">{{filedata.properties.size}}</span> </li>
-                                    
+                                    <li class="pt-1">Codec : <span
+                                            class="font-semibold uppercase">{{filedata.properties.codec}}</span> </li>
+                                    <li class="pt-1">Framerate : <span
+                                            class="font-semibold">{{filedata.properties. framerate}}</span></li>
+                                    <li class="pt-1">Bitrate : <span
+                                            class="font-semibold">{{filedata.properties. bitrate}}</span></li>
+                                    <li class="pt-1">Size : <span
+                                            class="font-semibold">{{filedata.properties.size}}</span> </li>
+
                                 </ul>
 
                             </div>
@@ -67,7 +75,7 @@
                             <select
                                 class="block appearance-none w-full pr-14 bg-white  hover:border-gray-500 px-4 py-2 pr-8 rounded-full justify-items-start shadow leading-tight focus:outline-none focus:shadow-outline"
                                 v-model="form.export">
-                             
+
                                 <option value="youtube">Export for Youtube</option>
                                 <option value="tiktok">Export for TikTok</option>
                                 <option value="instagram">Export fo Instagram</option>
@@ -75,14 +83,21 @@
                                 <option value="facebook">Export for Facebook</option>
                             </select>
                             <div
-                            
                                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <img v-if="form.export =='youtube'" class="w-6 h-5 mr-2" src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png" alt="">
-                                  <img v-if="form.export =='tiktok'" class="w-5 h-5 mr-2" src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="">
-                                  <img v-if="form.export =='instagram'" class="w-5 h-5 mr-2" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="">
-                                  <img v-if="form.export =='snapchat'" class="w-5 h-5 mr-2" src="https://upload.wikimedia.org/wikipedia/fr/archive/a/ad/20190808214526%21Logo-Snapchat.png" alt="">
-                                  <img v-if="form.export =='facebook'" class="w-5 h-5 mr-2" src="https://assets.stickpng.com/thumbs/584ac2d03ac3a570f94a666d.png" alt="">
-                                
+                                <img v-if="form.export =='youtube'" class="w-6 h-5 mr-2"
+                                    src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png" alt="">
+                                <img v-if="form.export =='tiktok'" class="w-5 h-5 mr-2"
+                                    src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png"
+                                    alt="">
+                                <img v-if="form.export =='instagram'" class="w-5 h-5 mr-2"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png"
+                                    alt="">
+                                <img v-if="form.export =='snapchat'" class="w-5 h-5 mr-2"
+                                    src="https://upload.wikimedia.org/wikipedia/fr/archive/a/ad/20190808214526%21Logo-Snapchat.png"
+                                    alt="">
+                                <img v-if="form.export =='facebook'" class="w-5 h-5 mr-2"
+                                    src="https://assets.stickpng.com/thumbs/584ac2d03ac3a570f94a666d.png" alt="">
+
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path
@@ -103,7 +118,34 @@
             </div>
         </form>
 
+        <div
+            class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+            <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-75"></div>
+            <div class="modal-container bg-transparent w-auto mx-auto rounded  z-50 overflow-y-auto">
+
+
+
+                <div class="flex justify-between items-center pb-3">
+                    <h3 class="text-white uppercase text-xl text-left font-semibold ">Select your interest point</h3>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                            viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                            </path>
+                        </svg>
+                    </div>
+
+                </div>
+
+                <canvas :width="getWidth" :height="getHeight"
+                    class=" cursor-move rounded-lg mx-auto justify-self-center" id="canvas_preview"
+                    :src="'/storage/'+filedata.properties.preview"></canvas>
+
+            </div>
+        </div>
     </div>
+
 </template>
 <script>
     import axios from 'axios';
@@ -123,7 +165,7 @@
                         name: "File_name.mp4",
                         orientation: "Orientation",
                         preview: "defaultvideo.png",
-                        resolution: "0000x0000",
+                        resolution: "604x327",
                         size: 0,
                     },
                     resource_id: '',
@@ -139,6 +181,14 @@
                     image: null,
                     export: "youtube",
                 },
+            }
+        },
+        computed: {
+            getHeight() {
+                return this.filedata.properties.resolution.split('x')[1];
+            },
+            getWidth() {
+                return this.filedata.properties.resolution.split('x')[0]
             }
         },
         methods: {
@@ -162,6 +212,7 @@
 
             },
             submitFile() {
+
                 this.inLoad = false;
                 this.downloadable = 0;
                 this.step2 = false;
@@ -180,10 +231,11 @@
                                 }
                             }
                         ).then(response => {
-                            
+
                             this.filedata = response.data
                             this.step2 = true
                             this.inLoad = false;
+
                         })
                         .catch(e => {
                             this.inLoad = false;
@@ -193,6 +245,112 @@
                     console.log("Saisie invalie")
                 }
             }
+        },
+        computed() {
+
+           
+                var openmodal = document.querySelectorAll('.modal-open')
+                for (var i = 0; i < openmodal.length; i++) {
+                    openmodal[i].addEventListener('click', function (event) {
+                        event.preventDefault()
+                        console.log("Ouverture du modal")
+                        toggleModal()
+                    })
+                }
+
+                const overlay = document.querySelector('.modal-overlay')
+                overlay.addEventListener('click', toggleModal)
+
+                var closemodal = document.querySelectorAll('.modal-close')
+                for (var i = 0; i < closemodal.length; i++) {
+                    closemodal[i].addEventListener('click', toggleModal)
+                }
+
+                document.onkeydown = function (evt) {
+                    evt = evt || window.event
+                    var isEscape = false
+                    if ("key" in evt) {
+                        isEscape = (evt.key === "Escape" || evt.key === "Esc")
+                    } else {
+                        isEscape = (evt.keyCode === 27)
+                    }
+                    if (isEscape && document.body.classList.contains('modal-active')) {
+                        toggleModal()
+                    }
+                };
+
+
+                function toggleModal() {
+                    const body = document.querySelector('body')
+                    const modal = document.querySelector('.modal')
+                    modal.classList.toggle('opacity-0')
+                    modal.classList.toggle('pointer-events-none')
+                    body.classList.toggle('modal-active')
+                    startInterest()
+                }
+
+            
+
+
+
+            function startInterest() {
+                var sprite_src = "/img/marker.png";
+                var canvas = document.getElementById('canvas_preview');
+                var context = canvas.getContext("2d");
+                var gheight = canvas.getAttribute('height');
+                var gwidth = canvas.getAttribute('width');
+                var mapSprite = new Image();
+                mapSprite.src = canvas.getAttribute('src');
+
+
+                var Marker = function () {
+                    this.Sprite = new Image();
+                    this.Sprite.src = sprite_src;
+                    this.Width = 30;
+                    this.Height = 30;
+                    this.XPos = 0;
+                    this.YPos = 0;
+                }
+
+                var Markers = new Array();
+                var mouseClicked = function (mouse) {
+                    var rect = canvas.getBoundingClientRect();
+                    var mouseXPos = (mouse.x - rect.left);
+                    var mouseYPos = (mouse.y - rect.top);
+                    var marker = new Marker();
+                    marker.XPos = mouseXPos - (marker.Width / 2);
+                    marker.YPos = mouseYPos - (marker.Height / 2);
+
+                    Markers.pop();
+                    Markers.push(marker);
+                }
+
+                canvas.addEventListener("mousedown", mouseClicked, false);
+                context.font = "15px Arial";
+                context.textAlign = "center";
+
+                var main = function () {
+                    draw();
+                };
+
+                var draw = function () {
+                    context.fillStyle = "#000";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    context.drawImage(mapSprite, 0, 0, gwidth, gheight);
+                    Markers.forEach(tempMarker => {
+                        context.drawImage(tempMarker.Sprite, tempMarker.XPos, tempMarker.YPos, tempMarker
+                            .Width,
+                            tempMarker.Height);
+                    });
+
+
+
+                }
+
+                setInterval(main, (1000 / 60));
+
+            }
+
         }
     };
 
