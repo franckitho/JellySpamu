@@ -21,7 +21,7 @@ class VideoController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -45,7 +45,7 @@ class VideoController extends Controller
             'video' => 'sometimes',
             'url' => 'string|sometimes'
         ]);
-       
+
         $format = explode("x", $request->get('export'));
 
         if ($request->hasFile('video') && $request->file('video')) {
@@ -66,7 +66,7 @@ class VideoController extends Controller
         }
         else if ($request->has('url') && $request->get('url')) {
             $host = parse_url($request->get('url'), PHP_URL_HOST);
-        
+
             if(self::INSTAGRAM_DOMAINE == $host){
                 $video = new Video();
                 $path = $video->insta($request->get('url'));
@@ -80,7 +80,7 @@ class VideoController extends Controller
                 $video->vid_time = $spec['duration'];
                 $video->plateform = 'Instagram';
                 $video->save();
-                
+
             }elseif(self::YOUTUBE_DOMAINE == $host){
                 $video = new Video();
                 $data = $video->youtube($request->get('url'));
@@ -148,14 +148,19 @@ class VideoController extends Controller
      * @param  mixed $video
      * @return void
      */
-    public function convert(Video $video)
+    public function convert(Video $video, Request $request)
     {
+        $x = $request->has('x_pos') ? $request->get('x_pos') : 0;
+        $y = $request->has('y_pos') ? $request->get('y_pos') : 0;
+
         $data = $video->data;
-        $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, [])['output_path'];
+        $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, $x, $y, [])['output_path'];
         $video->data = $data;
         $video->save();
 
-        return response()->json(['status' => 'success']);
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 
     public function download(Video $video)
