@@ -174,8 +174,8 @@
                     url: null,
                     image: null,
                     export: "youtube",
-                    x_pos: "150",
-                    y_pos: "150",
+                    x_pos: "0",
+                    y_pos: "0",
                     
                 },
             }
@@ -201,7 +201,7 @@
                 if (this.downloadable != 3) {
                     this.downloadable = 2;
                     e.preventDefault();
-                    axios.get('/video/' + this.filedata.resource_id + '/convert?x_pos='+this.form.x_pos+'&y_pos='+this.form.y_pos+'&platform='+this.form.export)
+                    axios.get('/video/' + this.filedata.resource_id + '/convert?x_pos='+parseInt(this.form.x_pos)+'&y_pos='+parseInt(this.form.y_pos)+'&platform='+this.form.export)
                         .then(response => {
                             this.downloadable = 3;
                             console.log(response.data)
@@ -249,8 +249,8 @@
                 }
                
             },
-
             openMSystem() {
+                var vm = this
                 startInterest()
                 var openmodal = document.querySelectorAll('.modal-open')
                 for (var i = 0; i < openmodal.length; i++) {
@@ -314,7 +314,7 @@
                         this.XPos = 0;
                         this.YPos = 0;
                     }
-                    var vm = this
+                    
                     var Markers = new Array();
                     var mouseClicked = function (mouse) {
                         var rect = canvas.getBoundingClientRect();

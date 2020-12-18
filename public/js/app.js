@@ -4476,8 +4476,8 @@ __webpack_require__.r(__webpack_exports__);
         url: null,
         image: null,
         "export": "youtube",
-        x_pos: "150",
-        y_pos: "150"
+        x_pos: "0",
+        y_pos: "0"
       }
     };
   },
@@ -4508,7 +4508,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.downloadable != 3) {
         this.downloadable = 2;
         e.preventDefault();
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert?x_pos=' + this.form.x_pos + '&y_pos=' + this.form.y_pos + '&platform=' + this.form["export"]).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/video/' + this.filedata.resource_id + '/convert?x_pos=' + parseInt(this.form.x_pos) + '&y_pos=' + parseInt(this.form.y_pos) + '&platform=' + this.form["export"]).then(function (response) {
           _this.downloadable = 3;
           console.log(response.data);
         })["catch"](function (e) {
@@ -4551,6 +4551,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     openMSystem: function openMSystem() {
+      var vm = this;
       startInterest();
       var openmodal = document.querySelectorAll('.modal-open');
 
@@ -4611,7 +4612,6 @@ __webpack_require__.r(__webpack_exports__);
           this.YPos = 0;
         };
 
-        var vm = this;
         var Markers = new Array();
 
         var mouseClicked = function mouseClicked(mouse) {

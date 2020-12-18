@@ -156,7 +156,7 @@ class VideoController extends Controller
 
         $x = $request->has('x_pos') ? $request->get('x_pos') : -1;
         $y = $request->has('y_pos') ? $request->get('y_pos') : -1;
-
+        
         $data = $video->data;
         $data['file_path'] = $video->convert($video->data['file_path'], 1080, 1920, [], config('format.' . $request->get('platform')), $x, $y)['output_path'];
         $video->data = $data;
