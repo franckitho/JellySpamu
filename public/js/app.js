@@ -4446,13 +4446,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50701,7 +50694,7 @@ var render = function() {
                 "div",
                 { staticClass: "bg-white p-4 mt-3 rounded" },
                 [
-                  _vm._v("\n                    tags: "),
+                  _vm._v("\n                tags: "),
                   _vm._l(_vm.filedata.properties.tags, function(tag) {
                     return _c("span", { staticClass: "font-semibold" }, [
                       _vm._v(_vm._s(tag[1] + ", "))
@@ -50857,12 +50850,17 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("li", { staticClass: "pt-1" }, [
                                     _vm._v("Bitrate : "),
-                                    _vm._v(
-                                      '\n<<<<<<< HEAD\n                                            class="font-semibold">' +
-                                        _vm._s(
-                                          _vm.filedata.properties.bitrate
-                                        ) +
-                                        "/s"
+                                    _c(
+                                      "span",
+                                      { staticClass: "font-semibold" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.filedata.properties.bitrate /
+                                              1000
+                                          ) + " Mo/s"
+                                        )
+                                      ]
                                     )
                                   ]),
                                   _vm._v(" "),
@@ -50877,49 +50875,7 @@ var render = function() {
                                         )
                                       ]
                                     )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "li",
-                                    { staticClass: "pt-1" },
-                                    [
-                                      _vm._v("tags : "),
-                                      _vm._l(
-                                        _vm.filedata.properties.tags,
-                                        function(tag) {
-                                          return _c(
-                                            "span",
-                                            { staticClass: "font-semibold" },
-                                            [_vm._v(_vm._s(tag[1] + " "))]
-                                          )
-                                        }
-                                      )
-                                    ],
-                                    2
-                                  ),
-                                  _vm._v(
-                                    '\n=======\n                                            class="font-semibold">' +
-                                      _vm._s(
-                                        _vm.filedata.properties.bitrate / 1000
-                                      ) +
-                                      " Mo/s"
-                                  ),
-                                  _vm._v(" "),
-                                  _c("li", { staticClass: "pt-1" }, [
-                                    _vm._v("Size : "),
-                                    _c(
-                                      "span",
-                                      { staticClass: "font-semibold" },
-                                      [
-                                        _vm._v(
-                                          _vm._s(_vm.filedata.properties.size)
-                                        )
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(
-                                    "\n>>>>>>> 17d8f8d768cf30ac63480618b4e5285cd95811d6\n\n                                "
-                                  )
+                                  ])
                                 ]
                               )
                             ])
@@ -50953,9 +50909,7 @@ var render = function() {
                                 }
                               },
                               [
-                                _vm._v(
-                                  "\n                            Download "
-                                ),
+                                _vm._v("\n                        Download "),
                                 _c("i", { staticClass: " ml-3 fa fa-download" })
                               ]
                             )
@@ -51131,9 +51085,7 @@ var render = function() {
                                 attrs: { type: "submit" }
                               },
                               [
-                                _vm._v(
-                                  "\n                            Convertir "
-                                ),
+                                _vm._v("\n                        Convertir "),
                                 _c("i", { staticClass: "fas fa-sync ml-3" })
                               ]
                             )

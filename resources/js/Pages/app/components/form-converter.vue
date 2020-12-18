@@ -56,16 +56,9 @@
                                     <li class="pt-1">Framerate : <span
                                             class="font-semibold">{{filedata.properties. framerate}}/s</span></li>
                                     <li class="pt-1">Bitrate : <span
-<<<<<<< HEAD
-                                            class="font-semibold">{{filedata.properties. bitrate}}/s</span></li>
-                                    <li class="pt-1">Size : <span
-                                            class="font-semibold">{{filedata.properties.size}}</span> </li>
-                                    <li class="pt-1">tags : <span v-for="tag in filedata.properties.tags" class="font-semibold">{{tag[1] + " "}}</span> </li>
-=======
                                             class="font-semibold">{{filedata.properties. bitrate / 1000}} Mo/s</span></li>
                                     <li class="pt-1">Size : <span
                                             class="font-semibold">{{filedata.properties.size}}</span> </li>
->>>>>>> 17d8f8d768cf30ac63480618b4e5285cd95811d6
 
                                 </ul>
                             </div>
