@@ -40,7 +40,7 @@
                                     <li class="pt-2">Resolution : <span
                                             class="font-semibold">{{filedata.properties.resolution}}</span></li>
                                     <li class="pt-2">Duration : <span
-                                            class="font-semibold">{{filedata.properties.duration}}</span></li>
+                                            class="font-semibold">{{filedata.properties.duration}}s</span></li>
                                     <li class="pt-2">Orientation : <span
                                             class="font-semibold">{{filedata.properties.orientation}}</span> </li>
 
@@ -51,11 +51,11 @@
                                     <li class="pt-1">Codec : <span
                                             class="font-semibold uppercase">{{filedata.properties.codec}}</span> </li>
                                     <li class="pt-1">Framerate : <span
-                                            class="font-semibold">{{filedata.properties. framerate}}</span></li>
+                                            class="font-semibold">{{filedata.properties. framerate}}/s</span></li>
                                     <li class="pt-1">Bitrate : <span
-                                            class="font-semibold">{{filedata.properties. bitrate}}</span></li>
+                                            class="font-semibold">{{filedata.properties. bitrate}}/s</span></li>
                                     <li class="pt-1">Size : <span
-                                            class="font-semibold">{{filedata.properties.size}}</span> </li>
+                                            class="font-semibold">{{filedata.properties.size}}o</span> </li>
 
                                 </ul>
 
@@ -204,6 +204,7 @@
                     axios.get('/video/' + this.filedata.resource_id + '/convert?x_pos='+parseInt(this.form.x_pos)+'&y_pos='+parseInt(this.form.y_pos)+'&platform='+this.form.export)
                         .then(response => {
                             this.downloadable = 3;
+                            
                             console.log(response.data)
                         })
                         .catch(e => {

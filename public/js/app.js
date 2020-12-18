@@ -50770,7 +50770,7 @@ var render = function() {
                                         _vm._v(
                                           _vm._s(
                                             _vm.filedata.properties.duration
-                                          )
+                                          ) + "s"
                                         )
                                       ]
                                     )
@@ -50823,7 +50823,7 @@ var render = function() {
                                         _vm._v(
                                           _vm._s(
                                             _vm.filedata.properties.framerate
-                                          )
+                                          ) + "/s"
                                         )
                                       ]
                                     )
@@ -50838,7 +50838,7 @@ var render = function() {
                                         _vm._v(
                                           _vm._s(
                                             _vm.filedata.properties.bitrate
-                                          )
+                                          ) + "/s"
                                         )
                                       ]
                                     )
@@ -50851,7 +50851,8 @@ var render = function() {
                                       { staticClass: "font-semibold" },
                                       [
                                         _vm._v(
-                                          _vm._s(_vm.filedata.properties.size)
+                                          _vm._s(_vm.filedata.properties.size) +
+                                            "o"
                                         )
                                       ]
                                     )
